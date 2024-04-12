@@ -4,6 +4,7 @@ public class PixEntity
     public int IdPix { get; set; }
 
     public int IdConta { get; set; }
+    public ContaEntity Conta { get; set; }
 
     public int IdPessoa { get; set; }
 
