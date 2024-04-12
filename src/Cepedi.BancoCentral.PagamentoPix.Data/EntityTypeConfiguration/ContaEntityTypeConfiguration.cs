@@ -14,5 +14,7 @@ public class ContaEntityTypeConfiguration : IEntityTypeConfiguration<ContaEntity
         builder.Property(c => c.Numero).IsRequired();
         builder.Property(c => c.Agencia).IsRequired();
         builder.Property(c => c.Conta).IsRequired();
+        
+        builder.HasMany(c => c.Pixs).WithOne(p => p.Conta).HasForeignKey(p => p.IdConta).IsRequired();
     }
 }
