@@ -1,13 +1,13 @@
-﻿using Cepedi.BancoCentral.PagamentoPix.WebApi.Controllers;
-using Cepedi.Shareable.Requests;
-using Cepedi.Shareable.Responses;
+﻿using Cepedi.BancoCentral.PagamentoPix.Api.Controllers;
+using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
+using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Responses;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NSubstitute;
 using OperationResult;
 
-namespace Cepedi.BancoCentral.PagamentoPix.WebApi.Tests
+namespace Cepedi.BancoCentral.PagamentoPix.Api.Tests
 {
     public class UserControllerTests
     {

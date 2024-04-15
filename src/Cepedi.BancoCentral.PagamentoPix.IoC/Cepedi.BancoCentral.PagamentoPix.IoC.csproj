@@ -18,9 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Cepedi.BancoCentral.PagamentoPix.Data\Cepedi.BancoCentral.PagamentoPix.Data.csproj" />
-    <ProjectReference Include="..\Cepedi.BancoCentral.PagamentoPix.Domain\Cepedi.BancoCentral.PagamentoPix.Domain.csproj" />
-    <ProjectReference Include="..\Cepedi.BancoCentral.PagamentoPix.Shareable\Cepedi.BancoCentral.PagamentoPix.Shareable.csproj" />
+    <ProjectReference Include="..\Cepedi.BancoCentral.PagamentoPix.Dados\Cepedi.BancoCentral.PagamentoPix.Dados.csproj" />
+    <ProjectReference Include="..\Cepedi.BancoCentral.PagamentoPix.Dominio\Cepedi.BancoCentral.PagamentoPix.Dominio.csproj" />
   </ItemGroup>
 
 </Project>
