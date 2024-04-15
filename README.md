@@ -1,4 +1,4 @@
-# Cepedi.CleanArch
+# Cepedi.BancoCentral.PagamentoPix
 
 Executar o projeto `src\Cepedi.BancoCentral.PagamentoPix.PagamentoPix.Api` para abrir o swagger
 
