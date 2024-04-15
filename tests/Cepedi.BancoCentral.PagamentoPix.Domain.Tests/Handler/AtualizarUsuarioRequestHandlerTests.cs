@@ -1,15 +1,15 @@
-﻿using Cepedi.BancoCentral.PagamentoPix.Domain.Entities;
-using Cepedi.BancoCentral.PagamentoPix.Domain.Handlers;
-using Cepedi.BancoCentral.PagamentoPix.Domain.Repository;
-using Cepedi.Shareable.Requests;
-using Cepedi.Shareable.Responses;
+﻿using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
+using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Responses;
+using Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades;
+using Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers;
+using Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NSubstitute;
 using OperationResult;
 
-namespace Cepedi.BancoCentral.PagamentoPix.Domain.Tests;
+namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Tests;
 
 public class AtualizarUsuarioRequestHandlerTests
 {

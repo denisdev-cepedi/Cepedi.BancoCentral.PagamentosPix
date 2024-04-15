@@ -1,5 +1,5 @@
 ﻿using Cepedi.BancoCentral.PagamentoPix.Data;
-using Cepedi.BancoCentral.PagamentoPix.Domain.Entities;
+using Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
