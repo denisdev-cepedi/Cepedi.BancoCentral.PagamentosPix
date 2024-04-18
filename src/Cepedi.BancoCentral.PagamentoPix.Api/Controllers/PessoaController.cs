@@ -25,14 +25,14 @@ namespace Cepedi.BancoCentral.PagamentoPix.Api.Controllers
     [HttpPost]
     [ProducesResponseType(typeof(CriarPessoaResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<CriarPessoaResponse>> CriarUsuarioAsync(
+    public async Task<ActionResult<CriarPessoaResponse>> CriarPessoaAsync(
         [FromBody] CriarPessoaRequest request) => await SendCommand(request);
 
     [HttpPut]
     [ProducesResponseType(typeof(AtualizarUsuarioResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
-    public async Task<ActionResult<AtualizarUsuarioResponse>> AtualizarUsuarioAsync(
+    public async Task<ActionResult<AtualizarUsuarioResponse>> AtualizarPessoaAsync(
         [FromBody] AtualizarUsuarioRequest request) => await SendCommand(request);
     }
 }

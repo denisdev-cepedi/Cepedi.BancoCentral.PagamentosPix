@@ -24,7 +24,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
         {
             try
             {
-                var pessoaEntity = _pessoaRepository.ObtemPessoaPorIdAsync(request.IdPessoa);
+                var pessoaEntity = await _pessoaRepository.ObtemPessoaPorIdAsync(request.IdPessoa);
                 if (pessoaEntity == null)
                 {
                     return Result.Error<AtualizarPessoaResponse>(
@@ -33,12 +33,15 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
 
                 pessoaEntity.Atualizar(request.Nome, request.Cpf, request.IdConta);
 
-                
                 await _pessoaRepository.AtualizarPessoaAsync(pessoaEntity);
 
-                return Result.Sucess(new AtualizarPessoaResponse(pessoaEntity.Nome, pessoaEntity.Cpf, pessoaEntity.IdConta));
-
-
+                return Result.Success(new AtualizarPessoaResponse(pessoaEntity.Nome, pessoaEntity.Cpf, pessoaEntity.IdConta));
+                
+            }
+            catch
+            {
+                _logger.LogError("Ocorreu um erro ao atualizar pessoa");
+                throw;
             }
         }
     }
