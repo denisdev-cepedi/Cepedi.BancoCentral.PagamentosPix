@@ -25,7 +25,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
          
         public async Task<Result<CriarPessoaResponse>> Handle(CriarPessoaRequest request, CancellationToken cancellationToken)
         {
-            try{
+           
                 var pessoa = new PessoaEntity{
                         Nome = request.Nome,
                         Cpf = request.Cpf,
@@ -33,14 +33,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
                 };
                 await _pessoaRepository.CriarPessoaAsync(pessoa);
                 return Result.Success(new CriarPessoaResponse(pessoa.IdPessoa, pessoa.Nome));
-            }
-            catch
-            {
-                _logger.LogError("Ocorreu um erro durante a execução");
-                return Result.Error<CriarPessoaResponse>(
-                    new Compartilhado.Excecoes.ExcecaoAplicacao(
-                    (PagamentosPix.ErroGravacaoPessoa)));
-            }
+          
         }
     }
 }

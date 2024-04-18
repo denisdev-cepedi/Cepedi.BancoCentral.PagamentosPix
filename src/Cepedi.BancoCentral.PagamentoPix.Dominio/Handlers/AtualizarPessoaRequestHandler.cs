@@ -22,8 +22,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
         }
         public async Task<Result<AtualizarPessoaResponse>> Handle(AtualizarPessoaRequest request, CancellationToken cancellationToken)
         {
-            try
-            {
+           
                 var pessoaEntity = await _pessoaRepository.ObtemPessoaPorIdAsync(request.IdPessoa);
                 if (pessoaEntity == null)
                 {
@@ -37,12 +36,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
 
                 return Result.Success(new AtualizarPessoaResponse(pessoaEntity.Nome, pessoaEntity.Cpf, pessoaEntity.IdConta));
                 
-            }
-            catch
-            {
-                _logger.LogError("Ocorreu um erro ao atualizar pessoa");
-                throw;
-            }
+           
         }
     }
 }
