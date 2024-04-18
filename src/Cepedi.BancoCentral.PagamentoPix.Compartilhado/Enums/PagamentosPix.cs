@@ -23,6 +23,12 @@ public class PagamentosPix
         Descricao = "Ocorreu um erro na gravação do usuário. Por favor tente novamente",
         Tipo = ETipoErro.Erro
     };
+    public static ResultadoErro ErroGravacaoPessoa = new()
+    {
+        Titulo = "Ocorreu um erro na gravação",
+        Descricao = "Ocorreu um erro na gravação da pessoa. Por favor tente novamente",
+        Tipo = ETipoErro.Erro
+    };
 
     public static ResultadoErro DadosInvalidos = new()
     {
