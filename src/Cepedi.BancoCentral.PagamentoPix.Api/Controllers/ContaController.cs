@@ -29,18 +29,18 @@ public class ContaController : BaseController
     public async Task<ActionResult<CriarContaResponse>> CriarContaAsync(
         [FromBody] CriarContaResquest request) => await SendCommand(request);
 
-    private async Task<ActionResult<CriarContaResponse>> SendCommand(CriarContaResquest request)
-    {
-        throw new NotImplementedException();
-    }
+    
 
 
 
-    /*[HttpPut]
+    [HttpPut]
     [ProducesResponseType(typeof(AtualizarContaResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
     public async Task<ActionResult<AtualizarContaResponse>> AtualizarContaAsync(
-        [FromBody] AtualizarContaRequest request) => await SendCommand(request);
-*/
+        [FromBody] AtualizarContaResquest request) => await SendCommand(request);
+private async Task<ActionResult<CriarContaResponse>> SendCommand(CriarContaResquest request)
+    {
+        throw new NotImplementedException();
+    }
 }
