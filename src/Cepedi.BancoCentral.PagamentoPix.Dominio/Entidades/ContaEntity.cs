@@ -8,4 +8,5 @@ public class ContaEntity
     public required string Agencia { get; set; }
     public required string Conta { get; set; } = default!;
     public ICollection<PixEntity> Pixs { get; set; }
+    public PessoaEntity Pessoa { get; set; }
 }
