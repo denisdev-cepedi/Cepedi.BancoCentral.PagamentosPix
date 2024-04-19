@@ -13,6 +13,6 @@ namespace Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests
         public int IdPessoa { get; set; }
         public required string Nome { get; set; }
         public required string Cpf { get; set; }
-        public string IdConta { get; set; } = default!;
+        public int IdConta { get; set; }
     }
 }

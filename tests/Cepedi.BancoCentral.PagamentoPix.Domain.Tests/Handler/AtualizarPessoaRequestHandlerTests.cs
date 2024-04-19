@@ -37,36 +37,10 @@ public class AtualizarPessoaRequestHandlerTests
 
         //Assert 
         result.Should().BeOfType<Result<AtualizarPessoaResponse>>().Which
-            .Value.nome.Should().Be(pessoa.Nome);
+            .Value.nome.Should().Be(pessoaEntity.Nome);
 
         result.Should().BeOfType<Result<AtualizarPessoaResponse>>().Which
             .Value.nome.Should().NotBeEmpty();
     }
-
-    // public async Task AtualizarPessoaAsync_QuandoAtualizar_DeveRetornarSucesso()
-    // {
-    //     //Arrange 
-    //     var pessoa = new AtualizarPessoaRequest { IdConta = "1", Nome= "PessoaY", Cpf = "11111111111", IdConta = "1" };
-    //     var pessoaEntity = new PessoaEntity    { Nome = "PessoaZ", Cpf = "11111111111", IdConta = "1" };
-    //     _pessoaRepository.ObtemPessoaPorIdAsync(It.IsAny<int>()).ReturnsForAnyArgs(new PessoaEntity(
-    //        pessoaEntity.Nome, pessoaEntity.Cpf, pessoaEntity.IdConta
-    //     ));
-    //     _pessoaRepository.AtualizarPessoaAsync(It.IsAny<PessoaEntity>())
-    //         .ReturnsForAnyArgs(new PessoaEntity
-    //         {
-    //             Nome = pessoa.Nome,
-    //             Cpf = pessoa.Cpf,
-    //             IdConta = pessoa.IdConta
-    //         });
-    //     //Act
-    //     var result = await _sut.Handle(pessoa, CancellationToken.None);
-
-    //     //Assert 
-    //     result.Should().BeOfType<Result<AtualizarPessoaResponse>>().Which
-    //         .Value.nome.Should().Be(pessoa.Nome);
-
-    //     result.Should().BeOfType<Result<AtualizarPessoaResponse>>().Which
-    //         .Value.nome.Should().NotBeEmpty();
-    // }
 
 }

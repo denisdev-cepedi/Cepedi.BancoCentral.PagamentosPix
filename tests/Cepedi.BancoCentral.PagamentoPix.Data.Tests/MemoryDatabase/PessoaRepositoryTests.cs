@@ -17,8 +17,8 @@ namespace Cepedi.BancoCentral.PagamentoPix.Data.Tests.MemoryDatabase
                 .Options;
             
             using (var context = new ApplicationDbContext(options)){
-                context.Pessoa.Add(new PessoaEntity { Nome = "Pessoa1", Cpf = "00000000191", IdConta = "1" });
-                context.Pessoa.Add(new PessoaEntity { Nome = "Pessoa2", Cpf = "11111111111", IdConta = "2"  });
+                context.Pessoa.Add(new PessoaEntity { Nome = "Pessoa1", Cpf = "00000000191", IdConta = 1 });
+                context.Pessoa.Add(new PessoaEntity { Nome = "Pessoa2", Cpf = "11111111111", IdConta = 2  });
                 context.SaveChanges();
             }
             // Act

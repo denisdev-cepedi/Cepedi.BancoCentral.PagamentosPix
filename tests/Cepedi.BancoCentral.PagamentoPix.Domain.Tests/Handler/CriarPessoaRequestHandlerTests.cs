@@ -29,7 +29,7 @@ public class CriarPessoaRequestHandlerTests
     public async Task CriarPessoaAsync_QuandoCriar_DeveRetornarSucesso()
     {
         //Arrange 
-        var pessoa = new CriarPessoaRequest { Nome= "PessoaX", Cpf = "11111111111", IdConta ="1"};
+        var pessoa = new CriarPessoaRequest { Nome= "PessoaX", Cpf = "11111111111", IdConta =1};
         _pessoaRepository.CriarPessoaAsync(It.IsAny<PessoaEntity>())
             .ReturnsForAnyArgs(new PessoaEntity
             {

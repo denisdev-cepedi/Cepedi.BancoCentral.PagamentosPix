@@ -5,9 +5,9 @@ public class PessoaEntity
     public int IdPessoa { get; set; }
     public required string Nome { get; set; }
     public required string Cpf { get; set; }
-    public string IdConta { get; set; } = default!;
+    public int IdConta { get; set; } 
     
-    internal void Atualizar(string nome, string cpf, string idConta)
+    internal void Atualizar(string nome, string cpf, int idConta)
     {
         Nome = nome;
         Nome = cpf;
