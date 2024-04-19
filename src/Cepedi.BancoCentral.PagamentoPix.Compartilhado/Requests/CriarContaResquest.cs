@@ -1,8 +1,10 @@
-﻿namespace Cepedi.BancoCentral.PagamentoPix.Compartilhado;
+﻿using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Responses;
+using MediatR;
+using OperationResult;
 
-public class CriarContaResquest
+public class CriarContaResquest: IRequest<Result<CriarContaResponse>>
 {
- public int IdConta { get; set; }
+ 
     public int IdPessoa { get; set; }
     public string Numero { get; set; } = default!; //numero da instituição pertencedora
     public required string Agencia { get; set; }
