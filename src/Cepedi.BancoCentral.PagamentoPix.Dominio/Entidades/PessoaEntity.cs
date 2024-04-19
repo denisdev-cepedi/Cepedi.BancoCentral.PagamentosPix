@@ -10,7 +10,7 @@ public class PessoaEntity
     internal void Atualizar(string nome, string cpf, int idConta)
     {
         Nome = nome;
-        Nome = cpf;
+        Cpf = cpf;
         IdConta = idConta;
     }
 

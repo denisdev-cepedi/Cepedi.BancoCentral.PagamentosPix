@@ -16,6 +16,9 @@ public class PixEntity
 
     public string Status { get; set; } = default!;
 
+    public ICollection<TransacaoPixEntity> TransacoesPixs { get; set; } = default!;
+
+
     public class TipoPixClass{
         public int IdTipoPix { get; set; }
 
