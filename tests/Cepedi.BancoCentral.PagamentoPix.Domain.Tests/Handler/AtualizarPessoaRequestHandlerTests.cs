@@ -28,7 +28,7 @@ public class AtualizarPessoaRequestHandlerTests
     {
         //Arrange 
         var pessoa = new AtualizarPessoaRequest { Nome= "PessoaY", Cpf = "11111111111"}; 
-        var pessoaEntity = new PessoaEntity {  Nome = "PessoaY", Cpf = "11111111111"};
+        var pessoaEntity = new PessoaEntity {  Nome = "PessoaX", Cpf = "11111111111"};
         _pessoaRepository.ObtemPessoaPorIdAsync(It.IsAny<int>()).ReturnsForAnyArgs(pessoaEntity);
         _pessoaRepository.AtualizarPessoaAsync(Arg.Any<PessoaEntity>()).ReturnsForAnyArgs(info => info.Arg<PessoaEntity>()); // Corrija a inicialização para corresponder ao construtor de PessoaEntity
 
@@ -37,7 +37,7 @@ public class AtualizarPessoaRequestHandlerTests
 
         //Assert 
         result.Should().BeOfType<Result<AtualizarPessoaResponse>>().Which
-            .Value.nome.Should().Be(pessoaEntity.Nome);
+            .Value.nome.Should().Be(pessoa.Nome);
 
         result.Should().BeOfType<Result<AtualizarPessoaResponse>>().Which
             .Value.nome.Should().NotBeEmpty();
