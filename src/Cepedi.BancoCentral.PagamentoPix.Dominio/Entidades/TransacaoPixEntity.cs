@@ -1,6 +1,6 @@
 namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades;
 
-public class TransacaoPixEntity
+public class  TransacaoPixEntity
 {
     public int Id { get; set; }
 
