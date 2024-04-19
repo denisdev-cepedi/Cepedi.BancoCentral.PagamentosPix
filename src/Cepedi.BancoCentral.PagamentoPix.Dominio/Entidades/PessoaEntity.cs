@@ -14,4 +14,7 @@ public class PessoaEntity
         IdConta = idConta;
     }
 
+
+    public ICollection<ContaEntity> Contas { get; set; }
+
 }
