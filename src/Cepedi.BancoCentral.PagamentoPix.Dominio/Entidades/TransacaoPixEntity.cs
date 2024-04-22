@@ -12,7 +12,7 @@ public class TransacaoPixEntity
     public string ChaveDeSeguranca { get; set; }
 
     public int IdPixOrigem { get; set; }
-
-   public int IdPixDestino  { get; set; }
-
+    public PixEntity PixOrigem { get; set; }
+    public int IdPixDestino  { get; set; }
+    
 }

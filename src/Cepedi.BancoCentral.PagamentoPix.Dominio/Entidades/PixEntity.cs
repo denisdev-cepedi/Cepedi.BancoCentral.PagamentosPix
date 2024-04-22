@@ -14,8 +14,8 @@ public class PixEntity
 
     public DateTime DataCriacao { get; set; }
 
-    public string Status { get; set; } = default!;
-
+    public bool Status { get; set; } = default!;
+    public ICollection<TransacaoPixEntity> TransacaoesPix { get; set; }
     public class TipoPixClass{
         public int IdTipoPix { get; set; }
 

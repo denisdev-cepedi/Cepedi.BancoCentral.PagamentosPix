@@ -24,6 +24,22 @@ public class PagamentosPix
         Tipo = ETipoErro.Erro
     };
 
+    public static ResultadoErro ErroGravacaoPix = new()
+    {
+        Titulo = "Ocorreu um erro na gravação",
+        Descricao = "Ocorreu um erro na gravação do PIX. Por favor tente novamente",
+        Tipo = ETipoErro.Erro
+    };
+    public static ResultadoErro ChavePixInvalida = new(){
+        Titulo = "Chave PIX inválida",
+        Descricao = "A chave PIX enviada é inválida",
+        Tipo = ETipoErro.Erro
+    };
+    public static ResultadoErro ChavePixJaCadastrada = new(){
+        Titulo = "Chave PIX inválida",
+        Descricao = "A chave PIX enviada está em uso",
+        Tipo = ETipoErro.Erro
+    };
     public static ResultadoErro DadosInvalidos = new()
     {
         Titulo = "Dados inválidos",

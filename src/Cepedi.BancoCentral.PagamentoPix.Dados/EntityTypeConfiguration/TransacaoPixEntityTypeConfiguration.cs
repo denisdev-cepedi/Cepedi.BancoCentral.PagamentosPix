@@ -21,11 +21,16 @@ public class TransacaoPixEntityTypeConfiguration : IEntityTypeConfiguration<Tran
         builder.HasOne<PixEntity>()
             .WithMany()
             .HasForeignKey(t => t.IdPixOrigem)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Restrict);//não pode ser removidonot
 
         builder.HasOne<PixEntity>()
             .WithMany()
             .HasForeignKey(t => t.IdPixDestino)
             .OnDelete(DeleteBehavior.Restrict);
+        
+        builder.HasOne(t => t.PixOrigem)
+        .WithMany(p => p.TransacaoesPix)
+        .HasForeignKey(t => t.IdPixOrigem)
+        .OnDelete(DeleteBehavior.Restrict);
     }
 }
