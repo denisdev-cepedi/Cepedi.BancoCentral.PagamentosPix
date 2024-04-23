@@ -38,6 +38,10 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dados.Repositorios
         {
             return await _context.Pessoa.Where(p => p.IdPessoa == IdPessoa).FirstOrDefaultAsync();
         }
-        
+
+        public async Task<List<PessoaEntity>> ObterPessoasAsync()
+        {
+            return await _context.Pessoa.ToListAsync();
+        }
     }
 }
