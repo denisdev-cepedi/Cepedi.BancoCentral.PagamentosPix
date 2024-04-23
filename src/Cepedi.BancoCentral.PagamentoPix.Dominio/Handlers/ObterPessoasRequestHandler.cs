@@ -11,7 +11,7 @@ using OperationResult;
 
 namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
 {
-    public class ObterPessoasRequestHandler : IRequestHandler<ObterPessoasRequest, Result<ObterListPessoasResponse>>
+    public class ObterPessoasRequestHandler : IRequestHandler<ObterListPessoasRequest, Result<ObterListPessoasResponse>>
     {
         private readonly ILogger<ObterPessoasRequestHandler> _logger;
         private readonly IPessoaRepository _pessoaRepositorio;
@@ -22,12 +22,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
             _pessoaRepositorio = pessoaRepositorio;
         }
 
-        public Task<Result<ObterListPessoasResponse>> Handle(ObterPessoasRequest request, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<ObterListPessoasResponse> IRequestHandler(ObterPessoasRequest request, CancellationToken cancellationToken)
+        public async Task<Result<ObterListPessoasResponse>> Handle(ObterListPessoasRequest request, CancellationToken cancellationToken)
         {
             var pessoas = await _pessoaRepositorio.ObtemPessoasAsync();
             
@@ -37,14 +32,11 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
                 {
                     IdPessoa = p.IdPessoa,
                     Nome = p.Nome,
-                    Cpf = p.Cpf,
                     IdConta = p.IdConta
                 }).ToList()
             };
 
             return Result.Success(response).Value;
         }
-
-    
     }
 }

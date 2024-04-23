@@ -43,7 +43,16 @@ namespace Cepedi.BancoCentral.PagamentoPix.Api.Controllers
     [ProducesResponseType(typeof(ObterListPessoasResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
-    public async Task<ActionResult<ObterListPessoasResponse>> ObterPessoasAsync() => await SendCommand(new ObterPessoasRequest());
+    public async Task<ActionResult<ObterListPessoasResponse>> ObterPessoasAsync() 
+        => await SendCommand(new ObterListPessoasRequest());
+
+    [HttpGet("{idPessoa}")]
+    [ProducesResponseType(typeof(ObterPessoaResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
+    public async Task<ActionResult<ObterPessoaResponse>> ObterPessoaAsync([FromRoute] int idPessoa) 
+        => await SendCommand(new ObterPessoaRequest(idPessoa));
+   
     }
    
 }
