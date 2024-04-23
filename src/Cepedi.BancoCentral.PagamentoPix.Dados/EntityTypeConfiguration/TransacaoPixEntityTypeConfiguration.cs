@@ -9,13 +9,13 @@ public class TransacaoPixEntityTypeConfiguration : IEntityTypeConfiguration<Tran
     {
         builder.ToTable("TransacaoPix"); 
 
-        builder.HasKey(c => c.Id); 
+        builder.HasKey(c => c.IdTransacaoPix); 
 
         builder.Property(c => c.Valor).IsRequired(); 
         builder.Property(c => c.Data).IsRequired(); 
-        builder.Property(c => c.ChavePix).IsRequired(); 
         builder.Property(c => c.ChaveDeSeguranca).IsRequired(); 
         builder.Property(c => c.IdPixOrigem).IsRequired(); 
         builder.Property(c => c.IdPixDestino).IsRequired();
+        
     }
 }
