@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Cepedi.BancoCentral.PagamentoPix.Data.Migrations
+namespace Cepedi.BancoCentral.PagamentoPix.Dados.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -22,7 +22,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Cepedi.BancoCentral.PagamentoPix.Domain.Entities.ContaEntity", b =>
+            modelBuilder.Entity("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.ContaEntity", b =>
                 {
                     b.Property<int>("IdConta")
                         .ValueGeneratedOnAdd()
@@ -47,10 +47,12 @@ namespace Cepedi.BancoCentral.PagamentoPix.Data.Migrations
 
                     b.HasKey("IdConta");
 
+                    b.HasIndex("IdPessoa");
+
                     b.ToTable("Contas", (string)null);
                 });
 
-            modelBuilder.Entity("Cepedi.BancoCentral.PagamentoPix.Domain.Entities.PessoaEntity", b =>
+            modelBuilder.Entity("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.PessoaEntity", b =>
                 {
                     b.Property<int>("IdPessoa")
                         .ValueGeneratedOnAdd()
@@ -63,10 +65,6 @@ namespace Cepedi.BancoCentral.PagamentoPix.Data.Migrations
                         .HasMaxLength(12)
                         .HasColumnType("nvarchar(12)");
 
-                    b.Property<string>("IdConta")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(150)
@@ -77,7 +75,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Data.Migrations
                     b.ToTable("Pessoas", (string)null);
                 });
 
-            modelBuilder.Entity("Cepedi.BancoCentral.PagamentoPix.Domain.Entities.PixEntity", b =>
+            modelBuilder.Entity("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.PixEntity", b =>
                 {
                     b.Property<int>("IdPix")
                         .ValueGeneratedOnAdd()
@@ -96,15 +94,11 @@ namespace Cepedi.BancoCentral.PagamentoPix.Data.Migrations
                     b.Property<int>("IdConta")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdPessoa")
-                        .HasColumnType("int");
-
                     b.Property<int>("IdTipoPix")
                         .HasColumnType("int");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.HasKey("IdPix");
 
@@ -113,19 +107,15 @@ namespace Cepedi.BancoCentral.PagamentoPix.Data.Migrations
                     b.ToTable("Pix", (string)null);
                 });
 
-            modelBuilder.Entity("Cepedi.BancoCentral.PagamentoPix.Domain.Entities.TransacaoPixEntity", b =>
+            modelBuilder.Entity("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.TransacaoPixEntity", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IdTransacaoPix")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdTransacaoPix"));
 
                     b.Property<string>("ChaveDeSeguranca")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ChavePix")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -138,15 +128,19 @@ namespace Cepedi.BancoCentral.PagamentoPix.Data.Migrations
                     b.Property<int>("IdPixOrigem")
                         .HasColumnType("int");
 
-                    b.Property<double>("Valor")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("Id");
+                    b.HasKey("IdTransacaoPix");
+
+                    b.HasIndex("IdPixDestino");
+
+                    b.HasIndex("IdPixOrigem");
 
                     b.ToTable("TransacaoPix", (string)null);
                 });
 
-            modelBuilder.Entity("Cepedi.BancoCentral.PagamentoPix.Domain.Entities.UsuarioEntity", b =>
+            modelBuilder.Entity("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.UsuarioEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -185,20 +179,62 @@ namespace Cepedi.BancoCentral.PagamentoPix.Data.Migrations
                     b.ToTable("Usuario", (string)null);
                 });
 
-            modelBuilder.Entity("Cepedi.BancoCentral.PagamentoPix.Domain.Entities.PixEntity", b =>
+            modelBuilder.Entity("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.ContaEntity", b =>
                 {
-                    b.HasOne("Cepedi.BancoCentral.PagamentoPix.Domain.Entities.ContaEntity", "Conta")
+                    b.HasOne("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.PessoaEntity", "Pessoa")
+                        .WithMany("Contas")
+                        .HasForeignKey("IdPessoa")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Pessoa");
+                });
+
+            modelBuilder.Entity("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.PixEntity", b =>
+                {
+                    b.HasOne("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.ContaEntity", "Conta")
                         .WithMany("Pixs")
                         .HasForeignKey("IdConta")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Conta");
                 });
 
-            modelBuilder.Entity("Cepedi.BancoCentral.PagamentoPix.Domain.Entities.ContaEntity", b =>
+            modelBuilder.Entity("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.TransacaoPixEntity", b =>
+                {
+                    b.HasOne("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.PixEntity", "PixDestino")
+                        .WithMany("TransacoesPixsRecebidas")
+                        .HasForeignKey("IdPixDestino")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.PixEntity", "PixOrigem")
+                        .WithMany("TransacoesPixsEnviadas")
+                        .HasForeignKey("IdPixOrigem")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("PixDestino");
+
+                    b.Navigation("PixOrigem");
+                });
+
+            modelBuilder.Entity("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.ContaEntity", b =>
                 {
                     b.Navigation("Pixs");
+                });
+
+            modelBuilder.Entity("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.PessoaEntity", b =>
+                {
+                    b.Navigation("Contas");
+                });
+
+            modelBuilder.Entity("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.PixEntity", b =>
+                {
+                    b.Navigation("TransacoesPixsEnviadas");
+
+                    b.Navigation("TransacoesPixsRecebidas");
                 });
 #pragma warning restore 612, 618
         }

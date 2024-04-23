@@ -4,9 +4,8 @@ public class PixEntity
     public int IdPix { get; set; }
 
     public int IdConta { get; set; }
-    public ContaEntity Conta { get; set; }
 
-    public int IdPessoa { get; set; }
+    public ContaEntity Conta { get; set; }
 
     public string ChavePix { get; set; } = default!;
 
@@ -14,7 +13,11 @@ public class PixEntity
 
     public DateTime DataCriacao { get; set; }
 
-    public string Status { get; set; } = default!;
+    public bool Status { get; set; } = default!;
+
+    public ICollection<TransacaoPixEntity> TransacoesPixsEnviadas { get; set; } = default!;
+    
+    public ICollection<TransacaoPixEntity> TransacoesPixsRecebidas { get; set; } = default!;
 
     public class TipoPixClass{
         public int IdTipoPix { get; set; }
