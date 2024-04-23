@@ -8,5 +8,7 @@ public class ContaEntity
     public required string Agencia { get; set; }
     public required string Conta { get; set; } = default!;
     public ICollection<PixEntity> Pixs { get; set; }
+    public ICollection<TransacaoPixEntity> TransacoesPixsEnviadas { get; set; } = default!;
+    public ICollection<TransacaoPixEntity> TransacoesPixsRecebidas { get; set; } = default!;
     public PessoaEntity Pessoa { get; set; }
 }

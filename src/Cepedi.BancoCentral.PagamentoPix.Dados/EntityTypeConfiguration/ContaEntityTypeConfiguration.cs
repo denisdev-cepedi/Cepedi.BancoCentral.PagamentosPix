@@ -18,6 +18,20 @@ public class ContaEntityTypeConfiguration : IEntityTypeConfiguration<ContaEntity
                   .WithMany(p => p.Contas)
                   .HasForeignKey(c => c.IdPessoa);
 
-        builder.HasMany(c => c.Pixs).WithOne(p => p.Conta).HasForeignKey(p => p.IdConta).IsRequired();
+        builder.HasMany(conta => conta.Pixs)
+                .WithOne(pix => pix.Conta)
+                .HasForeignKey(pix => pix.IdConta).IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+         builder.HasMany(conta => conta.TransacoesPixsEnviadas)
+            .WithOne(transacao => transacao.ContaOrigem)
+            .HasForeignKey(transacao => transacao.IdContaOrigem)
+            .OnDelete(DeleteBehavior.Restrict);
+            
+        builder.HasMany(conta => conta.TransacoesPixsRecebidas)
+            .WithOne(transacao => transacao.ContaDestino)
+            .HasForeignKey(transacao => transacao.IdContaDestino)
+            .OnDelete(DeleteBehavior.Restrict);
+
     }
 }

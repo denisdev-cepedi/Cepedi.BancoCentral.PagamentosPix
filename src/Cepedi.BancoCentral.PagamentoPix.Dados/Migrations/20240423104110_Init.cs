@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Cepedi.BancoCentral.PagamentoPix.Dados.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -87,7 +87,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dados.Migrations
                         column: x => x.IdConta,
                         principalTable: "Contas",
                         principalColumn: "IdConta",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -100,30 +100,37 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dados.Migrations
                     Data = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ChavePix = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ChaveDeSeguranca = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdPixOrigem = table.Column<int>(type: "int", nullable: false),
-                    IdPixDestino = table.Column<int>(type: "int", nullable: false),
-                    PixEntityIdPix = table.Column<int>(type: "int", nullable: true)
+                    IdContaOrigem = table.Column<int>(type: "int", nullable: false),
+                    IdContaDestino = table.Column<int>(type: "int", nullable: false),
+                    ContaOrigemIdConta = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TransacaoPix", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TransacaoPix_Pix_IdPixDestino",
-                        column: x => x.IdPixDestino,
+                        name: "FK_TransacaoPix_Contas_ContaOrigemIdConta",
+                        column: x => x.ContaOrigemIdConta,
+                        principalTable: "Contas",
+                        principalColumn: "IdConta",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TransacaoPix_Contas_IdContaDestino",
+                        column: x => x.IdContaDestino,
+                        principalTable: "Contas",
+                        principalColumn: "IdConta",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_TransacaoPix_Contas_IdContaOrigem",
+                        column: x => x.IdContaOrigem,
+                        principalTable: "Contas",
+                        principalColumn: "IdConta",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_TransacaoPix_Pix_IdContaDestino",
+                        column: x => x.IdContaDestino,
                         principalTable: "Pix",
                         principalColumn: "IdPix",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_TransacaoPix_Pix_IdPixOrigem",
-                        column: x => x.IdPixOrigem,
-                        principalTable: "Pix",
-                        principalColumn: "IdPix",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_TransacaoPix_Pix_PixEntityIdPix",
-                        column: x => x.PixEntityIdPix,
-                        principalTable: "Pix",
-                        principalColumn: "IdPix");
                 });
 
             migrationBuilder.CreateIndex(
@@ -137,19 +144,19 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dados.Migrations
                 column: "IdConta");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TransacaoPix_IdPixDestino",
+                name: "IX_TransacaoPix_ContaOrigemIdConta",
                 table: "TransacaoPix",
-                column: "IdPixDestino");
+                column: "ContaOrigemIdConta");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TransacaoPix_IdPixOrigem",
+                name: "IX_TransacaoPix_IdContaDestino",
                 table: "TransacaoPix",
-                column: "IdPixOrigem");
+                column: "IdContaDestino");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TransacaoPix_PixEntityIdPix",
+                name: "IX_TransacaoPix_IdContaOrigem",
                 table: "TransacaoPix",
-                column: "PixEntityIdPix");
+                column: "IdContaOrigem");
         }
 
         /// <inheritdoc />

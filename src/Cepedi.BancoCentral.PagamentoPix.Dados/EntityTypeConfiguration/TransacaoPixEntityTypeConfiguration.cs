@@ -15,17 +15,17 @@ public class TransacaoPixEntityTypeConfiguration : IEntityTypeConfiguration<Tran
         builder.Property(c => c.Data).IsRequired(); 
         builder.Property(c => c.ChavePix).IsRequired(); 
         builder.Property(c => c.ChaveDeSeguranca).IsRequired(); 
-        builder.Property(c => c.IdPixOrigem).IsRequired(); 
-        builder.Property(c => c.IdPixDestino).IsRequired();
+        builder.Property(c => c.IdContaOrigem).IsRequired(); 
+        builder.Property(c => c.IdContaDestino).IsRequired();
         
-        builder.HasOne<PixEntity>()
+        builder.HasOne<ContaEntity>()
             .WithMany()
-            .HasForeignKey(t => t.IdPixOrigem)
+            .HasForeignKey(t => t.IdContaOrigem)
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasOne<PixEntity>()
             .WithMany()
-            .HasForeignKey(t => t.IdPixDestino)
+            .HasForeignKey(t => t.IdContaDestino)
             .OnDelete(DeleteBehavior.Restrict);
     }
 }

@@ -130,16 +130,16 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dados.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ContaOrigemIdConta")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdPixDestino")
+                    b.Property<int>("IdContaDestino")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdPixOrigem")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PixEntityIdPix")
+                    b.Property<int>("IdContaOrigem")
                         .HasColumnType("int");
 
                     b.Property<double>("Valor")
@@ -147,11 +147,11 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dados.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdPixDestino");
+                    b.HasIndex("ContaOrigemIdConta");
 
-                    b.HasIndex("IdPixOrigem");
+                    b.HasIndex("IdContaDestino");
 
-                    b.HasIndex("PixEntityIdPix");
+                    b.HasIndex("IdContaOrigem");
 
                     b.ToTable("TransacaoPix", (string)null);
                 });
@@ -211,7 +211,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dados.Migrations
                     b.HasOne("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.ContaEntity", "Conta")
                         .WithMany("Pixs")
                         .HasForeignKey("IdConta")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Conta");
@@ -219,36 +219,47 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dados.Migrations
 
             modelBuilder.Entity("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.TransacaoPixEntity", b =>
                 {
-                    b.HasOne("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.PixEntity", null)
-                        .WithMany()
-                        .HasForeignKey("IdPixDestino")
+                    b.HasOne("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.ContaEntity", "ContaOrigem")
+                        .WithMany("TransacoesPixsEnviadas")
+                        .HasForeignKey("ContaOrigemIdConta")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.ContaEntity", "ContaDestino")
+                        .WithMany("TransacoesPixsRecebidas")
+                        .HasForeignKey("IdContaDestino")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.PixEntity", null)
                         .WithMany()
-                        .HasForeignKey("IdPixOrigem")
+                        .HasForeignKey("IdContaDestino")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.PixEntity", null)
-                        .WithMany("TransacoesPixs")
-                        .HasForeignKey("PixEntityIdPix");
+                    b.HasOne("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.ContaEntity", null)
+                        .WithMany()
+                        .HasForeignKey("IdContaOrigem")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("ContaDestino");
+
+                    b.Navigation("ContaOrigem");
                 });
 
             modelBuilder.Entity("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.ContaEntity", b =>
                 {
                     b.Navigation("Pixs");
+
+                    b.Navigation("TransacoesPixsEnviadas");
+
+                    b.Navigation("TransacoesPixsRecebidas");
                 });
 
             modelBuilder.Entity("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.PessoaEntity", b =>
                 {
                     b.Navigation("Contas");
-                });
-
-            modelBuilder.Entity("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.PixEntity", b =>
-                {
-                    b.Navigation("TransacoesPixs");
                 });
 #pragma warning restore 612, 618
         }
