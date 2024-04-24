@@ -30,7 +30,6 @@ public class CriarTransacaoPixRequestHandler : IRequestHandler<CriarTransacaoPix
         {
             Valor = request.Valor,
             Data = request.Data,
-            ChavePix = request.ChavePix,
             ChaveDeSeguranca = request.ChaveDeSeguranca,
             IdPixOrigem = request.IdPixOrigem,
             IdPixDestino = request.IdPixDestino
@@ -38,6 +37,6 @@ public class CriarTransacaoPixRequestHandler : IRequestHandler<CriarTransacaoPix
 
         await _transacaoPixRepository.CriarTransacaoPixAsync(transacao);
 
-        return Result.Success(new CriarTransacaoPixResponse(transacao.Id, transacao.Valor));
+        return Result.Success(new CriarTransacaoPixResponse(transacao.IdTransacaoPix, transacao.Valor));
     }
 }
