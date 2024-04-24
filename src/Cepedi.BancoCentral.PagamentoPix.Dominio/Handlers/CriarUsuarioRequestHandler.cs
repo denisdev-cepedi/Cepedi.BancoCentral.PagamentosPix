@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 using OperationResult;
 
 namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers;
-public class CriarUsuarioRequestHandler 
+public class CriarUsuarioRequestHandler
     : IRequestHandler<CriarUsuarioRequest, Result<CriarUsuarioResponse>>
 {
     private readonly ILogger<CriarUsuarioRequestHandler> _logger;
