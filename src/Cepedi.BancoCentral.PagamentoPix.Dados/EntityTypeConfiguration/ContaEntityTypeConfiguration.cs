@@ -16,8 +16,13 @@ public class ContaEntityTypeConfiguration : IEntityTypeConfiguration<ContaEntity
 
         builder.HasOne(c => c.Pessoa)
                   .WithMany(p => p.Contas)
-                  .HasForeignKey(c => c.IdPessoa);
+                  .HasForeignKey(c => c.IdPessoa).IsRequired()
+                  .OnDelete(DeleteBehavior.Restrict);
 
-        builder.HasMany(c => c.Pixs).WithOne(p => p.Conta).HasForeignKey(p => p.IdConta).IsRequired();
+        builder.HasMany(conta => conta.Pixs)
+                .WithOne(pix => pix.Conta)
+                .HasForeignKey(pix => pix.IdConta)
+                .OnDelete(DeleteBehavior.Restrict);
+
     }
 }

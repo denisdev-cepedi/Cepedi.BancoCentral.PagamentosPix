@@ -14,6 +14,8 @@ public class PessoaEntityTypeConfiguration : IEntityTypeConfiguration<PessoaEnti
         builder.Property(pessoa => pessoa.Nome).HasMaxLength(150);
         builder.Property(pessoa => pessoa.IdPessoa).IsRequired();
         builder.Property(pessoa => pessoa.Cpf).IsRequired().HasMaxLength(12);
-         builder.HasMany(c => c.Contas).WithOne(p => p.Pessoa).HasForeignKey(p => p.IdPessoa).IsRequired();
+        builder.HasMany(c => c.Contas)
+                .WithOne(p => p.Pessoa)
+                .HasForeignKey(p => p.IdPessoa).IsRequired();
     }
 }
