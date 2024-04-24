@@ -27,9 +27,7 @@ public class CriarPixRequestHandler : IRequestHandler<CriarPixRequest, Result<Cr
         //devo verificar se a chave pix ja existe, e a conta deve existir e a pessoa deve existir retonando uma excecão
         //caso esses dados sejam invalidos, retornar uma excecão???
         
-        try
-        {
-           
+      
             var pixEntity = await _pixRepository.ObterChavePixAsync(request.ChavePix);
             if(pixEntity != null){
                 _logger.LogError("Chave Pix ja existe");
@@ -51,13 +49,6 @@ public class CriarPixRequestHandler : IRequestHandler<CriarPixRequest, Result<Cr
             await _pixRepository.CriarPixAsync(pix);
             return Result.Success(new CriarPixResponse(pix.IdPix, pix.ChavePix));
 
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError("Ocorreu um erro durante a execução");
-            return Result.Error<CriarPixResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (PagamentosPix.ErroGravacaoPix))
-            );
-        }
+       
     }
 }

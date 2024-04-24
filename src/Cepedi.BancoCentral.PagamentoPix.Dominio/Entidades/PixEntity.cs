@@ -18,7 +18,6 @@ public class PixEntity
     public ICollection<TransacaoPixEntity> TransacaoesPix { get; set; }
     public class TipoPixClass{
         public int IdTipoPix { get; set; }
-
         public string Nome { get; set; } = default!;
     }
     
