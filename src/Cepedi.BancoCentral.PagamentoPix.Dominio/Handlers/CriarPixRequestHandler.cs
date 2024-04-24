@@ -15,40 +15,51 @@ public class CriarPixRequestHandler : IRequestHandler<CriarPixRequest, Result<Cr
 {
     private readonly ILogger<CriarPixRequestHandler> _logger;
     private readonly IPixRepository _pixRepository;
-    // private readonly IContaRepository _contaRepository;
+    private readonly IContaRepository _contaRepository;
 
-    public CriarPixRequestHandler(IPixRepository pixRepository, ILogger<CriarPixRequestHandler> logger){
+    public CriarPixRequestHandler(IPixRepository pixRepository, IContaRepository contaRepository, ILogger<CriarPixRequestHandler> logger)
+    {
         _pixRepository = pixRepository;
+        _contaRepository = contaRepository;
         _logger = logger;
     }
 
     public async Task<Result<CriarPixResponse>> Handle(CriarPixRequest request, CancellationToken cancellationToken)
     {
-        //devo verificar se a chave pix ja existe, e a conta deve existir e a pessoa deve existir retonando uma excecão
-        //caso esses dados sejam invalidos, retornar uma excecão???
+
+        var pixEntity = await _pixRepository.ObterChavePixAsync(request.ChavePix);
+        if (pixEntity != null)
+        {
+            _logger.LogError("Chave Pix ja existe");
+            return Result.Error<CriarPixResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
+                (PagamentosPix.ChavePixJaCadastrada))
+            );
+        }
+
+        var contaResponse = await _contaRepository.ObterContaByIdAsync(request.IdConta);
+
+        if (contaResponse == null)
+        {
+            _logger.LogError("Conta não existe");
+            return Result.Error<CriarPixResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
+                (PagamentosPix.ContaInexistente))
+            );
+        }
         
-      
-            var pixEntity = await _pixRepository.ObterChavePixAsync(request.ChavePix);
-            if(pixEntity != null){
-                _logger.LogError("Chave Pix ja existe");
-                return Result.Error<CriarPixResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                    (PagamentosPix.ChavePixJaCadastrada))
-                );
-            }
-            var pix = new PixEntity()
-            {
-                IdPix = request.idPix,
-                IdTipoPix = request.IdTipoPix,
-                ChavePix = request.ChavePix,
-                IdConta = request.IdConta,
-                IdPessoa = request.IdPessoa,
-                DataCriacao = DateTime.Now,
-                Status = true
-            };
+        var pix = new PixEntity()
+        {
+            IdPix = request.idPix,
+            IdTipoPix = request.IdTipoPix,
+            ChavePix = request.ChavePix,
+            IdConta = request.IdConta,
+            Conta = contaResponse,
+            DataCriacao = DateTime.Now,
+            Status = true
+        };
 
-            await _pixRepository.CriarPixAsync(pix);
-            return Result.Success(new CriarPixResponse(pix.IdPix, pix.ChavePix));
+        await _pixRepository.CriarPixAsync(pix);
+        return Result.Success(new CriarPixResponse(pix.IdPix, pix.ChavePix, pix.Status));
 
-       
+
     }
 }

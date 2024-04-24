@@ -35,6 +35,11 @@ public class PagamentosPix
         Descricao = "A chave PIX enviada está em uso",
         Tipo = ETipoErro.Alerta
     };
+    public static ResultadoErro ContaInexistente = new(){
+        Titulo = "Conta inexistente",
+        Descricao = "A conta informada não existe",
+        Tipo = ETipoErro.Alerta
+    };
     public static ResultadoErro DadosInvalidos = new()
     {
         Titulo = "Dados inválidos",
