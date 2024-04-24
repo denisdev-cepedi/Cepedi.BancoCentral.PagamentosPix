@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Cepedi.BancoCentral.PagamentoPix.Dados.Repositorios;
 using Cepedi.BancoCentral.PagamentoPix.Data;
 using Cepedi.BancoCentral.PagamentoPix.Data.Repositories;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers.Pipelines;
@@ -25,7 +26,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.IoC
 
             ConfigurarFluentValidation(services);
 
-
+            services.AddScoped<IPessoaRepository, PessoaRepository>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<IPixRepository, PixRepository>();
             services.AddScoped<IContaRepository, ContaRepository>();
