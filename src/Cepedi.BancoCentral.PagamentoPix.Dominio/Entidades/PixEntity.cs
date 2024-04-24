@@ -31,4 +31,10 @@ public class PixEntity
         chaveAleatoria = 4
     }
 
+    internal void Desabilitar()
+    {
+        Status = false;
+    }
 }
+
+

@@ -24,7 +24,11 @@ public class PagamentosPix
         Tipo = ETipoErro.Erro
     };
 
-    
+    public static ResultadoErro PixInexistente = new(){
+        Titulo = "Chave PIX inexistente",
+        Descricao = "A chave PIX informada não foi localizada",
+        Tipo = ETipoErro.Alerta
+    };
     public static ResultadoErro ChavePixInvalida = new(){
         Titulo = "Chave PIX inválida",
         Descricao = "A chave PIX enviada é inválida",

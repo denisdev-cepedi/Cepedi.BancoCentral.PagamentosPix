@@ -22,10 +22,16 @@ namespace Cepedi.BancoCentral.PagamentoPix.IoC
             cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ExcecaoPipeline<,>));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidacaoComportamento<,>));
+
             ConfigurarFluentValidation(services);
 
 
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IPixRepository, PixRepository>();
+            services.AddScoped<IContaRepository, ContaRepository>();
+
+
+            // services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddHealthChecks()
                 .AddDbContextCheck<ApplicationDbContext>();

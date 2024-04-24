@@ -26,9 +26,10 @@ public class CriarPixRequestHandler : IRequestHandler<CriarPixRequest, Result<Cr
 
     public async Task<Result<CriarPixResponse>> Handle(CriarPixRequest request, CancellationToken cancellationToken)
     {
-
+        //teorizando que eu pode ter um pix com a mesma chave e difente conta se 
+        //estiver desabilitado
         var pixEntity = await _pixRepository.ObterChavePixAsync(request.ChavePix);
-        if (pixEntity != null)
+        if (pixEntity != null && pixEntity.Status == true)
         {
             _logger.LogError("Chave Pix ja existe");
             return Result.Error<CriarPixResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
@@ -45,7 +46,7 @@ public class CriarPixRequestHandler : IRequestHandler<CriarPixRequest, Result<Cr
                 (PagamentosPix.ContaInexistente))
             );
         }
-        
+
         var pix = new PixEntity()
         {
             IdPix = request.idPix,

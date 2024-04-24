@@ -17,22 +17,5 @@ public class TransacaoPixEntityTypeConfiguration : IEntityTypeConfiguration<Tran
         builder.Property(c => c.IdPixOrigem).IsRequired(); 
         builder.Property(c => c.IdPixDestino).IsRequired();
         
-<<<<<<< HEAD
-        builder.HasOne<PixEntity>()
-            .WithMany()
-            .HasForeignKey(t => t.IdPixOrigem)
-            .OnDelete(DeleteBehavior.Restrict);//não pode ser removidonot
-
-        builder.HasOne<PixEntity>()
-            .WithMany()
-            .HasForeignKey(t => t.IdPixDestino)
-            .OnDelete(DeleteBehavior.Restrict);
-        
-        builder.HasOne(t => t.PixOrigem)
-        .WithMany(p => p.TransacaoesPix)
-        .HasForeignKey(t => t.IdPixOrigem)
-        .OnDelete(DeleteBehavior.Restrict);
-=======
->>>>>>> master
     }
 }

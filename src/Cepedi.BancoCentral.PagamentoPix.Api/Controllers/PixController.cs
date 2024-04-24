@@ -18,17 +18,22 @@ public class PixController : BaseController
         _mediator = mediator;
     }
 
+    [HttpGet("Pixs")]
+    [ProducesResponseType(typeof(ObterPixsResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<List<ObterPixsResponse>>> ObterPixsAsync(
+        [FromQuery] ObterPixsRequest request) => await SendCommand(request);
+
     [HttpPost]
     [ProducesResponseType(typeof(CriarPixResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<CriarPixResponse>> CriarPixAsync(
         [FromBody] CriarPixRequest request) => await SendCommand(request);
-    
-    // [HttpPut]
-    // [ProducesResponseType(typeof(AtualizarPixResponse), StatusCodes.Status200OK)]
-    // [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
-    // [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
-    // public async Task<ActionResult<AtualizarPixResponse>> AtualizarPixAsync(
-    //     [FromBody] AtualizarPixRequest request) => await SendCommand(request);
-    // )
+
+    [HttpPut]
+    [ProducesResponseType(typeof(ExcluirPixResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<ExcluirPixResponse>> ExcluirPixAsync(
+        [FromBody] ExcluirPixRequest request) => await SendCommand(request);
+
 }
