@@ -1,10 +1,10 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Cepedi.BancoCentral.PagamentoPix.Compartilhado;
 using Cepedi.BancoCentral.PagamentoPix.Dados.Repositorios;
 using Cepedi.BancoCentral.PagamentoPix.Data;
 using Cepedi.BancoCentral.PagamentoPix.Data.Repositories;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers.Pipelines;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio;
-using Cepedi.BancoCentral.PagamentoPix.Shareable;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -41,7 +41,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.IoC
         private static void ConfigurarFluentValidation(IServiceCollection services)
         {
             var abstractValidator = typeof(AbstractValidator<>);
-            var validadores = typeof(QualquerCoisa)
+            var validadores = typeof(IValida)
                 .Assembly
                 .DefinedTypes
                 .Where(type => type.BaseType?.IsGenericType is true &&
