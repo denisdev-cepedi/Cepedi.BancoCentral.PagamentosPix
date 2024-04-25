@@ -16,7 +16,6 @@ public class PixEntity
     public bool Status { get; set; } = default!;
 
     public ICollection<TransacaoPixEntity> TransacoesPixsEnviadas { get; set; } = default!;
-    
     public ICollection<TransacaoPixEntity> TransacoesPixsRecebidas { get; set; } = default!;
 
     public class TipoPixClass{
@@ -32,4 +31,10 @@ public class PixEntity
         chaveAleatoria = 4
     }
 
+    internal void Desabilitar()
+    {
+        Status = false;
+    }
 }
+
+

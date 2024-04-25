@@ -5,7 +5,6 @@ using Cepedi.BancoCentral.PagamentoPix.Data;
 using Cepedi.BancoCentral.PagamentoPix.Data.Repositories;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers.Pipelines;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio;
-using Cepedi.BancoCentral.PagamentoPix.Shareable;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -24,13 +23,15 @@ namespace Cepedi.BancoCentral.PagamentoPix.IoC
             cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ExcecaoPipeline<,>));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidacaoComportamento<,>));
+
             ConfigurarFluentValidation(services);
 
             services.AddScoped<IPessoaRepository, PessoaRepository>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<IContaRepository, ContaRepository>();
+            services.AddScoped<IPixRepository, PixRepository>();
         
-
+            // services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddHealthChecks()
                 .AddDbContextCheck<ApplicationDbContext>();
         }
