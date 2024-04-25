@@ -8,8 +8,8 @@ namespace Cepedi.BancoCentral.PagamentoPix.Data;
 public class ApplicationDbContext : DbContext
 {
     public DbSet<UsuarioEntity> Usuario { get; set; } = default!;
-     public DbSet<TransacaoPixEntity> TransacaoPix { get; set; } = default!;
-
+    public DbSet<TransacaoPixEntity> TransacaoPix { get; set; } = default!;
+    
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
     {
@@ -20,4 +20,8 @@ public class ApplicationDbContext : DbContext
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         base.OnModelCreating(modelBuilder);
     }
+}
+
+public class TransacaoEntity
+{
 }

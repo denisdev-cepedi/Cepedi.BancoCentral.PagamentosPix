@@ -8,7 +8,7 @@ public class ContaEntityTypeConfiguration : IEntityTypeConfiguration<ContaEntity
 {
     public void Configure(EntityTypeBuilder<ContaEntity> builder)
     {
-        builder.ToTable("Contas");
+       builder.ToTable("Contas");
         builder.HasKey(c => c.IdConta); // Define a chave primária 
         builder.Property(c => c.IdPessoa).IsRequired();
         builder.Property(c => c.Numero).IsRequired();
@@ -16,8 +16,12 @@ public class ContaEntityTypeConfiguration : IEntityTypeConfiguration<ContaEntity
 
         builder.HasOne(c => c.Pessoa)
                   .WithMany(p => p.Contas)
-                  .HasForeignKey(c => c.IdPessoa);
+                  .HasForeignKey(c => c.IdPessoa).IsRequired()
+                  .OnDelete(DeleteBehavior.Restrict);
 
-        builder.HasMany(c => c.Pixs).WithOne(p => p.Conta).HasForeignKey(p => p.IdConta).IsRequired();
+        builder.HasMany(conta => conta.Pixs)
+                .WithOne(pix => pix.Conta)
+                .HasForeignKey(pix => pix.IdConta)
+                .OnDelete(DeleteBehavior.Restrict);
     }
 }
