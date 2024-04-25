@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Enums;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Responses;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades;
@@ -13,8 +8,7 @@ using OperationResult;
 
 namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
 {
-    public class CriarContaRequestHandler :
-            IRequestHandler<CriarContaRequest, Result<CriarContaResponse>>
+    public class CriarContaRequestHandler : IRequestHandler<CriarContaRequest, Result<CriarContaResponse>>
     {
         private readonly IContaRepository _contaRepository;
         private readonly ILogger<CriarContaRequestHandler> _logger;
@@ -26,38 +20,20 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
             _logger = logger;
         }
 
-        public async Task<Result<CriarContaResponse>> Handle(CriarContaResquest request, CancellationToken cancellationToken)
-        {
-            var conta = new ContaEntity{
-                    Numero = request.Numero,
-                    Agencia = request.Agencia,
-                    Conta = request.Conta,
-                    IdPessoa = request.IdPessoa
-                };
-                await _contaRepository.CriarContaAsync(conta);
-                return Result.Success(new CriarContaResponse(conta.IdConta, conta.IdPessoa));
-        }
-}
-
         public async Task<Result<CriarContaResponse>> Handle(CriarContaRequest request, CancellationToken cancellationToken)
         {
-
-
             var conta = new ContaEntity
             {
-                IdPessoa = request.IdPessoa,
                 Numero = request.Numero,
                 Agencia = request.Agencia,
-                Conta = request.Conta
+                Conta = request.Conta,
+                IdPessoa = request.IdPessoa
             };
 
-           
             await _contaRepository.CriarContaAsync(conta);
 
-            
             return Result.Success(new CriarContaResponse(conta.IdConta, conta.IdPessoa));
         }
-    }
 
-    
+    }
 }
