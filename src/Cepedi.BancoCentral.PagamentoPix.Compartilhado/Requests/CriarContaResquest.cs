@@ -1,8 +1,8 @@
 ﻿using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Responses;
 using MediatR;
 using OperationResult;
-
-public class CriarContaResquest: IRequest<Result<CriarContaResponse>>
+namespace Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests{
+public class CriarContaRequest: IRequest<Result<CriarContaResponse>>
 {
  
     public int IdPessoa { get; set; }
@@ -10,4 +10,5 @@ public class CriarContaResquest: IRequest<Result<CriarContaResponse>>
     public required string Agencia { get; set; }
     public required string Conta { get; set; } = default!;
     
+}
 }
