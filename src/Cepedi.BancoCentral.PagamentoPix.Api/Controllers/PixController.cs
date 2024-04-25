@@ -5,6 +5,8 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cepedi.BancoCentral.PagamentoPix.Api.Controllers;
+[ApiController]
+[Route("[controller]")]
 public class PixController : BaseController
 {
     private readonly ILogger<PixController> _logger;
@@ -18,7 +20,7 @@ public class PixController : BaseController
         _mediator = mediator;
     }
 
-    [HttpGet("Pixs")]
+    [HttpGet]
     [ProducesResponseType(typeof(ObterPixsResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<List<ObterPixsResponse>>> ObterPixsAsync(

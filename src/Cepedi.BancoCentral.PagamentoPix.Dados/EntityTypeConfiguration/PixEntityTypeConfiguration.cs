@@ -7,7 +7,7 @@ public class PixEntityTypeConfiguration : IEntityTypeConfiguration<PixEntity>
 {
     public void Configure(EntityTypeBuilder<PixEntity> builder)
     {
-        builder.ToTable("Pixs");
+        builder.ToTable("Pix");
         builder.HasKey(pix => pix.IdPix); // Define a chave primária
 
         builder.Property(pix => pix.IdConta).IsRequired();

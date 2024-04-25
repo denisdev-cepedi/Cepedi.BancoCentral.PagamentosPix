@@ -37,7 +37,7 @@ public class CriarPixRequestHandler : IRequestHandler<CriarPixRequest, Result<Cr
             );
         }
 
-        var contaResponse = await _contaRepository.ObterContaByIdAsync(request.IdConta);
+        var contaResponse = await _contaRepository.ObtemContaPorIdAsync(request.IdConta);
 
         if (contaResponse == null)
         {

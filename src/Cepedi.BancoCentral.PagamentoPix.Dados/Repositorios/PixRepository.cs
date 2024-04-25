@@ -12,13 +12,13 @@ public class PixRepository : IPixRepository{
     public async Task<PixEntity> CriarPixAsync(PixEntity pix)
     {
 
-        _context.Pixs.Add(pix);
+        _context.Pix.Add(pix);
         await _context.SaveChangesAsync();
         return pix;
     }
 
     public async Task<PixEntity> AtualizarPixAsync(PixEntity pix){
-        _context.Pixs.Update(pix);
+        _context.Pix.Update(pix);
         await _context.SaveChangesAsync();
         return pix;
     }
@@ -26,16 +26,16 @@ public class PixRepository : IPixRepository{
 
     public async Task<PixEntity> ObterPixByIdAsync(int id)
     {
-        return await _context.Pixs.Where(x => x.IdPix == id).FirstOrDefaultAsync();
+        return await _context.Pix.Where(x => x.IdPix == id).FirstOrDefaultAsync();
     }
 
     public async Task<PixEntity> ObterChavePixAsync(string chavePix)
     {
-        return await _context.Pixs.Where(x => x.ChavePix == chavePix).FirstOrDefaultAsync();
+        return await _context.Pix.Where(x => x.ChavePix == chavePix).FirstOrDefaultAsync();
     }
 
     public ICollection<PixEntity> ListarPixs()
     {
-        return _context.Pixs.ToList();
+        return _context.Pix.ToList();
     }
 }
