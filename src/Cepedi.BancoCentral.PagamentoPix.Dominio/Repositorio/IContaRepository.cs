@@ -5,12 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades;
 
-namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio;
-
-public interface IContaRepository
-{
-    Task<ContaEntity> ObterContaByIdAsync(int idConta);
-}
 
 namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio
 {
