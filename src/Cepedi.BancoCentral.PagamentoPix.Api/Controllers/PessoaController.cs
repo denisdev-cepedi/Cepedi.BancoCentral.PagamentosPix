@@ -52,13 +52,5 @@ namespace Cepedi.BancoCentral.PagamentoPix.Api.Controllers
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
     public async Task<ActionResult<ObterPessoaResponse>> ObterPessoaAsync([FromRoute] int idPessoa) 
         => await SendCommand(new ObterPessoaRequest(idPessoa));
-   
-    [HttpPost("pessoa/{id}/conta")]
-    [ProducesResponseType(typeof(CriarContaResponse), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
-    public async Task<ActionResult<CriarContaResponse>> CriarContaAsync(
-        [FromRoute] int id, [FromBody] CriarContaResquest request) => await SendCommand(request);
-    }
-   
+}
 }
