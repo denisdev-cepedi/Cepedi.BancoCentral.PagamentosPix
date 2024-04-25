@@ -39,8 +39,5 @@ public class ContaController : BaseController
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
     public async Task<ActionResult<AtualizarContaResponse>> AtualizarContaAsync(
         [FromBody] AtualizarContaResquest request) => await SendCommand(request);
-private async Task<ActionResult<CriarContaResponse>> SendCommand(CriarContaResquest request)
-    {
-        throw new NotImplementedException();
-    }
+
 }

@@ -9,7 +9,8 @@ public class ApplicationDbContext : DbContext
 {
     public DbSet<UsuarioEntity> Usuario { get; set; } = default!;
     public DbSet<PessoaEntity> Pessoa { get; set; } = default!;
-    
+    public DbSet<ContaEntity> Conta { get; set; } = default!;
+
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
     {
