@@ -2,7 +2,7 @@
 using MediatR;
 using OperationResult;
 
-public class AtualizarContaResquest: IRequest<Result<AtualizarContaResponse>>
+public class AtualizarContaRequest: IRequest<Result<AtualizarContaResponse>>
 {
  public int IdConta { get; set; }
     public int IdPessoa { get; set; }
