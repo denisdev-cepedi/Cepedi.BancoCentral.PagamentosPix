@@ -8,7 +8,7 @@ public class ContaEntityTypeConfiguration : IEntityTypeConfiguration<ContaEntity
 {
     public void Configure(EntityTypeBuilder<ContaEntity> builder)
     {
-        builder.ToTable("Contas");
+        builder.ToTable("Conta");
         builder.HasKey(c => c.IdConta); // Define a chave primária 
         builder.Property(c => c.IdPessoa).IsRequired();
         builder.Property(c => c.Numero).IsRequired();
