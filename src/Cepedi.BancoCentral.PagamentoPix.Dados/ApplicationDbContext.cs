@@ -11,6 +11,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<PixEntity> Pix { get; set; } = default!;
     public DbSet<ContaEntity> Conta { get; set; } = default!;
     public DbSet<PessoaEntity> Pessoa { get; set; } = default!;
+    public DbSet<TransacaoPixEntity> TransacaoPix { get; set; } = default!;
+
 
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
