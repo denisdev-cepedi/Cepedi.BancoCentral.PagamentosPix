@@ -8,12 +8,15 @@ public class Worker : BackgroundService
 {
     private readonly ILogger<Worker> _logger;
     private readonly IConsumerRabbitMQ<CriarPessoaRequest> _criaPessoaConsumer;
+    private readonly IConsumerRabbitMQ<AtualizarPessoaRequest> _atualizaPessoaConsumer;//Verificar se pode colocar mais de um
 
     public Worker(ILogger<Worker> logger,
-        IConsumerRabbitMQ<CriarPessoaRequest> criaPessoaConsumer)
+        IConsumerRabbitMQ<CriarPessoaRequest> criaPessoaConsumer,
+        IConsumerRabbitMQ<AtualizarPessoaRequest> atualizaPessoaConsumer)
     {
         _logger = logger;
         _criaPessoaConsumer = criaPessoaConsumer;
+        _atualizaPessoaConsumer = atualizaPessoaConsumer;
     }
 
     protected override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -38,11 +41,13 @@ public class Worker : BackgroundService
 
     private Task Inicia(CancellationToken stoppingToken)
     {
-        return Task.WhenAll(_criaPessoaConsumer.IniciaLeituraMensagens(stoppingToken));
+        return Task.WhenAll(_criaPessoaConsumer.IniciaLeituraMensagens(stoppingToken),
+            _atualizaPessoaConsumer.IniciaLeituraMensagens(stoppingToken));
     }
 
     private void Finaliza()
     {
         _criaPessoaConsumer.Finaliza();
+        _atualizaPessoaConsumer.Finaliza();	
     }
 }
