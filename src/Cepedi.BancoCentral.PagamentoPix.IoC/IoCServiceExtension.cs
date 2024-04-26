@@ -1,10 +1,10 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Cepedi.BancoCentral.PagamentoPix.Compartilhado;
 using Cepedi.BancoCentral.PagamentoPix.Dados.Repositorios;
 using Cepedi.BancoCentral.PagamentoPix.Data;
 using Cepedi.BancoCentral.PagamentoPix.Data.Repositories;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers.Pipelines;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio;
-using Cepedi.BancoCentral.PagamentoPix.Shareable;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -19,16 +19,22 @@ namespace Cepedi.BancoCentral.PagamentoPix.IoC
         public static void ConfigureAppDependencies(this IServiceCollection services, IConfiguration configuration)
         {
             ConfigurarDbContext(services, configuration);
+
             services.AddMediatR(cfg => 
             cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
+            
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ExcecaoPipeline<,>));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidacaoComportamento<,>));
+
             ConfigurarFluentValidation(services);
 
-
+            services.AddScoped<IPessoaRepository, PessoaRepository>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IContaRepository, ContaRepository>();
+            services.AddScoped<IPixRepository, PixRepository>();
             services.AddScoped<ITransacaoPixRepository, TransacaoPixRepository>();
-
+        
+            // services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddHealthChecks()
                 .AddDbContextCheck<ApplicationDbContext>();
         }
@@ -36,7 +42,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.IoC
         private static void ConfigurarFluentValidation(IServiceCollection services)
         {
             var abstractValidator = typeof(AbstractValidator<>);
-            var validadores = typeof(QualquerCoisa)
+            var validadores = typeof(IValida)
                 .Assembly
                 .DefinedTypes
                 .Where(type => type.BaseType?.IsGenericType is true &&

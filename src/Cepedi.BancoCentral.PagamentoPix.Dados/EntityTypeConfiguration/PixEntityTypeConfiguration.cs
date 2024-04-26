@@ -26,7 +26,7 @@ public class PixEntityTypeConfiguration : IEntityTypeConfiguration<PixEntity>
                 .HasForeignKey(transacao => transacao.IdPixOrigem)
                  .OnDelete(DeleteBehavior.Restrict);
 
-        builder.HasMany(pix => pix.TransacoesPixsRecebidas)
+                builder.HasMany(pix => pix.TransacoesPixsRecebidas)
                 .WithOne(transacao => transacao.PixDestino)
                 .HasForeignKey(transacao => transacao.IdPixDestino)
                 .OnDelete(DeleteBehavior.Restrict);
