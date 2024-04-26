@@ -33,5 +33,28 @@ namespace Cepedi.BancoCentral.PagamentoPix.Data.Tests.MemoryDatabase
                 Assert.Equal("Pessoa2", pessoas[1].Nome);
             }
         }
+        public async Task Update_Pessoa_From_Database()
+        {
+            // Arrange
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "TestDatabase")
+                .Options;
+            // Act
+            using (var context = new ApplicationDbContext(options))
+            {
+                var pessoaRepository = new PessoaRepository(context);
+                var pessoa = await pessoaRepository.ObtemPessoaPorIdAsync(1);
+                pessoa.Cpf = "22222222222";
+                await pessoaRepository.AtualizarPessoaAsync(pessoa);
+            }
+            // Assert
+            using (var context = new ApplicationDbContext(options))
+            {
+                var pessoaRepository = new PessoaRepository(context);
+                var pessoa = await pessoaRepository.ObtemPessoaPorIdAsync(1);
+                Assert.Equal("22222222222", pessoa.Cpf);
+            }
+
+        }
     }
 }
