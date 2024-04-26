@@ -2,7 +2,6 @@
 using BenchmarkDotNet.Running;
 using Cepedi.BancoCentral.PagamentoPix.Performance.Test;
 using Cepedi.BancoCentral.PagamentoPix.Performance.Test.Helpers;
-using Cepedi.BancoCentral.PagamentoPix.Performance.Test;
 
 //var summary = BenchmarkRunner.Run<StringConcatenationVsStringBuilderBenchmark>();
 //var summary = BenchmarkRunner.Run<IterationBenchmark>();

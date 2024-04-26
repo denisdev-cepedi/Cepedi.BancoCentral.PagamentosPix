@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cepedi.BancoCentral.PagamentoPix.Dados.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240423184417_init")]
-    partial class init
+    [Migration("20240425175949_inicial")]
+    partial class inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,7 +52,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dados.Migrations
 
                     b.HasIndex("IdPessoa");
 
-                    b.ToTable("Contas", (string)null);
+                    b.ToTable("Conta", (string)null);
                 });
 
             modelBuilder.Entity("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.PessoaEntity", b =>
@@ -75,7 +75,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dados.Migrations
 
                     b.HasKey("IdPessoa");
 
-                    b.ToTable("Pessoas", (string)null);
+                    b.ToTable("Pessoa", (string)null);
                 });
 
             modelBuilder.Entity("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.PixEntity", b =>

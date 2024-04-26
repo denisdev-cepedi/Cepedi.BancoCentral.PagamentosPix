@@ -49,7 +49,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dados.Migrations
 
                     b.HasIndex("IdPessoa");
 
-                    b.ToTable("Contas", (string)null);
+                    b.ToTable("Conta", (string)null);
                 });
 
             modelBuilder.Entity("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.PessoaEntity", b =>
@@ -72,7 +72,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dados.Migrations
 
                     b.HasKey("IdPessoa");
 
-                    b.ToTable("Pessoas", (string)null);
+                    b.ToTable("Pessoa", (string)null);
                 });
 
             modelBuilder.Entity("Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades.PixEntity", b =>
