@@ -42,4 +42,11 @@ public class ContaController : BaseController
     public async Task<ActionResult<ObterListContaByPessoaIdResponse>> ObterContasAsync(
         [FromRoute] int idPessoa) => await SendCommand(new ObterListContaByPessoaIdRequest(idPessoa));
 
+    [HttpGet("{idConta}")]
+    [ProducesResponseType(typeof(ObterContaResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
+    public async Task<ActionResult<ObterContaResponse>> ObterPessoaAsync([FromRoute] int idConta)
+    => await SendCommand(new ObterContaRequest(idConta));
+
 }
