@@ -26,26 +26,12 @@ public class TransacaoPixController : BaseController
         _mediator = mediator;
     }
 
-    /*[HttpGet("{id}")]
-    [ProducesResponseType(typeof(TransacaoPixEntity), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<TransacaoPixEntity>> ObterTransacaoPorIdAsync(int id)
-    {
-        var transacao = await _transacaoService.ObterTransacaoPorIdAsync(id);
-        if (transacao == null)
-        {
-            return NotFound();
-        }
-        return Ok(transacao);
-    }
-
-    [HttpGet]
-    [ProducesResponseType(typeof(IEnumerable<TransacaoPixEntity>), StatusCodes.Status200OK)]
-    public async Task<ActionResult<IEnumerable<TransacaoPixEntity>>> ObterTodasTransacoesAsync()
-    {
-        var transacoes = await _transacaoService.ObterTodasTransacoesAsync();
-        return Ok(transacoes);
-    }*/
+    [HttpGet("{idTransacaoPix}")]
+    [ProducesResponseType(typeof(ObterTransacaoPixResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
+    public async Task<ActionResult<ObterTransacaoPixResponse>> ObterTransacaoPixAsync([FromRoute] int idTransacaoPix) 
+        => await SendCommand(new ObterTransacaoPixRequest(idTransacaoPix));
 
     [HttpPost]
     [ProducesResponseType(typeof(CriarTransacaoPixResponse), StatusCodes.Status200OK)]
