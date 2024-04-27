@@ -14,7 +14,8 @@ IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((hostContext, services) =>
     {
         services.ConfigureAppDependencies(hostContext.Configuration);
-        services.AddSingleton<IConsumerRabbitMQ<CriarPessoaRequest>, FilaConsumer>();
+        services.AddSingleton<IConsumerRabbitMQ<CriarPessoaRequest>, FilaConsumerCriarPessoa>();
+        services.AddSingleton<IConsumerRabbitMQ<AtualizarPessoaRequest>, FilaConsumerAtualizarPessoa>();
         services.AddHostedService<Worker>();
     })
     .Build();
