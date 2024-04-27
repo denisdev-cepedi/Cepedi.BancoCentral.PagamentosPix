@@ -4,11 +4,11 @@ using Cepedi.BancoCentral.PagamentoPix.RabbitMQ;
 using MediatR;
 
 namespace Cepedi.BancoCentral.ServiceWorker.Consumer;
-public class FilaConsumer : RabbitMQConsumer<CriarPessoaRequest>
+public class FilaConsumerCriarPessoa : RabbitMQConsumer<CriarPessoaRequest>
 {
     private readonly IServiceProvider _serviceProvider;
 
-    public FilaConsumer(
+    public FilaConsumerCriarPessoa(
         IServiceProvider serviceProvider,
         IConfiguration configuration)
         : base(configuration)
