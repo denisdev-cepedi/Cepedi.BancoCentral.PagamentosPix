@@ -23,6 +23,5 @@ public class ContaEntityTypeConfiguration : IEntityTypeConfiguration<ContaEntity
                 .WithOne(pix => pix.Conta)
                 .HasForeignKey(pix => pix.IdConta)
                 .OnDelete(DeleteBehavior.Restrict);
-
     }
 }
