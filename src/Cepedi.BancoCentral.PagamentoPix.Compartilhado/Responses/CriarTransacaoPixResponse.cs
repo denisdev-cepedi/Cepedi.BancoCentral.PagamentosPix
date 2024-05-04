@@ -1,2 +1,2 @@
 ﻿namespace Cepedi.BancoCentral.PagamentoPix.Compartilhado.Responses;
-public record CriarTransacaoPixResponse(int idTransacaoPix, decimal valor);
+public record CriarTransacaoPixResponse(int IdTransacaoPix, decimal Valor);

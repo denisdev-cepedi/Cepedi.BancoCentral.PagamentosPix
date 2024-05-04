@@ -6,6 +6,6 @@ public interface ITransacaoPixRepository
 {
     Task<TransacaoPixEntity> CriarTransacaoPixAsync(TransacaoPixEntity transacao);
     Task<TransacaoPixEntity> ObterTransacaoPixAsync(int id);
-
+    Task<List<TransacaoPixEntity>> ObterTransacoesPixAsync();
     Task<TransacaoPixEntity> AtualizarTransacaoPixAsync(TransacaoPixEntity transacao);
 }

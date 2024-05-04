@@ -31,4 +31,9 @@ public class TransacaoPixRepository : ITransacaoPixRepository
     {
         return await _context.TransacaoPix.Where(p => p.IdTransacaoPix == IdTransacaoPix).FirstOrDefaultAsync();
     }
+
+    public async Task<List<TransacaoPixEntity>> ObterTransacoesPixAsync()
+    {
+        return await _context.TransacaoPix.ToListAsync();
+    }
 }

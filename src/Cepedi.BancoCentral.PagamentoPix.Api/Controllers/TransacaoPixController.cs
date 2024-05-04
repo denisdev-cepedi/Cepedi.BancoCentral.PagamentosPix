@@ -30,8 +30,15 @@ public class TransacaoPixController : BaseController
     [ProducesResponseType(typeof(ObterTransacaoPixResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
-    public async Task<ActionResult<ObterTransacaoPixResponse>> ObterTransacaoPixAsync([FromRoute] int idTransacaoPix) 
+    public async Task<ActionResult<ObterTransacaoPixResponse>> ObterTransacaoPixAsync([FromRoute] int idTransacaoPix)
         => await SendCommand(new ObterTransacaoPixRequest(idTransacaoPix));
+
+    [HttpGet]
+    [ProducesResponseType(typeof(ObterListTransacoesPixResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
+    public async Task<ActionResult<ObterListTransacoesPixResponse>> ObterTransacoesPixAsync()
+    => await SendCommand(new ObterListTransacoesPixRequest());
 
     [HttpPost]
     [ProducesResponseType(typeof(CriarTransacaoPixResponse), StatusCodes.Status200OK)]
