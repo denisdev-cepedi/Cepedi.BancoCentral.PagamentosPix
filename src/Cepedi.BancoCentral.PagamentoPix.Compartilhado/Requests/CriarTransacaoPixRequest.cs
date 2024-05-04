@@ -3,7 +3,7 @@ using MediatR;
 using OperationResult;
 
 namespace Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
-public class CriarTransacaoPixRequest : IRequest<Result<CriarTransacaoPixResponse>>
+public class CriarTransacaoPixRequest : IRequest<Result<CriarTransacaoPixResponse>>, IValida
 {
     public decimal Valor { get; set; }
 
