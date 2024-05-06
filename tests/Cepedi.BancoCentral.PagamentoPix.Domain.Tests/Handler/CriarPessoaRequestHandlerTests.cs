@@ -20,7 +20,7 @@ public class CriarPessoaRequestHandlerTests
     private readonly ILogger<CriarPessoaRequestHandler> _logger = Substitute.For<ILogger<CriarPessoaRequestHandler>>();
     private readonly CriarPessoaRequestHandler _sut;
 
-    public CriarPessoaRequestHandlerTests()
+    public CriarPessoaRequestHandlerTests() 
     {
         _sut = new CriarPessoaRequestHandler(_pessoaRepository, _logger);
     }

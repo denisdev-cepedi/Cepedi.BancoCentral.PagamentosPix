@@ -31,6 +31,7 @@ public class BaseController : ControllerBase
     protected ActionResult HandleError(Exception error) => error switch
     {
         SemResultadosExcecao e => NoContent(),
+        ExcecaoAplicacao e => BadRequest(FormatErrorMessage(e.ResponseErro)),
         _ => BadRequest(FormatErrorMessage(PagamentosPix.Generico))
     };
 
