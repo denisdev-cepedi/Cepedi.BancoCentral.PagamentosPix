@@ -2,8 +2,9 @@
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Responses;
 using MediatR;
 using OperationResult;
+namespace Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
 
-public class AtualizarContaResquest: IRequest<Result<AtualizarContaResponse>>, IValida
+public class AtualizarContaRequest: IRequest<Result<AtualizarContaResponse>>, IValida
 {
     public int IdConta { get; set; }
     public int IdPessoa { get; set; }
