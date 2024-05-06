@@ -1,9 +1,9 @@
-﻿using Cepedi.BancoCentral.PagamentoPix.Compartilhado;
-using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Excecoes;
+﻿using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Excecoes;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using OperationResult;
 
 namespace Cepedi.BancoCentral.PagamentoPix.Api.Controllers;
 
@@ -27,20 +27,27 @@ public class ContaController : BaseController
     [ProducesResponseType(typeof(CriarContaResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<CriarContaResponse>> CriarContaAsync(
-        [FromBody] CriarContaResquest request) => await SendCommand(request);
-
-    
-
-
+        [FromBody] CriarContaRequest request) => await SendCommand(request);
 
     [HttpPut]
     [ProducesResponseType(typeof(AtualizarContaResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
     public async Task<ActionResult<AtualizarContaResponse>> AtualizarContaAsync(
-        [FromBody] AtualizarContaResquest request) => await SendCommand(request);
-private async Task<ActionResult<CriarContaResponse>> SendCommand(CriarContaResquest request)
-    {
-        throw new NotImplementedException();
-    }
+        [FromBody] AtualizarContaRequest request) => await SendCommand(request);
+
+    // [HttpGet("{idPessoa}")]
+    // [ProducesResponseType(typeof(ObterListContaByPessoaIdResponse), StatusCodes.Status200OK)]
+    // [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+    // [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
+    // public async Task<ActionResult<ObterListContaByPessoaIdResponse>> ObterContasAsync(
+    //     [FromRoute] ObterListContaByPessoaIdRequest request) => await SendCommand(request);
+    [HttpGet("{idPessoa}")]
+    [ProducesResponseType(typeof(ObterListContaByPessoaIdResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
+    public async Task<ActionResult<ObterListContaByPessoaIdResponse>> ObterContasAsync([FromRoute] int idPessoa) => await SendCommand(new ObterListContaByPessoaIdRequest(idPessoa));
+
+
 }
+

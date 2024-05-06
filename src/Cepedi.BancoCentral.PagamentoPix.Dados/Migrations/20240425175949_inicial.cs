@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Cepedi.BancoCentral.PagamentoPix.Dados.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class inicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Pessoas",
+                name: "Pessoa",
                 columns: table => new
                 {
                     IdPessoa = table.Column<int>(type: "int", nullable: false)
@@ -22,7 +22,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dados.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pessoas", x => x.IdPessoa);
+                    table.PrimaryKey("PK_Pessoa", x => x.IdPessoa);
                 });
 
             migrationBuilder.CreateTable(
@@ -44,7 +44,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dados.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Contas",
+                name: "Conta",
                 columns: table => new
                 {
                     IdConta = table.Column<int>(type: "int", nullable: false)
@@ -56,11 +56,11 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dados.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Contas", x => x.IdConta);
+                    table.PrimaryKey("PK_Conta", x => x.IdConta);
                     table.ForeignKey(
-                        name: "FK_Contas_Pessoas_IdPessoa",
+                        name: "FK_Conta_Pessoa_IdPessoa",
                         column: x => x.IdPessoa,
-                        principalTable: "Pessoas",
+                        principalTable: "Pessoa",
                         principalColumn: "IdPessoa",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -81,9 +81,9 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dados.Migrations
                 {
                     table.PrimaryKey("PK_Pix", x => x.IdPix);
                     table.ForeignKey(
-                        name: "FK_Pix_Contas_IdConta",
+                        name: "FK_Pix_Conta_IdConta",
                         column: x => x.IdConta,
-                        principalTable: "Contas",
+                        principalTable: "Conta",
                         principalColumn: "IdConta",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -118,8 +118,8 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dados.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Contas_IdPessoa",
-                table: "Contas",
+                name: "IX_Conta_IdPessoa",
+                table: "Conta",
                 column: "IdPessoa");
 
             migrationBuilder.CreateIndex(
@@ -151,10 +151,10 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dados.Migrations
                 name: "Pix");
 
             migrationBuilder.DropTable(
-                name: "Contas");
+                name: "Conta");
 
             migrationBuilder.DropTable(
-                name: "Pessoas");
+                name: "Pessoa");
         }
     }
 }

@@ -9,4 +9,10 @@ public class ContaEntity
     public required string Conta { get; set; } = default!;
     public ICollection<PixEntity> Pixs { get; set; }
     public PessoaEntity Pessoa { get; set; }
+
+     internal void Atualizar(string agencia, string conta)
+    {
+        Agencia = agencia;
+        Conta = conta;
+    }
 }

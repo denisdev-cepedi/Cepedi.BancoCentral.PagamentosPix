@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-Cepedi.BancoCentral.ServiceWorker-c37ddf04-f852-419c-8478-45b5a7d09c6d</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cepedi.BancoCentral.PagamentoPix.Dominio\Cepedi.BancoCentral.PagamentoPix.Dominio.csproj" />
+    <ProjectReference Include="..\Cepedi.BancoCentral.PagamentoPix.IoC\Cepedi.BancoCentral.PagamentoPix.IoC.csproj" />
+    <ProjectReference Include="..\Cepedi.BancoCentral.PagamentoPix.RabbitMQ\Cepedi.BancoCentral.PagamentoPix.RabbitMQ.csproj" />
+  </ItemGroup>
+</Project>

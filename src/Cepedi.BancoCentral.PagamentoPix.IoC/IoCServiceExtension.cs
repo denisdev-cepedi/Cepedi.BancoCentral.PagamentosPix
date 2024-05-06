@@ -19,8 +19,10 @@ namespace Cepedi.BancoCentral.PagamentoPix.IoC
         public static void ConfigureAppDependencies(this IServiceCollection services, IConfiguration configuration)
         {
             ConfigurarDbContext(services, configuration);
+
             services.AddMediatR(cfg => 
             cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
+            
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ExcecaoPipeline<,>));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidacaoComportamento<,>));
 
@@ -28,12 +30,11 @@ namespace Cepedi.BancoCentral.PagamentoPix.IoC
 
             services.AddScoped<IPessoaRepository, PessoaRepository>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-            services.AddScoped<IPixRepository, PixRepository>();
             services.AddScoped<IContaRepository, ContaRepository>();
-
-
+            services.AddScoped<IPixRepository, PixRepository>();
+            services.AddScoped<ITransacaoPixRepository, TransacaoPixRepository>();
+        
             // services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
             services.AddHealthChecks()
                 .AddDbContextCheck<ApplicationDbContext>();
         }
