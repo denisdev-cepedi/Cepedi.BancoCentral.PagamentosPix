@@ -32,8 +32,6 @@ namespace Cepedi.BancoCentral.PagamentoPix.Api.Tests
             // public record CriarPixResponse(int idPix, string chavePix, bool status);
             _mediator.Send(request).ReturnsForAnyArgs(Result.Success(new CriarPixResponse(1, "12345678901234567890", true)));
 
-
-
             // Assert
             await _mediator.ReceivedWithAnyArgs().Send(request);
         }

@@ -28,7 +28,7 @@ public class PixEntity
         Cpf = 1,
         email = 2,
         telefone = 3,
-        chaveAleatoria = 4
+        chaveAleatoria = 4 
     }
 
     internal void Desabilitar()

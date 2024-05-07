@@ -10,7 +10,7 @@ public class ContaEntity
     public ICollection<PixEntity> Pixs { get; set; }
     public PessoaEntity Pessoa { get; set; }
 
-     internal void Atualizar(string agencia, string conta)
+     public  void Atualizar(string agencia, string conta)
     {
         Agencia = agencia;
         Conta = conta;
