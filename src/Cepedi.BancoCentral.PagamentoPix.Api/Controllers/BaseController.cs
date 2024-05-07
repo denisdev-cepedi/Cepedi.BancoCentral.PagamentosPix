@@ -31,13 +31,13 @@ public class BaseController : ControllerBase
     protected ActionResult HandleError(Exception error) => error switch
     {
         SemResultadosExcecao e => NoContent(),
-        ExcecaoAplicacao e => BadRequest(FormatErrorMessage(e.ResponseErro)),
+        RequestInvalidaExcecao e => BadRequest(FormatErrorMessage(PagamentosPix.DadosInvalidos, e.Erros)),
         _ => BadRequest(FormatErrorMessage(PagamentosPix.Generico))
     };
 
     private ResultadoErro FormatErrorMessage(ResultadoErro responseErro, IEnumerable<string>? errors = null)
     {
-        if (errors == null)
+        if (errors != null)
         {
             responseErro.Descricao = $"{responseErro.Descricao} : {string.Join("; ", errors!)}";
         }
