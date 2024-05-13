@@ -30,6 +30,7 @@ public class CriarPessoaRequestHandlerTests
     {
         //Arrange 
         var pessoa = new CriarPessoaRequest { Nome= "PessoaX", Cpf = "11111111111"};
+        
         _pessoaRepository.CriarPessoaAsync(It.IsAny<PessoaEntity>())
             .ReturnsForAnyArgs(new PessoaEntity
             {
@@ -46,6 +47,32 @@ public class CriarPessoaRequestHandlerTests
             .Value.nome.Should().Be(pessoa.Nome);
         result.Should().BeOfType<Result<CriarPessoaResponse>>().Which
             .Value.nome.Should().NotBeEmpty();
+    }
+
+    [Fact]
+    public async Task CriarPessoaAsync_QuandoCriarNomeMenorQueCincoCaracteres_DeveRetornarErro()
+    {
+        //Arrange 
+        var pessoa = new CriarPessoaRequest { Nome= "X", Cpf = "11111111111"};
+
+        _pessoaRepository.CriarPessoaAsync(It.IsAny<PessoaEntity>())
+            .ReturnsForAnyArgs(new PessoaEntity
+            {
+                IdPessoa = 1,
+                Nome = pessoa.Nome,
+                Cpf = pessoa.Cpf
+            });
+
+        //Act
+        var result = await _sut.Handle(pessoa, CancellationToken.None);
+
+        //Assert 
+        result.IsFailure.Should().BeTrue();
+        result.Should().BeOfType<Result<CriarPessoaResponse>>().Which
+            .ValueNome.Should().Be(pessoa.Nome);
+        result.Should().BeOfType<Result<CriarPessoaResponse>>().Which
+            .ValueNome.Should().NotBeEmpty();
+
     }
 
 }
