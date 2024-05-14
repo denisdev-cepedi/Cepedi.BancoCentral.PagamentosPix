@@ -40,6 +40,14 @@ public class TransacaoPixController : BaseController
     public async Task<ActionResult<ObterListTransacoesPixResponse>> ObterTransacoesPixAsync()
     => await SendCommand(new ObterListTransacoesPixRequest());
 
+    [HttpGet("filter")]
+    [ProducesResponseType(typeof(ObterListTransacoesPixResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
+    public async Task<ActionResult<ObterListTransacoesPixResponse>> ObterTransacoesPixFilterAsync([FromQuery] ObterTransacaoPixRequestFilter request)
+    => await SendCommand(request);
+
+
     [HttpPost]
     [ProducesResponseType(typeof(CriarTransacaoPixResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
