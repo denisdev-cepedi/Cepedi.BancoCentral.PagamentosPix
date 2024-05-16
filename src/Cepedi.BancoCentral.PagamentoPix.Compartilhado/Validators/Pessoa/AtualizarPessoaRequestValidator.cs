@@ -11,9 +11,20 @@ namespace Cepedi.BancoCentral.PagamentoPix.Compartilhado.Validators
     {
         public AtualizarPessoaRequestValidator()
         {
+            
             RuleFor(pessoa => pessoa.Nome)
                 .NotEmpty().WithMessage("Nome é obrigatório")
                 .MinimumLength(5).WithMessage("Pessoa deve ter pelo menos 5 caracteres");
+
+            RuleFor(pessoa => pessoa.Cpf)
+                .Matches("^[0-9]+$").WithMessage("Cpf deve conter apenas números");
+                
+            RuleFor(pessoa => pessoa.Cpf)
+                .NotEmpty().WithMessage("Cpf é obrigatório")
+                .Length(11).WithMessage("Cpf deve ter 11 caracteres");
+
+            RuleFor(pessoa => pessoa.Cpf)
+            .Must(Utils.Utils.ValidarCpf).WithMessage("Cpf inválido");
         }
     }
 }
