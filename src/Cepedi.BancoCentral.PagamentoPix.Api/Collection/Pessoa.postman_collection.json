@@ -7,54 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "http://localhost:5078/Pessoa",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"nome\": \"1\",\r\n  \"cpf\": \"string\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:5078/Pessoa",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5078",
-					"path": [
-						"Pessoa"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:5078/Pessoa",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:5078/Pessoa",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5078",
-					"path": [
-						"Pessoa"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:5078/BancoCentralPagamentosPix/v1/Pessoas",
+			"name": "http://localhost:5000/BancoCentralPagamentosPix/v1/Pessoas",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -88,7 +41,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:5078/BancoCentralPagamentosPix/v1/Pessoas/1",
+			"name": "http://localhost:5000/BancoCentralPagamentosPix/v1/Pessoas",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -98,12 +51,77 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:5078/BancoCentralPagamentosPix/v1/Pessoas/1",
+					"raw": "http://localhost:5000/BancoCentralPagamentosPix/v1/Pessoas",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5078",
+					"port": "5000",
+					"path": [
+						"BancoCentralPagamentosPix",
+						"v1",
+						"Pessoas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/BancoCentralPagamentosPix/v1/Pessoas",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "text/plain"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Demmi Damaceno\",\r\n  \"cpf\": \"01772182583\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/BancoCentralPagamentosPix/v1/Pessoas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"BancoCentralPagamentosPix",
+						"v1",
+						"Pessoas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/BancoCentralPagamentosPix/v1/Pessoas/1",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "text/plain"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/BancoCentralPagamentosPix/v1/Pessoas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
 					"path": [
 						"BancoCentralPagamentosPix",
 						"v1",
