@@ -37,6 +37,10 @@ public class ContaRepository : IContaRepository
         return await _context.Conta.ToListAsync();
     }
 
+    public async Task<List<ContaEntity>> ObterListContaByPessoaIdAsync(int idPessoa)
+    {
+        return await _context.Conta.Where(p=> p.IdPessoa == idPessoa).ToListAsync();
+    }
     public async Task<ContaEntity> ObtemContaPorIdAsync(int IdConta)
     {
         return await _context.Conta.Where(p => p.IdConta == IdConta).FirstOrDefaultAsync();
