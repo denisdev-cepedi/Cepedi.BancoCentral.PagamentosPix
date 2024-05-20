@@ -46,8 +46,8 @@ namespace Cepedi.BancoCentral.PagamentoPix.IoC
             // Cache Redis
             services.AddStackExchangeRedisCache(obj =>
             {
-                obj.Configuration = "stringConff";
-                obj.InstanceName = "BancoCentral.PagamentoPix";
+                obj.Configuration = configuration["Redis::Connection"];
+                obj.InstanceName = configuration["Redis::Instance"];
             });
 
             services.AddSingleton<IDistributedCache, RedisCache>();
