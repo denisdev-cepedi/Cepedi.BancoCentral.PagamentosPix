@@ -18,10 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositorios\Queries\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Cepedi.BancoCentral.PagamentoPix.Dominio\Cepedi.BancoCentral.PagamentoPix.Dominio.csproj" />
   </ItemGroup>
 
