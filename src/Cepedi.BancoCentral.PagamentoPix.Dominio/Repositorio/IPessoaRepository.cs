@@ -13,6 +13,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio
         Task<PessoaEntity> CriarPessoaAsync(PessoaEntity pessoa);
         Task<PessoaEntity> AtualizarPessoaAsync(PessoaEntity pessoa);
         Task<List<PessoaEntity>> ObterPessoasAsync();
+        Task<PessoaEntity> ObtemPessoaPorCpfAsync(string cpf);
         
     }
 }

@@ -25,6 +25,14 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
          
         public async Task<Result<CriarPessoaResponse>> Handle(CriarPessoaRequest request, CancellationToken cancellationToken)
         {
+            var PessoaEntity = await _pessoaRepository.ObtemPessoaPorCpfAsync(request.Cpf);
+            if(PessoaEntity != null)
+            {
+                return Result.Error<CriarPessoaResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
+                    (PagamentosPix.PessoaJaCadastrada)
+                ));
+            }
+
                 var pessoa = new PessoaEntity{
                         Nome = request.Nome,
                         Cpf = request.Cpf

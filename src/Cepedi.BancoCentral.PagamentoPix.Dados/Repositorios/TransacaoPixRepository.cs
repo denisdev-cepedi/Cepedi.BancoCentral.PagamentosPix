@@ -1,3 +1,5 @@
+using System.Linq.Expressions;
+using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
 using Cepedi.BancoCentral.PagamentoPix.Data;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio;
@@ -34,6 +36,13 @@ public class TransacaoPixRepository : ITransacaoPixRepository
 
     public async Task<List<TransacaoPixEntity>> ObterTransacoesPixAsync()
     {
+        return await _context.TransacaoPix.ToListAsync();
+    }
+
+    public async Task<List<TransacaoPixEntity>> ObterTransacoesPixFilterAsync(ObterTransacaoPixRequestFilter filter)
+    {
+         Expression <Func<TransacaoPixEntity, bool>> dataFilter = p =>p.Data >= filter.DataInicial && p.Data <= filter.DataFinal;
+        _context.TransacaoPix.Where(dataFilter);
         return await _context.TransacaoPix.ToListAsync();
     }
 }

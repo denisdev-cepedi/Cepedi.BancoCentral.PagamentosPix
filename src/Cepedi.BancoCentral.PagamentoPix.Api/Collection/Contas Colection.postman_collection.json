@@ -1,0 +1,115 @@
+{
+	"info": {
+		"_postman_id": "b1227bad-50d1-4ad8-8a64-d9379d445c8d",
+		"name": "Contas Colection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35040910"
+	},
+	"item": [
+		{
+			"name": "http://localhost:5078/BancoCentralPagamentoPix/v1/Contas",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "text/plain"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"idPessoa\": 2,\r\n  \"numero\": \"12\",\r\n  \"agencia\": \"123\",\r\n  \"conta\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5078/BancoCentralPagamentoPix/v1/Contas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5078",
+					"path": [
+						"BancoCentralPagamentoPix",
+						"v1",
+						"Contas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5078/BancoCentralPagamentoPix/v1/Contas",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "text/plain"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"idConta\": 2,\r\n  \"idPessoa\": 1,\r\n  \"numero\": \"12356\",\r\n  \"agencia\": \"13256\",\r\n  \"conta\": \"123544\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5078/BancoCentralPagamentoPix/v1/Contas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5078",
+					"path": [
+						"BancoCentralPagamentoPix",
+						"v1",
+						"Contas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5078/BancoCentralPagamentoPix/v1/Contas/1",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "text/plain"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5078/BancoCentralPagamentoPix/v1/Contas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5078",
+					"path": [
+						"BancoCentralPagamentoPix",
+						"v1",
+						"Contas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
