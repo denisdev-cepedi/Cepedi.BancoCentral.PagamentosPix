@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Cepedi.BancoCentral.PagamentoPix.Api.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("BancoCentralPagamentoPix/v1/TransacoesPix")]
 public class TransacaoPixController : BaseController
 {
     private readonly ILogger<TransacaoPixController> _logger;
