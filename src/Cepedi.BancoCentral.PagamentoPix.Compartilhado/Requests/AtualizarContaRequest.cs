@@ -3,7 +3,7 @@ using MediatR;
 using OperationResult;
 namespace Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
 
-public class AtualizarContaRequest: IRequest<Result<AtualizarContaResponse>>, IValida
+public class AtualizarContaRequest: IRequest<Result<AtualizarContaResponse>>
 {
     public int IdConta { get; set; }
     public int IdPessoa { get; set; }

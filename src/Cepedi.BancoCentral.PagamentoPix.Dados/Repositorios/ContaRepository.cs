@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Cepedi.BancoCentral.PagamentoPix.Data;
+﻿using Cepedi.BancoCentral.PagamentoPix.Data;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +15,6 @@ public class ContaRepository : IContaRepository
     public async Task<ContaEntity> AtualizarContaAsync(ContaEntity conta)
     {
         _context.Conta.Update(conta);
-        await _context.SaveChangesAsync();
         return conta;
     }
 
@@ -27,7 +22,6 @@ public class ContaRepository : IContaRepository
     public async Task<ContaEntity> CriarContaAsync(ContaEntity conta)
     {
         _context.Conta.Add(conta);
-        await _context.SaveChangesAsync();
         return conta;
 
     }

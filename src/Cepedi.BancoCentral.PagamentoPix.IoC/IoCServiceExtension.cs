@@ -33,6 +33,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.IoC
             services.AddScoped<IContaRepository, ContaRepository>();
             services.AddScoped<IPixRepository, PixRepository>();
             services.AddScoped<ITransacaoPixRepository, TransacaoPixRepository>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
         
             // services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddHealthChecks()
@@ -60,6 +61,12 @@ namespace Cepedi.BancoCentral.PagamentoPix.IoC
         private static void ConfigurarDbContext(IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ApplicationDbContext>((sp, options) =>
+            {
+                //options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+            });
+            
+            services.AddDbContext<AlternativeDbContext>((sp, options) =>
             {
                 //options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
