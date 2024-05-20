@@ -8,7 +8,7 @@ using OperationResult;
 namespace Cepedi.BancoCentral.PagamentoPix.Api.Controllers;
 
 [ApiController]
-[Route("[banco-central-pagamento-pix/api/v1/Contas]")]
+[Route("BancoCentralPagamentoPix/v1/Contas")]
 public class ContaController : BaseController
 {
     private readonly ILogger<ContaController> _logger;
@@ -23,13 +23,13 @@ public class ContaController : BaseController
     }
 
 
-    [HttpPost("Conta/v1/CriarConta Cria uma nova conta.")]
+    [HttpPost]
     [ProducesResponseType(typeof(CriarContaResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<CriarContaResponse>> CriarContaAsync(
         [FromBody] CriarContaRequest request) => await SendCommand(request);
 
-    [HttpPut("Conta/v1/AtualizarConta Atualiza uma conta.")]
+    [HttpPut]
     [ProducesResponseType(typeof(AtualizarContaResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
@@ -42,7 +42,7 @@ public class ContaController : BaseController
     // [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
     // public async Task<ActionResult<ObterListContaByPessoaIdResponse>> ObterContasAsync(
     //     [FromRoute] ObterListContaByPessoaIdRequest request) => await SendCommand(request);
-    [HttpGet("Conta/v1/Contas{idPessoa} Pega todas as contas de uma pessoa.")]
+    [HttpGet("{idPessoa}")]
     [ProducesResponseType(typeof(ObterListContaByPessoaIdResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
