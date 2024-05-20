@@ -25,12 +25,15 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
         public async Task<Result<ObterTransacaoPixResponse>> Handle(ObterTransacaoPixRequest request, CancellationToken cancellationToken)
         {
             var transacaoPix = await _transacaoPixRepository.ObterTransacaoPixAsync(request.IdTransacaoPix);
-            
+
             if (transacaoPix == null)
             {
                 return Result.Error<ObterTransacaoPixResponse>(
                     new Compartilhado.Excecoes.SemResultadosExcecao());
             }
+
+            var chavePixOrigem = await _transacaoPixRepository.ObterChavePixPorIdAsync(transacaoPix.IdPixOrigem);
+            var chavePixDestino = await _transacaoPixRepository.ObterChavePixPorIdAsync(transacaoPix.IdPixDestino);
 
             var response = new ObterTransacaoPixResponse
             (
@@ -38,11 +41,10 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
                 transacaoPix.Valor,
                 transacaoPix.Data,
                 transacaoPix.ChaveDeSeguranca,
-                transacaoPix.IdPixOrigem,
-                transacaoPix.IdPixDestino
-
+                chavePixOrigem,
+                chavePixDestino
             );
-            
+
             return Result.Success(response);
         }
     }

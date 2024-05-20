@@ -27,6 +27,19 @@ public class TransacaoPixRepository : ITransacaoPixRepository
         return transacao;
     }
 
+    public async Task<string> ObterChavePixPorIdAsync(int id)
+    {
+        var pix = await _context.Pix.SingleOrDefaultAsync(p => p.IdPix == id);
+        return pix?.ChavePix;
+    }
+
+    public async Task<int> ObterIdPorChavePixAsync(string chavePix)
+    {
+        var pix = await _context.Pix.SingleOrDefaultAsync(p => p.ChavePix == chavePix);
+        Console.WriteLine(pix);
+        return pix?.IdPix ?? 0;
+    }
+
     public async Task<TransacaoPixEntity> ObterTransacaoPixAsync(int IdTransacaoPix)
     {
         return await _context.TransacaoPix.Where(p => p.IdTransacaoPix == IdTransacaoPix).FirstOrDefaultAsync();

@@ -8,4 +8,7 @@ public interface ITransacaoPixRepository
     Task<TransacaoPixEntity> ObterTransacaoPixAsync(int id);
     Task<List<TransacaoPixEntity>> ObterTransacoesPixAsync();
     Task<TransacaoPixEntity> AtualizarTransacaoPixAsync(TransacaoPixEntity transacao);
+    Task<int> ObterIdPorChavePixAsync(string chavePix);
+
+    Task<string> ObterChavePixPorIdAsync(int id);
 }
