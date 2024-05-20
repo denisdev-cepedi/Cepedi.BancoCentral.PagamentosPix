@@ -35,6 +35,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
                 {
                     IdConta = c.IdConta,
                     IdPessoa = c.IdPessoa,
+                    Numero = c.Numero,
                     Conta = c.Conta,
                     Agencia = c.Agencia
                 }).ToList()
