@@ -28,16 +28,26 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
 
             var response = new ObterListTransacoesPixResponse()
             {
-                TransacoesPix = transacoesPix.Select(p => new ObterTransacaoPixResponse
-                (
-                    p.IdTransacaoPix,
-                    p.Valor,
-                    p.Data,
-                    p.ChaveDeSeguranca,
-                    p.IdPixOrigem,
-                    p.IdPixDestino
-                )).ToList()
+                TransacoesPix = new List<ObterTransacaoPixResponse>()
             };
+
+            foreach (var transacao in transacoesPix)
+            {
+                var chavePixOrigem = await _transacaoPixRepository.ObterChavePixPorIdAsync(transacao.IdPixOrigem);
+                var chavePixDestino = await _transacaoPixRepository.ObterChavePixPorIdAsync(transacao.IdPixDestino);
+
+                var transacaoResponse = new ObterTransacaoPixResponse
+                (
+                    transacao.IdTransacaoPix,
+                    transacao.Valor,
+                    transacao.Data,
+                    transacao.ChaveDeSeguranca,
+                    chavePixOrigem,
+                    chavePixDestino
+                );
+
+                response.TransacoesPix.Add(transacaoResponse);
+            }
 
             return Result.Success(response).Value;
         }
