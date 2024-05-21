@@ -2,6 +2,7 @@ using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Enums;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using OperationResult;
 
 namespace Cepedi.BancoCentral.PagamentoPix.Dados.Repositorios;
@@ -9,8 +10,10 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dados.Repositorios;
 public class ObterPixByChavePixRequestHandler : IRequestHandler<ObterPixByChavePixRequest, Result<ObterPixByChavePixResponse>>
 {
     private readonly IPixRepository _pixRepository;
-    public ObterPixByChavePixRequestHandler( IPixRepository pixRepository){
+    private readonly ILogger<ObterPixByChavePixRequestHandler> _logger;
+    public ObterPixByChavePixRequestHandler( IPixRepository pixRepository, ILogger<ObterPixByChavePixRequestHandler> logger){
         _pixRepository = pixRepository;
+        _logger = logger;
     }
     public async Task<Result<ObterPixByChavePixResponse>> Handle(ObterPixByChavePixRequest request, CancellationToken cancellationToken)
     {

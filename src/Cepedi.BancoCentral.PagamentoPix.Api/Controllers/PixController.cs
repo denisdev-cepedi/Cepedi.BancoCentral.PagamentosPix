@@ -51,4 +51,11 @@ public class PixController : BaseController
     public async Task<ActionResult<ObterPixByChavePixResponse>> ObterPixsByChavePixAsync(
         [FromBody] ObterPixByChavePixRequest request) => await SendCommand(request);
 
+
+    [HttpDelete("ChavePix")]
+    [ProducesResponseType(typeof(DesabilitarChavePixResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<DesabilitarChavePixResponse>> DesabilitarChavePixAsync(
+        [FromBody] DesabilitarChavePixRequest request) => await SendCommand(request);
 }

@@ -10,11 +10,13 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers;
 
 public class ObterPixsByContaBankRequestHandler : IRequestHandler<ObterPixsByContaBankRequest, Result<List<ObterPixsByContaBankResponse>>>
 {
+    private readonly ILogger<ObterPixsByContaBankRequestHandler> _logger;
     private readonly IPixRepository _pixRepository;
 
 
     public ObterPixsByContaBankRequestHandler(IPixRepository pixRepository, ILogger<ObterPixsByContaBankRequestHandler> logger){
         _pixRepository = pixRepository;
+        _logger = logger;
        
     }
     
