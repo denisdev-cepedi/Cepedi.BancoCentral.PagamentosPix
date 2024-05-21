@@ -1,4 +1,4 @@
-﻿/* using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
+﻿using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Responses;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers;
@@ -67,15 +67,10 @@ public class CriarPessoaRequestHandlerTests
         var result = await _sut.Handle(pessoa, CancellationToken.None);
 
         //Assert 
-        
         result.IsSuccess.Should().BeFalse();
-
-        // result.Should().BeOfType<Result<CriarPessoaResponse>>().Which
-        //     .ValueNome.Should().Be(pessoa.Nome);
-        // result.Should().BeOfType<Result<CriarPessoaResponse>>().Which
-        //     .ValueNome.Should().NotBeEmpty();
+        result.Should().NotBeNull();
+        //result.Should().Contain("Nome deve ter pelo menos 5 caracteres"); 
 
     }
 
 }
-*/

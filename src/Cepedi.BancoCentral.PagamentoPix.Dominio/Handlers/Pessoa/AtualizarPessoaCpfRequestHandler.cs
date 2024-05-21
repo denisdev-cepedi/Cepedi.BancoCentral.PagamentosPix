@@ -12,27 +12,30 @@ using OperationResult;
 
 namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
 {
-    public class AtualizarPessoaRequestHandler :
-            IRequestHandler<AtualizarPessoaRequest, Result<AtualizarPessoaResponse>>
+    public class AtualizarPessoaCpfRequestHandler :
+            IRequestHandler<AtualizarPessoaCpfRequest, Result<AtualizarPessoaResponse>>
     {
         private readonly IPessoaRepository _pessoaRepository;
-        private readonly ILogger<AtualizarPessoaRequestHandler> _logger;
-        public AtualizarPessoaRequestHandler(IPessoaRepository pessoaRepository, ILogger<AtualizarPessoaRequestHandler> logger){
+        private readonly ILogger<AtualizarPessoaCpfRequestHandler> _logger;
+        public AtualizarPessoaCpfRequestHandler(IPessoaRepository pessoaRepository, ILogger<AtualizarPessoaCpfRequestHandler> logger){
             _pessoaRepository = pessoaRepository;
             _logger = logger;
         }
-        public async Task<Result<AtualizarPessoaResponse>> Handle(AtualizarPessoaRequest request, CancellationToken cancellationToken)
+        public async Task<Result<AtualizarPessoaResponse>> Handle(AtualizarPessoaCpfRequest request, CancellationToken cancellationToken)
         {
            
-                var pessoaEntity = await _pessoaRepository.ObtemPessoaPorIdAsync(request.IdPessoa);
+                var pessoaEntity = await _pessoaRepository.ObtemPessoaPorCpfAsync(request.Cpf);
                 if (pessoaEntity == null)
                 {
                     return Result.Error<AtualizarPessoaResponse>(
-                        new Compartilhado.Excecoes.SemResultadosExcecao());
+                        new Compartilhado.Excecoes.ExcecaoAplicacao(
+                            (PagamentosPix.PessoaInexistente)
+                        ));
                 }
-                if (pessoaEntity.Cpf != request.Cpf)
+
+                if (pessoaEntity.Cpf != request.NovoCpf)
                 {
-                    var PessoaEntity2 = await _pessoaRepository.ObtemPessoaPorCpfAsync(request.Cpf);
+                    var PessoaEntity2 = await _pessoaRepository.ObtemPessoaPorCpfAsync(request.NovoCpf);
                     
                     if(PessoaEntity2 != null)
                     {
@@ -41,8 +44,8 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
                         ));
                     }
                 }
-          
-                pessoaEntity.Atualizar(request.Nome, request.Cpf);
+        
+                pessoaEntity.AtualizarCpf(request.NovoCpf);
 
                 await _pessoaRepository.AtualizarPessoaAsync(pessoaEntity);
 
