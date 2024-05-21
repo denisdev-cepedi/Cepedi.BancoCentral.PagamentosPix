@@ -12,10 +12,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Compartilhado.Validators
         public CriarContaRequestValidator()
         {
             
-             RuleFor(request => request.IdPessoa)
-            .NotNull().WithMessage("IdPessoa não pode ser nulo.");
-
-        RuleFor(request => request.Numero)
+             RuleFor(request => request.Numero)
             .NotEmpty().WithMessage("Número da instituição é obrigatório.");
 
         RuleFor(request => request.Agencia)
