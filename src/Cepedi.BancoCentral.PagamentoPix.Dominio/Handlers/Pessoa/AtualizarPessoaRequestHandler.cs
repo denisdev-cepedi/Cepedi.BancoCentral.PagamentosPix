@@ -24,15 +24,18 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
         public async Task<Result<AtualizarPessoaResponse>> Handle(AtualizarPessoaRequest request, CancellationToken cancellationToken)
         {
            
-                var pessoaEntity = await _pessoaRepository.ObtemPessoaPorIdAsync(request.IdPessoa);
+                var pessoaEntity = await _pessoaRepository.ObtemPessoaPorCpfAsync(request.Cpf);
                 if (pessoaEntity == null)
                 {
                     return Result.Error<AtualizarPessoaResponse>(
-                        new Compartilhado.Excecoes.SemResultadosExcecao());
+                        new Compartilhado.Excecoes.ExcecaoAplicacao(
+                            (PagamentosPix.PessoaInexistente)
+                        ));
                 }
-                if (pessoaEntity.Cpf != request.Cpf)
+
+                if (pessoaEntity.Cpf != request.NovoCpf)
                 {
-                    var PessoaEntity2 = await _pessoaRepository.ObtemPessoaPorCpfAsync(request.Cpf);
+                    var PessoaEntity2 = await _pessoaRepository.ObtemPessoaPorCpfAsync(request.NovoCpf);
                     
                     if(PessoaEntity2 != null)
                     {
@@ -41,8 +44,8 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
                         ));
                     }
                 }
-          
-                pessoaEntity.Atualizar(request.Nome, request.Cpf);
+        
+                pessoaEntity.Atualizar(request.Nome, request.NovoCpf);
 
                 await _pessoaRepository.AtualizarPessoaAsync(pessoaEntity);
 

@@ -40,17 +40,19 @@ namespace Cepedi.BancoCentral.PagamentoPix.Api.Controllers
 
     
     [HttpGet]
-    [ProducesResponseType(typeof(ObterListPessoasResponse), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
-    public async Task<ActionResult<ObterListPessoasResponse>> ObterPessoasAsync() 
-        => await SendCommand(new ObterListPessoasRequest());
-
-    [HttpGet("{idPessoa}")]
     [ProducesResponseType(typeof(ObterPessoaResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
-    public async Task<ActionResult<ObterPessoaResponse>> ObterPessoaAsync([FromRoute] int idPessoa) 
-        => await SendCommand(new ObterPessoaRequest(idPessoa));
+    public async Task<ActionResult<List<ObterPessoaResponse>>> ObterPessoasAsync(
+        [FromQuery] ObterListPessoasRequest request
+    ) 
+        => await SendCommand(request);
+
+    [HttpGet("Cpf")]
+    [ProducesResponseType(typeof(ObterPessoaResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
+    public async Task<ActionResult<ObterPessoaResponse>> ObterPessoaAsync([FromBody] ObterPessoaRequest request) 
+        => await SendCommand(request);
 }
 }

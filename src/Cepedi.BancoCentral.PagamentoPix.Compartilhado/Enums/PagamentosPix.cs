@@ -56,4 +56,10 @@ public class PagamentosPix
         Descricao = "A pessoa informada está em uso",
         Tipo = ETipoErro.Alerta
     };
+    
+    public static ResultadoErro PessoaInexistente = new(){
+        Titulo = "Pessoa não encontrada",
+        Descricao = "Não foi encontrada a pessoa",
+        Tipo = ETipoErro.Alerta
+    };
 }
