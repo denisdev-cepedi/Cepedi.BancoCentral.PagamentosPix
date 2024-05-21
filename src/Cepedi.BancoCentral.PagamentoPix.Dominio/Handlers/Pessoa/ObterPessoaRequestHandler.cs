@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Enums;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Responses;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio;
@@ -26,21 +27,17 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
             }
         public async Task<Result<ObterPessoaResponse>> Handle(ObterPessoaRequest request, CancellationToken cancellationToken)
         {
-            var pessoa = await _pessoaRepositorio.ObtemPessoaPorIdAsync(request.IdPessoa);
+            var pessoa = await _pessoaRepositorio.ObtemPessoaPorCpfAsync(request.Cpf);
             
             if (pessoa == null)
             {
                 return Result.Error<ObterPessoaResponse>(
-                    new Compartilhado.Excecoes.SemResultadosExcecao());
+                    new Compartilhado.Excecoes.ExcecaoAplicacao(
+                        (PagamentosPix.PessoaInexistente)
+                    ));
             }
 
-            var response = new ObterPessoaResponse()
-            {
-                IdPessoa = pessoa.IdPessoa,
-                Nome = pessoa.Nome
-
-            };
-            return Result.Success(response);
+            return Result.Success(new ObterPessoaResponse(pessoa.IdPessoa, pessoa.Nome, pessoa.Cpf));
         }
     }
 }

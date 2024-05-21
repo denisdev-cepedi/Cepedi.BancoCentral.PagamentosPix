@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Enums;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
@@ -26,17 +28,49 @@ public class CriarTransacaoPixRequestHandler : IRequestHandler<CriarTransacaoPix
     public async Task<Result<CriarTransacaoPixResponse>> Handle(CriarTransacaoPixRequest request, CancellationToken cancellationToken)
     {
 
+        var idPixOrigem = await _transacaoPixRepository.ObterIdPorChavePixAsync(request.ChavePixOrigem);
+        var idPixDestino = await _transacaoPixRepository.ObterIdPorChavePixAsync(request.ChavePixDestino);
+        var chaveDeSeguranca = GerarChaveDeSeguranca();
+
+        if (idPixOrigem == 0 || idPixDestino == 0)
+        {
+            _logger.LogError("Chave Pix incorreta ou inexistente");
+            
+            return Result.Error<CriarTransacaoPixResponse>(
+                    new Compartilhado.Excecoes.PixInexistente());
+        }
+
         var transacao = new TransacaoPixEntity()
         {
             Valor = request.Valor,
             Data = request.Data,
-            ChaveDeSeguranca = request.ChaveDeSeguranca,
-            IdPixOrigem = request.IdPixOrigem,
-            IdPixDestino = request.IdPixDestino
+            ChaveDeSeguranca = chaveDeSeguranca,
+            IdPixOrigem = idPixOrigem,
+            IdPixDestino = idPixDestino
         };
 
         await _transacaoPixRepository.CriarTransacaoPixAsync(transacao);
 
-        return Result.Success(new CriarTransacaoPixResponse(transacao.IdTransacaoPix, transacao.Valor));
+        return Result.Success(new CriarTransacaoPixResponse(transacao.IdTransacaoPix, transacao.Valor, transacao.ChaveDeSeguranca));
+    }
+
+    private static string GerarChaveDeSeguranca()
+    {
+        using (var rng = RandomNumberGenerator.Create())
+        {
+            byte[] keyBytes = new byte[16];
+            rng.GetBytes(keyBytes);
+            return BytesToHexString(keyBytes);
+        }
+    }
+
+    private static string BytesToHexString(byte[] bytes)
+    {
+        StringBuilder sb = new StringBuilder();
+        foreach (byte b in bytes)
+        {
+            sb.Append(b.ToString("X2"));
+        }
+        return sb.ToString();
     }
 }

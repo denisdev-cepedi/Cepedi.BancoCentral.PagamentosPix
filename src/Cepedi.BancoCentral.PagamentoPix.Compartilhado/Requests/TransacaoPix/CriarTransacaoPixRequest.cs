@@ -9,9 +9,6 @@ public class CriarTransacaoPixRequest : IRequest<Result<CriarTransacaoPixRespons
 
     public DateTime Data { get; set; }
 
-    public string ChaveDeSeguranca { get; set; }
-
-    public int IdPixOrigem { get; set; }
-
-    public int IdPixDestino { get; set; }
+    public string ChavePixOrigem { get; set; } = default!;
+    public string ChavePixDestino { get; set; } = default!;
 }

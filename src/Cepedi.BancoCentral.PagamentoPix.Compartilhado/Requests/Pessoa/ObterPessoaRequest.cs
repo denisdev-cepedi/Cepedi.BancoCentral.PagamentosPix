@@ -8,9 +8,8 @@ using OperationResult;
 
 namespace Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests
 {
-    public class ObterPessoaRequest : IRequest<Result<ObterPessoaResponse>>
+    public class ObterPessoaRequest : IRequest<Result<ObterPessoaResponse>>, IValida
     {
-        public ObterPessoaRequest(int idPessoa) => IdPessoa = idPessoa;
-        public int IdPessoa { get; set; }
+        public required string Cpf { get; set; } 
     }
 }
