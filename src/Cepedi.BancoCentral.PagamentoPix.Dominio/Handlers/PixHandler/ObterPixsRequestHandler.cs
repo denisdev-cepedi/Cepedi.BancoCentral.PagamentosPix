@@ -26,12 +26,8 @@ public class ObterPixsRequestHandler : IRequestHandler<ObterPixsRequest, Result<
     {
 
         var pixs = await _pixRepository.GetAllPixsAsync();
-
-
-        if (pixs == null)
-        {
+        if (pixs == null){
             return Result.Error<List<ObterPixsResponse>>(new Compartilhado.Excecoes.SemResultadosExcecao());
         }
-
         return Result.Success(pixs.Select(x => new ObterPixsResponse(x.IdPix, x.Conta.Numero.ToString() ,x.ChavePix,((PixEntity.TipoPix)x.IdTipoPix).ToString(), x.Status ? "Ativado" : "Desativado")).ToList());}
 }

@@ -9,7 +9,6 @@ public class ObterPixsByContaBankRequestValidator: AbstractValidator<ObterPixsBy
         
         //Validação do Código da instituição
         RuleFor(pix => pix.CodigoInstituicao).CodigoInstituicaoRules();
-        
 
         //Validação da agência
         RuleFor(pix => pix.Agencia).AgenciaRules();
