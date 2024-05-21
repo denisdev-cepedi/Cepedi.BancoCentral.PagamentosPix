@@ -13,7 +13,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Api.Controllers;
 
 [ApiController]
 
-[Route("BancoCentralPagamentosPix/v1/TransacoesPix")]
+[Route("[controller]/v1/TransacoesPix")]
 
 public class TransacaoPixController : BaseController
 {

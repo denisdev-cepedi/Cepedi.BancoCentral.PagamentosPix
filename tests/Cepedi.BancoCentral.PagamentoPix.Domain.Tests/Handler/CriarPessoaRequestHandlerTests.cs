@@ -67,11 +67,9 @@ public class CriarPessoaRequestHandlerTests
         var result = await _sut.Handle(pessoa, CancellationToken.None);
 
         //Assert 
-        // result.IsFailure.Should().BeTrue();
-        // result.Should().BeOfType<Result<CriarPessoaResponse>>().Which
-        //     .ValueNome.Should().Be(pessoa.Nome);
-        // result.Should().BeOfType<Result<CriarPessoaResponse>>().Which
-        //     .ValueNome.Should().NotBeEmpty();
+        result.IsSuccess.Should().BeFalse();
+        result.Should().NotBeNull();
+        //result.Should().Contain("Nome deve ter pelo menos 5 caracteres"); 
 
     }
 
