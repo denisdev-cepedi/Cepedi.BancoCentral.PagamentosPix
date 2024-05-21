@@ -34,12 +34,8 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
                     new Compartilhado.Excecoes.SemResultadosExcecao());
             }
 
-            var response = new ObterPessoaResponse()
-            {
-                IdPessoa = pessoa.IdPessoa,
-                Nome = pessoa.Nome
-
-            };
+            var response = new ObterPessoaResponse(pessoa.IdPessoa, pessoa.Nome);
+        
             return Result.Success(response);
         }
     }

@@ -21,8 +21,8 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
             ILogger<ObterListContaByPessoaIdRequestHandler> logger,
             IContaRepository contaRepositorio)
             {
-                _logger = logger;
                 _contaRepositorio = contaRepositorio;
+                _logger = logger;
             }
 
         public async Task<Result<ObterListContaByPessoaIdResponse>> Handle(ObterListContaByPessoaIdRequest request, CancellationToken cancellationToken)

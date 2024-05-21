@@ -16,7 +16,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
         private readonly ILogger<ObterPessoasRequestHandler> _logger;
         private readonly IPessoaRepository _pessoaRepositorio;
 
-        public ObterPessoasRequestHandler(ILogger<ObterPessoasRequestHandler> logger, IPessoaRepository pessoaRepositorio) 
+        public ObterPessoasRequestHandler(ILogger<ObterPessoasRequestHandler> logger, IPessoaRepository pessoaRepositorio)
         {
             _logger = logger;
             _pessoaRepositorio = pessoaRepositorio;
@@ -25,17 +25,15 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
         public async Task<Result<ObterListPessoasResponse>> Handle(ObterListPessoasRequest request, CancellationToken cancellationToken)
         {
             var pessoas = await _pessoaRepositorio.ObtemPessoasAsync();
-            
+
             var response = new ObterListPessoasResponse()
             {
-                Pessoas = pessoas.Select(p => new ObterPessoaResponse()
+                Pessoas = pessoas.Select(p => new ObterPessoaResponse(p.IdPessoa, p.Nome)
                 {
-                    IdPessoa = p.IdPessoa,
-                    Nome = p.Nome
                 }).ToList()
             };
 
-            return Result.Success(response).Value;
+            return Result.Success(response);
         }
     }
 }

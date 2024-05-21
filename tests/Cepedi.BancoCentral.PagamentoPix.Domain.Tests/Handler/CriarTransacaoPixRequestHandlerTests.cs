@@ -28,13 +28,11 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Tests
         public async Task CriarTransacaoAsync_QuandoCriar_DeveRetornarSucesso()
         {
             // Arrange
-            var request = new CriarTransacaoPixRequest
-            {
-                Valor = 100,
+            var request = new CriarTransacaoPixRequest( ){
+                 Valor = 100,
                 Data = DateTime.Now,
-                ChaveDeSeguranca = "chave",
-                IdPixOrigem = 1,
-                IdPixDestino = 2
+                ChavePixOrigem = "1",
+                ChavePixDestino = "2"
             };
 
             // Act

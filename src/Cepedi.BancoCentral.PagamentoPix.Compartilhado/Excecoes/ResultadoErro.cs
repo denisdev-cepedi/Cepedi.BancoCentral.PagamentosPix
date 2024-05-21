@@ -8,4 +8,8 @@ public class ResultadoErro
     public string Descricao { get; set; } = default!;
 
     public ETipoErro Tipo { get; set; }
+
+    public class PixInexistente
+    {
+    }
 }
