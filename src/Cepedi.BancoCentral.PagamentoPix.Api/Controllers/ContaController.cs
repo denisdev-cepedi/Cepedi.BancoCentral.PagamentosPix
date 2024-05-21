@@ -36,18 +36,18 @@ public class ContaController : BaseController
     public async Task<ActionResult<AtualizarContaResponse>> AtualizarContaAsync(
         [FromBody] AtualizarContaRequest request) => await SendCommand(request);
 
-    // [HttpGet("{idPessoa}")]
-    // [ProducesResponseType(typeof(ObterListContaByPessoaIdResponse), StatusCodes.Status200OK)]
-    // [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
-    // [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
-    // public async Task<ActionResult<ObterListContaByPessoaIdResponse>> ObterContasAsync(
-    //     [FromRoute] ObterListContaByPessoaIdRequest request) => await SendCommand(request);
+   
     [HttpGet("{idPessoa}")]
     [ProducesResponseType(typeof(ObterListContaByPessoaIdResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
     public async Task<ActionResult<ObterListContaByPessoaIdResponse>> ObterContasAsync([FromRoute] int idPessoa) => await SendCommand(new ObterListContaByPessoaIdRequest(idPessoa));
 
+    [HttpGet("{cpf}")]
+    [ProducesResponseType(typeof(ObterListContaByCpfResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
+    public async Task<ActionResult<ObterListContaByCpfResponse>> ObterContasByCpfAsync([FromRoute] int cpf) => await SendCommand(new ObterListContaByCpfRequest(cpf));
 
 }
 

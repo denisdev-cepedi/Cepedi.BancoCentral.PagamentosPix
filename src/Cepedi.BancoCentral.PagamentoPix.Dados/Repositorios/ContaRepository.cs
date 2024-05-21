@@ -45,5 +45,13 @@ public class ContaRepository : IContaRepository
     {
         return await _context.Conta.Where(p => p.IdConta == IdConta).FirstOrDefaultAsync();
     }
+    
+     public async Task<List<ContaEntity>> ObterContasByCpfAsync(string cpf)
+    {
+        return await _context.Conta
+        .Include(c => c.Pessoa) // discutir se é correto assim
+        .Where(c => c.Pessoa.Cpf == cpf) 
+        .ToListAsync();
+    }
 
 }

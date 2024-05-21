@@ -14,7 +14,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Handlers\Conta\" />
     <Folder Include="Notifications\" />
     <Folder Include="Repositorio\Queries\" />
     <Folder Include="Servicos\" />

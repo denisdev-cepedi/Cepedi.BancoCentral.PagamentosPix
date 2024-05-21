@@ -14,6 +14,8 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio
         Task<List<ContaEntity>> ObtemContasAsync(int IdPessoa);
         Task<ContaEntity> CriarContaAsync(ContaEntity conta);
         Task<ContaEntity> AtualizarContaAsync(ContaEntity conta);
+
+        Task<List<ContaEntity>> ObterContasByCpfAsync(string cpf);
     }
 
 }
