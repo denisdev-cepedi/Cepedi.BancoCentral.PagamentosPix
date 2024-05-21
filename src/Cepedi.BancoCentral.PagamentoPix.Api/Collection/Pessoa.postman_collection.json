@@ -7,130 +7,196 @@
 	},
 	"item": [
 		{
-			"name": "http://localhost:5000/BancoCentralPagamentosPix/v1/Pessoas",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "accept",
-						"value": "text/plain"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"idPessoa\": 1,\r\n  \"nome\": \"Lorena Andrade\",\r\n  \"cpf\": \"00352442590\"\r\n}"
-				},
-				"url": {
-					"raw": "http://localhost:5078/BancoCentralPagamentosPix/v1/Pessoas",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5078",
-					"path": [
-						"BancoCentralPagamentosPix",
-						"v1",
-						"Pessoas"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:5000/BancoCentralPagamentosPix/v1/Pessoas",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "accept",
-						"value": "text/plain"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:5000/BancoCentralPagamentosPix/v1/Pessoas",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"BancoCentralPagamentosPix",
-						"v1",
-						"Pessoas"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:5000/BancoCentralPagamentosPix/v1/Pessoas",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "accept",
-						"value": "text/plain"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"nome\": \"Demmi Damaceno\",\r\n  \"cpf\": \"01772182583\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Get",
+			"item": [
+				{
+					"name": "GetAll",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/BancoCentralPagamentosPix/v1/Pessoas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"BancoCentralPagamentosPix",
+								"v1",
+								"Pessoas"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:5000/BancoCentralPagamentosPix/v1/Pessoas",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"BancoCentralPagamentosPix",
-						"v1",
-						"Pessoas"
-					]
+				{
+					"name": "GetByCPF",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cpf\": \"00352442590\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/Pessoa/v1/Pessoas/Cpf",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"Pessoa",
+								"v1",
+								"Pessoas",
+								"Cpf"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "http://localhost:5000/BancoCentralPagamentosPix/v1/Pessoas/1",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "accept",
-						"value": "text/plain"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:5000/BancoCentralPagamentosPix/v1/Pessoas/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"BancoCentralPagamentosPix",
-						"v1",
-						"Pessoas",
-						"1"
-					]
+			"name": "Create",
+			"item": [
+				{
+					"name": "Demmi Damaceno",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Demmi Damaceno\",\r\n  \"cpf\": \"94916531051\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/Pessoa/v1/Pessoas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"Pessoa",
+								"v1",
+								"Pessoas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Diego Andrade",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Diego Andrade\",\r\n  \"cpf\": \"90927507005\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/Pessoa/v1/Pessoas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"Pessoa",
+								"v1",
+								"Pessoas"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
+		},
+		{
+			"name": "Put",
+			"item": [
+				{
+					"name": "Lorena",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Lorena Andrade\",\r\n  \"cpf\": \"07517113062\",\r\n  \"novoCpf\": \"07517113062\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/Pessoa/v1/Pessoas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"Pessoa",
+								"v1",
+								"Pessoas"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

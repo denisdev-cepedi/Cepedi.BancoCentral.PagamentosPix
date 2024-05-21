@@ -5,6 +5,6 @@ using System.Threading.Tasks;
 
 namespace Cepedi.BancoCentral.PagamentoPix.Compartilhado.Responses
 {
-    public record ObterPessoaResponse(int IdPessoa, string Nome);
+    public record ObterPessoaResponse(int IdPessoa, string Nome, string Cpf);
     
 }

@@ -5,20 +5,18 @@ using System.Threading.Tasks;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Validators.CommonRules;
 using FluentValidation;
-using FluentValidation.Validators;
 
 namespace Cepedi.BancoCentral.PagamentoPix.Compartilhado.Validators
 {
-    public class CriarPessoaRequestValidator : AbstractValidator<CriarPessoaRequest>
+    public class AtualizarPessoaCpfRequestValidator : AbstractValidator<AtualizarPessoaCpfRequest>
     {
-        
-        public CriarPessoaRequestValidator()
+        public AtualizarPessoaCpfRequestValidator()
         {
-           
-            RuleFor(pessoa => pessoa.Nome).NomeRules();
                
             RuleFor(pessoa => pessoa.Cpf).CpfRules();
 
+            RuleFor(pessoa => pessoa.NovoCpf).CpfRules();
+            
         }
     }
 }
