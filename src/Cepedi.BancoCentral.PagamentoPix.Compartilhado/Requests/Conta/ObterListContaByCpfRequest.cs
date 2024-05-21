@@ -6,15 +6,17 @@ using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Responses;
 using MediatR;
 using OperationResult;
 
+// Add this line
+
 namespace Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests
 {
- public class ObterListContaByCpfRequest : IRequest<Result<ObterListContaByCpfResponse>>
- {
-    public int Cpf { get; set; }
-
-    public ObterListContaByCpfRequest(int cpf)
+    public class ObterListContaByCpfRequest : IRequest<Result<ObterListContaByCpfResponse>>
     {
-        Cpf = cpf;
+        public string Cpf { get; set; }
+
+        public ObterListContaByCpfRequest(string cpf)
+        {
+            Cpf = cpf;
+        }
     }
-}
 }
