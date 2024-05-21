@@ -27,8 +27,13 @@ public class TransacaoPixRepository : ITransacaoPixRepository
         return transacao;
     }
 
-    public Task<TransacaoPixEntity> ObterTransacaoPixAsync(int id)
+    public async Task<TransacaoPixEntity> ObterTransacaoPixAsync(int IdTransacaoPix)
     {
-        throw new NotImplementedException();
+        return await _context.TransacaoPix.Where(p => p.IdTransacaoPix == IdTransacaoPix).FirstOrDefaultAsync();
+    }
+
+    public async Task<List<TransacaoPixEntity>> ObterTransacoesPixAsync()
+    {
+        return await _context.TransacaoPix.ToListAsync();
     }
 }

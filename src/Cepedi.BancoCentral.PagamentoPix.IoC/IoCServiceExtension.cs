@@ -1,13 +1,24 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Security.Claims;
+using Cepedi.BancoCentral.PagamentoPix.Cache;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado;
 using Cepedi.BancoCentral.PagamentoPix.Dados.Repositorios;
+using Cepedi.BancoCentral.PagamentoPix.Dados.Repositorios.Queries;
 using Cepedi.BancoCentral.PagamentoPix.Data;
 using Cepedi.BancoCentral.PagamentoPix.Data.Repositories;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers.Pipelines;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio;
+using Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio.Queries;
+using Cepedi.BancoCentral.PagamentoPix.Dominio.Servicos;
 using FluentValidation;
+using Keycloak.AuthServices.Authentication;
+using Keycloak.AuthServices.Authorization;
+using Keycloak.AuthServices.Sdk.Admin;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.StackExchangeRedis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,9 +31,9 @@ namespace Cepedi.BancoCentral.PagamentoPix.IoC
         {
             ConfigurarDbContext(services, configuration);
 
-            services.AddMediatR(cfg => 
+            services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
-            
+
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ExcecaoPipeline<,>));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidacaoComportamento<,>));
 
@@ -33,7 +44,23 @@ namespace Cepedi.BancoCentral.PagamentoPix.IoC
             services.AddScoped<IContaRepository, ContaRepository>();
             services.AddScoped<IPixRepository, PixRepository>();
             services.AddScoped<ITransacaoPixRepository, TransacaoPixRepository>();
-        
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+
+            services.AddScoped<IPessoaQueryRepository, PessoaQueryRepository>();
+
+            // Cache Redis
+            services.AddStackExchangeRedisCache(obj =>
+            {
+                obj.Configuration = configuration["Redis::Connection"];
+                obj.InstanceName = configuration["Redis::Instance"];
+            });
+
+            services.AddSingleton<IDistributedCache, RedisCache>();
+            services.AddScoped(typeof(ICache<>), typeof(Cache<>));
+            // CacheRedis
+
+            ConfigurarSso(services, configuration);
+
             // services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddHealthChecks()
                 .AddDbContextCheck<ApplicationDbContext>();
@@ -66,6 +93,28 @@ namespace Cepedi.BancoCentral.PagamentoPix.IoC
             });
 
             services.AddScoped<ApplicationDbContextInitialiser>();
+        }
+
+        private static void ConfigurarSso(IServiceCollection services, IConfiguration configuration)
+        {
+            var authenticationOptions = configuration
+                            .GetSection(KeycloakAuthenticationOptions.Section)
+                            .Get<KeycloakAuthenticationOptions>();
+
+            services.AddKeycloakAuthentication(authenticationOptions!);
+
+
+            var authorizationOptions = configuration
+                                        .GetSection(KeycloakProtectionClientOptions.Section)
+                                        .Get<KeycloakProtectionClientOptions>();
+
+            services.AddKeycloakAuthorization(authorizationOptions);
+
+            var adminClientOptions = configuration
+                                        .GetSection(KeycloakAdminClientOptions.Section)
+                                        .Get<KeycloakAdminClientOptions>();
+
+            services.AddKeycloakAdminHttpClient(adminClientOptions);
         }
     }
 }

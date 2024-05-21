@@ -15,6 +15,8 @@ namespace Cepedi.BancoCentral.PagamentoPix.Compartilhado.Validators
             RuleFor(pessoa => pessoa.Nome)
                 .NotEmpty().WithMessage("Nome é obrigatório")
                 .MinimumLength(5).WithMessage("Pessoa deve ter pelo menos 5 caracteres");
+
+
         }
         
     }

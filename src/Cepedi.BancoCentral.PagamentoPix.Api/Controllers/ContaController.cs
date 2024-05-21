@@ -3,6 +3,7 @@ using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using OperationResult;
 
 namespace Cepedi.BancoCentral.PagamentoPix.Api.Controllers;
 
@@ -35,11 +36,18 @@ public class ContaController : BaseController
     public async Task<ActionResult<AtualizarContaResponse>> AtualizarContaAsync(
         [FromBody] AtualizarContaRequest request) => await SendCommand(request);
 
+    // [HttpGet("{idPessoa}")]
+    // [ProducesResponseType(typeof(ObterListContaByPessoaIdResponse), StatusCodes.Status200OK)]
+    // [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+    // [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
+    // public async Task<ActionResult<ObterListContaByPessoaIdResponse>> ObterContasAsync(
+    //     [FromRoute] ObterListContaByPessoaIdRequest request) => await SendCommand(request);
     [HttpGet("{idPessoa}")]
     [ProducesResponseType(typeof(ObterListContaByPessoaIdResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
-    public async Task<ActionResult<ObterListContaByPessoaIdResponse>> ObterContasAsync(
-        [FromRoute] int idPessoa) => await SendCommand(new ObterListContaByPessoaIdRequest(idPessoa));
+    public async Task<ActionResult<ObterListContaByPessoaIdResponse>> ObterContasAsync([FromRoute] int idPessoa) => await SendCommand(new ObterListContaByPessoaIdRequest(idPessoa));
+
 
 }
+
