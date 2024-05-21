@@ -64,36 +64,8 @@ public class CriarPixRequestValidator : AbstractValidator<CriarPixRequest>
                         .Matches(@"^\d{11}$").WithMessage("Chave Pix do tipo CPF deve ter 11 dígitos numéricos.")
                         .Must(ValidarCpf).WithMessage("Chave Pix do tipo CPF deve ser um CPF válido.");
                     });
-                
 
                 });
-    }
-     private bool ValidarCpf(string cpf)
-    {
-        // Adicione aqui a lógica de validação de CPF, incluindo os dígitos verificadores.
-        // Este é um exemplo simplificado e você pode querer usar uma biblioteca ou lógica mais completa.
-        if (cpf.Length != 11 || !long.TryParse(cpf, out _))
-        {
-            return false;
-        }
-
-        var cpfDigits = cpf.Select(d => int.Parse(d.ToString())).ToArray();
-
-        int AddDigits(int[] digits, int[] multipliers)
-        {
-            return digits.Zip(multipliers, (d, m) => d * m).Sum();
-        }
-
-        bool ValidateDigit(int[] digits, int position)
-        {
-            int[] multipliers = position == 9 ? new int[] { 10, 9, 8, 7, 6, 5, 4, 3, 2 } : new int[] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
-            int sum = AddDigits(digits.Take(position).ToArray(), multipliers);
-            int result = sum % 11;
-            int verifier = result < 2 ? 0 : 11 - result;
-            return verifier == digits[position];
-        }
-
-        return ValidateDigit(cpfDigits, 9) && ValidateDigit(cpfDigits, 10);
     }
 }
 
