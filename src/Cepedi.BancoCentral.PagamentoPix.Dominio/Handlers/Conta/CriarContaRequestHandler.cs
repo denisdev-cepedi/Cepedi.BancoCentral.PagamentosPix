@@ -24,11 +24,15 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
         private readonly ILogger<CriarContaRequestHandler> _logger;
 
 
-        public CriarContaRequestHandler(IContaRepository contaRepository, ILogger<CriarContaRequestHandler> logger)
+        public CriarContaRequestHandler(IContaRepository contaRepository, ILogger<CriarContaRequestHandler> logger, IPessoaRepository pessoaRepository)
         {
             _contaRepository = contaRepository;
             _logger = logger;
+            _pessoaRepository = pessoaRepository;
+            
         }
+
+        
 
         public async Task<Result<CriarContaResponse>> Handle(CriarContaRequest request, CancellationToken cancellationToken)
 {
