@@ -25,7 +25,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Api.Tests
         {
             // Arrange 
             var request = new CriarPessoaRequest { Nome = "Lorena", Cpf = "11111111111" };
-            _mediator.Send(request).ReturnsForAnyArgs(Result.Success(new CriarPessoaResponse(1, "")));
+            _mediator.Send(request).ReturnsForAnyArgs(Result.Success(new CriarPessoaResponse(1, "Lorena")));
 
             // Act
             await _sut.CriarPessoaAsync(request);
