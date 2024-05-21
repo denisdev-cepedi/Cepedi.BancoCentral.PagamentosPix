@@ -1,12 +1,13 @@
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Excecoes;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Responses;
+using Cepedi.BancoCentral.PagamentoPix.Dados.Repositorios;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cepedi.BancoCentral.PagamentoPix.Api.Controllers;
 [ApiController]
-[Route("[controller]")]
+[Route("[controller]/v1/Pixs")]
 public class PixController : BaseController
 {
     private readonly ILogger<PixController> _logger;
@@ -23,19 +24,31 @@ public class PixController : BaseController
     [HttpGet]
     [ProducesResponseType(typeof(ObterPixsResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
     public async Task<ActionResult<List<ObterPixsResponse>>> ObterPixsAsync(
-        [FromQuery] ObterPixsRequest request) => await SendCommand(request);
-
+        [FromBody] ObterPixsRequest request) => await SendCommand(new ObterPixsRequest());
+    
+   
     [HttpPost]
     [ProducesResponseType(typeof(CriarPixResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
     public async Task<ActionResult<CriarPixResponse>> CriarPixAsync(
         [FromBody] CriarPixRequest request) => await SendCommand(request);
 
-    [HttpPut]
-    [ProducesResponseType(typeof(ExcluirPixResponse), StatusCodes.Status200OK)]
+    [HttpGet ("ContaBank")]
+    [ProducesResponseType(typeof(ObterPixsByContaBankResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<ExcluirPixResponse>> ExcluirPixAsync(
-        [FromBody] ExcluirPixRequest request) => await SendCommand(request);
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
+    public async Task<ActionResult<List<ObterPixsByContaBankResponse>>> ObterPixsByContaBankAsync(
+        [FromBody] ObterPixsByContaBankRequest request) => await SendCommand(request);
+
+    
+    [HttpGet("ChavePix")]
+    [ProducesResponseType(typeof(ObterPixByChavePixResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
+    public async Task<ActionResult<ObterPixByChavePixResponse>> ObterPixsByChavePixAsync(
+        [FromBody] ObterPixByChavePixRequest request) => await SendCommand(request);
 
 }

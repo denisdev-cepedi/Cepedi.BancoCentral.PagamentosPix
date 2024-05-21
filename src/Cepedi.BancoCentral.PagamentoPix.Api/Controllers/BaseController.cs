@@ -32,6 +32,7 @@ public class BaseController : ControllerBase
     {
         SemResultadosExcecao e => NoContent(),
         RequestInvalidaExcecao e => BadRequest(FormatErrorMessage(PagamentosPix.DadosInvalidos, e.Erros)),
+        ExcecaoAplicacao e => BadRequest(FormatErrorMessage(e.ResponseErro)),
         _ => BadRequest(FormatErrorMessage(PagamentosPix.Generico))
     };
 

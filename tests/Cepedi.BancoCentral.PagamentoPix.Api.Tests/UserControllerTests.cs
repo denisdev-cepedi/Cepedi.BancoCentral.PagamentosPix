@@ -20,7 +20,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Api.Tests
             _sut = new UserController(_logger, _mediator);
         }
 
-        [Fact]
+        [Fact (DisplayName = "Criar usuario deve enviar request para mediator")]
         public async Task CriarUsuario_DeveEnviarRequest_Para_Mediator()
         {
             // Arrange 

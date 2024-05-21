@@ -7,8 +7,8 @@ public class ContaEntity
     public string Numero { get; set; } = default!; //numero da instituição pertencedora
     public required string Agencia { get; set; }
     public required string Conta { get; set; } = default!;
-    public ICollection<PixEntity> Pixs { get; set; }
-    public PessoaEntity Pessoa { get; set; }
+    public ICollection<PixEntity> Pixs { get; set; } 
+    public  PessoaEntity Pessoa { get; set; } = default!;
 
      public  void Atualizar(string agencia, string conta)
     {

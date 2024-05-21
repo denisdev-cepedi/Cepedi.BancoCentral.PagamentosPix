@@ -31,8 +31,12 @@ public class ContaRepository : IContaRepository
         return conta;
 
     }
+    public async Task<ContaEntity> ObterContasByCpf(string Cpf){
 
-    public async Task<List<ContaEntity>> ObtemContasAsync(int IdPessoa)
+        return await _context.Conta.Where(p => p.Pessoa.Cpf == Cpf).FirstOrDefaultAsync();
+    }
+
+       public async Task<List<ContaEntity>> ObtemContasAsync(int IdPessoa)
     {
         return await _context.Conta.Where(p => p.IdPessoa == IdPessoa).ToListAsync();
     }
@@ -46,4 +50,8 @@ public class ContaRepository : IContaRepository
         return await _context.Conta.Where(p => p.IdConta == IdConta).FirstOrDefaultAsync();
     }
 
+    public async Task<ContaEntity> ObterContaBankAsync(string CodigoInstituicao, string agencia, string conta)
+    {
+        return await _context.Conta.Where(x => x.Numero == CodigoInstituicao && x.Agencia == agencia && x.Conta == conta).FirstOrDefaultAsync();
+    }
 }
