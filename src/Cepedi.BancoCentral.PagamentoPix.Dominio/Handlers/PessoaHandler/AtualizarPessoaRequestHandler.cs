@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Responses;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio;
+using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Enums;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using OperationResult;
@@ -29,7 +30,18 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
                     return Result.Error<AtualizarPessoaResponse>(
                         new Compartilhado.Excecoes.SemResultadosExcecao());
                 }
-
+                if (pessoaEntity.Cpf != request.Cpf)
+                {
+                    var PessoaEntity2 = await _pessoaRepository.ObtemPessoaPorCpfAsync(request.Cpf);
+                    
+                    if(PessoaEntity2 != null)
+                    {
+                        return Result.Error<AtualizarPessoaResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
+                            (PagamentosPix.PessoaJaCadastrada)
+                        ));
+                    }
+                }
+          
                 pessoaEntity.Atualizar(request.Nome, request.Cpf);
 
                 await _pessoaRepository.AtualizarPessoaAsync(pessoaEntity);

@@ -43,5 +43,10 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dados.Repositorios
         {
             return await _context.Pessoa.ToListAsync();
         }
+
+        public async Task<PessoaEntity> ObtemPessoaPorCpfAsync(string cpf)
+        {
+            return await _context.Pessoa.Where(p => p.Cpf == cpf).FirstOrDefaultAsync();
+        }
     }
 }

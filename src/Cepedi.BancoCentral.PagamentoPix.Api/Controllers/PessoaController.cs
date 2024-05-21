@@ -12,7 +12,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Api.Controllers
 {
     
     [ApiController]
-    [Route("[controller]")]
+    [Route("BancoCentralPagamentosPix/v1/Pessoas")]
     public class PessoaController: BaseController
     {
         private readonly ILogger<PessoaController> _logger;

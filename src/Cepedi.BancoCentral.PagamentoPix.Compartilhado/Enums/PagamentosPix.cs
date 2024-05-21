@@ -50,4 +50,10 @@ public class PagamentosPix
         Descricao = "Os dados enviados na requisição são inválidos",
         Tipo = ETipoErro.Erro
     };
+    public static ResultadoErro PessoaJaCadastrada = new()
+    {
+        Titulo = "Pessoa ja cadastrada",
+        Descricao = "A pessoa informada está em uso",
+        Tipo = ETipoErro.Alerta
+    };
 }

@@ -8,7 +8,7 @@ using OperationResult;
 namespace Cepedi.BancoCentral.PagamentoPix.Api.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("BancoCentralPagamentoPix/v1/Contas")]
 public class ContaController : BaseController
 {
     private readonly ILogger<ContaController> _logger;

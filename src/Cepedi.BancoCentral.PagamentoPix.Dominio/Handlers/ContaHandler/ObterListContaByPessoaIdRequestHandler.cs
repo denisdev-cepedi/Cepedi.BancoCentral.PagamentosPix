@@ -28,13 +28,14 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
         public async Task<Result<ObterListContaByPessoaIdResponse>> Handle(ObterListContaByPessoaIdRequest request, CancellationToken cancellationToken)
         {
             var contas = await _contaRepositorio.ObtemContasAsync(request.IdPessoa);
-
+            
             var response = new ObterListContaByPessoaIdResponse()
             {
                 Contas = contas.Select(c => new ObterContaResponse()
                 {
                     IdConta = c.IdConta,
                     IdPessoa = c.IdPessoa,
+                    Numero = c.Numero,
                     Conta = c.Conta,
                     Agencia = c.Agencia
                 }).ToList()

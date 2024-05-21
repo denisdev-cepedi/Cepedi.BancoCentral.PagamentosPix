@@ -26,8 +26,8 @@ public class PixController : BaseController
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
     public async Task<ActionResult<List<ObterPixsResponse>>> ObterPixsAsync(
-        [FromBody] ObterPixsRequest request) => await SendCommand(new ObterPixsRequest());
-    
+        [FromBody] ObterPixsRequest request) => await SendCommand(request);
+
    
     [HttpPost]
     [ProducesResponseType(typeof(CriarPixResponse), StatusCodes.Status200OK)]
