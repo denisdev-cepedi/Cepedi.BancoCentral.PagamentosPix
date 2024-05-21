@@ -1,6 +1,6 @@
-using Serilog;
 using Cepedi.BancoCentral.PagamentoPix.IoC;
-using Cepedi.BancoCentral.PagamentoPix.Api;
+using Microsoft.IdentityModel.Logging;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +19,7 @@ builder.Host.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration);
 });
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -26,10 +27,17 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    IdentityModelEventSource.ShowPII = true;
+}
+else
+{
+    app.UseHttpsRedirection();
 }
 
 app.UseHealthChecks("/health");
-app.UseHttpsRedirection();
+
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

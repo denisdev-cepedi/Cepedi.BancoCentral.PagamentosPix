@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Security.Claims;
 using Cepedi.BancoCentral.PagamentoPix.Cache;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado;
 using Cepedi.BancoCentral.PagamentoPix.Dados.Repositorios;
@@ -10,7 +11,11 @@ using Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio.Queries;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Servicos;
 using FluentValidation;
+using Keycloak.AuthServices.Authentication;
+using Keycloak.AuthServices.Authorization;
+using Keycloak.AuthServices.Sdk.Admin;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.StackExchangeRedis;
@@ -26,9 +31,9 @@ namespace Cepedi.BancoCentral.PagamentoPix.IoC
         {
             ConfigurarDbContext(services, configuration);
 
-            services.AddMediatR(cfg => 
+            services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
-            
+
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ExcecaoPipeline<,>));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidacaoComportamento<,>));
 
@@ -53,7 +58,9 @@ namespace Cepedi.BancoCentral.PagamentoPix.IoC
             services.AddSingleton<IDistributedCache, RedisCache>();
             services.AddScoped(typeof(ICache<>), typeof(Cache<>));
             // CacheRedis
-        
+
+            ConfigurarSso(services, configuration);
+
             // services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddHealthChecks()
                 .AddDbContextCheck<ApplicationDbContext>();
@@ -84,14 +91,30 @@ namespace Cepedi.BancoCentral.PagamentoPix.IoC
                 //options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
-            
-            services.AddDbContext<AlternativeDbContext>((sp, options) =>
-            {
-                //options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
-            });
 
             services.AddScoped<ApplicationDbContextInitialiser>();
+        }
+
+        private static void ConfigurarSso(IServiceCollection services, IConfiguration configuration)
+        {
+            var authenticationOptions = configuration
+                            .GetSection(KeycloakAuthenticationOptions.Section)
+                            .Get<KeycloakAuthenticationOptions>();
+
+            services.AddKeycloakAuthentication(authenticationOptions!);
+
+
+            var authorizationOptions = configuration
+                                        .GetSection(KeycloakProtectionClientOptions.Section)
+                                        .Get<KeycloakProtectionClientOptions>();
+
+            services.AddKeycloakAuthorization(authorizationOptions);
+
+            var adminClientOptions = configuration
+                                        .GetSection(KeycloakAdminClientOptions.Section)
+                                        .Get<KeycloakAdminClientOptions>();
+
+            services.AddKeycloakAdminHttpClient(adminClientOptions);
         }
     }
 }
