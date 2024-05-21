@@ -7,9 +7,13 @@ public class PessoaEntity
     public required string Cpf { get; set; }
     public ICollection<ContaEntity> Contas { get; set; } = default!;
 
-     internal void Atualizar(string nome, string cpf)
+    internal void AtualizarNome(string nome)
     {
         Nome = nome;
+    }
+
+    internal void AtualizarCpf(string cpf)
+    {
         Cpf = cpf;
     }
 }
