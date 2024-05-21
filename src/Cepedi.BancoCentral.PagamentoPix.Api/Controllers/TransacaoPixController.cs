@@ -28,12 +28,12 @@ public class TransacaoPixController : BaseController
         _mediator = mediator;
     }
 
-    [HttpGet("{idTransacaoPix}")]
-    [ProducesResponseType(typeof(ObterTransacaoPixResponse), StatusCodes.Status200OK)]
+    [HttpGet("chavePix")]
+    [ProducesResponseType(typeof(ObterListTransacoesPixResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
-    public async Task<ActionResult<ObterTransacaoPixResponse>> ObterTransacaoPixAsync([FromRoute] int idTransacaoPix)
-        => await SendCommand(new ObterTransacaoPixRequest(idTransacaoPix));
+    public async Task<ActionResult<ObterListTransacoesPixResponse>> ObterTransacaoPixAsync([FromQuery] string chavePix)
+        => await SendCommand(new ObterTransacoesPorChavePixRequest (chavePix));
 
     [HttpGet]
     [ProducesResponseType(typeof(ObterListTransacoesPixResponse), StatusCodes.Status200OK)]

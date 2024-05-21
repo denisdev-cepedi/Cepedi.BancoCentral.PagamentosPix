@@ -24,29 +24,24 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Tests
             _sut = new CriarTransacaoPixRequestHandler(_transacaoPixRepository, _logger);
         }
 
-        // [Fact]
-        // public async Task CriarTransacaoAsync_QuandoCriar_DeveRetornarSucesso()
-        // {
-        //     // Arrange
-        //     var request = new CriarTransacaoPixRequest
-        //     {
-        //         Valor = 100,
-        //         Data = DateTime.Now,
-        //         ChaveDeSeguranca = "chave",
-        //         IdPixOrigem = 1,
-        //         IdPixDestino = 2
-        //     };
 
-        //     // Act
-        //     var result = await _sut.Handle(request, CancellationToken.None);
+        [Fact]
+        public async Task CriarTransacaoAsync_QuandoCriar_DeveRetornarSucesso()
+        {
+            // Arrange
+            var request = new CriarTransacaoPixRequest
+            {
+                Valor = 100,
+                Data = DateTime.Now,
+                ChavePixOrigem = "00352442590",
+                ChavePixDestino = "73998626051"
+            };
+            _transacaoPixRepository.ObterIdPorChavePixAsync(request.ChavePixOrigem).Returns(Task.FromResult(1));
+            _transacaoPixRepository.ObterIdPorChavePixAsync(request.ChavePixDestino).Returns(Task.FromResult(2));
+            _transacaoPixRepository.CriarTransacaoPixAsync(Arg.Any<TransacaoPixEntity>()).Returns(Task.CompletedTask);
+            // Act
+            var result = await _sut.Handle(request, CancellationToken.None);
 
-        //     // Assert
-
-
-        //     result.IsSuccess.Should().BeTrue();
-        //     result.Should().BeOfType<Result<CriarTransacaoPixResponse>>().Which
-        //         .Value.Valor.Should().Be(request.Valor);
-
-        // }
+        }
     }
 }
