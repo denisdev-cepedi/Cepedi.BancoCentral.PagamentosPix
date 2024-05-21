@@ -58,4 +58,11 @@ public class TransacaoPixRepository : ITransacaoPixRepository
         _context.TransacaoPix.Where(dataFilter);
         return await _context.TransacaoPix.ToListAsync();
     }
+
+    public async  Task<List<TransacaoPixEntity>> ObterTransacoesPixPorChavePixAsync(int idPixOrigem)
+    {
+        return await _context.TransacaoPix
+            .Where(t => t.IdPixOrigem == idPixOrigem)
+            .ToListAsync();
+    }
 }
