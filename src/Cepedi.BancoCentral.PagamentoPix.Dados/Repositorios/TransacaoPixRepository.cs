@@ -24,8 +24,6 @@ public class TransacaoPixRepository : ITransacaoPixRepository
     {
         _context.TransacaoPix.Add(transacao);
 
-        await _context.SaveChangesAsync();
-
         return transacao;
     }
 

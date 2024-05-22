@@ -19,11 +19,15 @@ public class CriarTransacaoPixRequestHandler : IRequestHandler<CriarTransacaoPix
 
     private readonly ILogger<CriarTransacaoPixRequestHandler> _logger;
     private readonly ITransacaoPixRepository _transacaoPixRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public CriarTransacaoPixRequestHandler(ITransacaoPixRepository transacaoPixRepository, ILogger<CriarTransacaoPixRequestHandler> logger)
+    public CriarTransacaoPixRequestHandler(ITransacaoPixRepository transacaoPixRepository, 
+        ILogger<CriarTransacaoPixRequestHandler> logger, 
+        IUnitOfWork unitOfWork)
     {
         _transacaoPixRepository = transacaoPixRepository;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
     public async Task<Result<CriarTransacaoPixResponse>> Handle(CriarTransacaoPixRequest request, CancellationToken cancellationToken)
     {
@@ -50,6 +54,7 @@ public class CriarTransacaoPixRequestHandler : IRequestHandler<CriarTransacaoPix
         };
 
         await _transacaoPixRepository.CriarTransacaoPixAsync(transacao);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         return Result.Success(new CriarTransacaoPixResponse(transacao.IdTransacaoPix, transacao.Valor, transacao.ChaveDeSeguranca));
     }
