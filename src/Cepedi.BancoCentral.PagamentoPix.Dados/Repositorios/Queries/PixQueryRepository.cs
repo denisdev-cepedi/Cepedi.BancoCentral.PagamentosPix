@@ -11,7 +11,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dados.Repositorios.Queries
 {
     public class PixQueryRepository : BaseDapperRepository, IPixQueryRepository
     {
-        protected PixQueryRepository(IConfiguration configuration) : base(configuration)
+        public PixQueryRepository(IConfiguration configuration) : base(configuration)
         {
         }
 

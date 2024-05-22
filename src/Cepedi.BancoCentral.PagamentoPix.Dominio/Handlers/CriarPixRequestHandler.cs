@@ -17,6 +17,7 @@ public class CriarPixRequestHandler : IRequestHandler<CriarPixRequest, Result<Cr
     private readonly IPixRepository _pixRepository;
     private readonly IContaRepository _contaRepository;
     private readonly IPixQueryRepository _pixQueryRepository;
+    
 
     public CriarPixRequestHandler(IPixRepository pixRepository, 
         IContaRepository contaRepository, 
