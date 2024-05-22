@@ -42,6 +42,11 @@ public class TransacaoPixRepository : ITransacaoPixRepository
         return pix?.IdPix ?? 0;
     }
 
+    public async Task<TransacaoPixEntity> ObterIdPorChaveSegurancaAsync(string chaveSeguranca)
+    {
+         return await _context.TransacaoPix.Where(p => p.ChaveDeSeguranca == chaveSeguranca).FirstOrDefaultAsync();
+    }
+
     public async Task<TransacaoPixEntity> ObterTransacaoPixAsync(int IdTransacaoPix)
     {
         return await _context.TransacaoPix.Where(p => p.IdTransacaoPix == IdTransacaoPix).FirstOrDefaultAsync();
@@ -57,5 +62,12 @@ public class TransacaoPixRepository : ITransacaoPixRepository
          Expression <Func<TransacaoPixEntity, bool>> dataFilter = p =>p.Data >= filter.DataInicial && p.Data <= filter.DataFinal;
         _context.TransacaoPix.Where(dataFilter);
         return await _context.TransacaoPix.ToListAsync();
+    }
+
+    public async  Task<List<TransacaoPixEntity>> ObterTransacoesPixPorChavePixAsync(int idPixOrigem)
+    {
+        return await _context.TransacaoPix
+            .Where(t => t.IdPixOrigem == idPixOrigem)
+            .ToListAsync();
     }
 }

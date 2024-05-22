@@ -33,6 +33,7 @@ public class DesabilitarChavePixRequestValidator : AbstractValidator<Desabilitar
                     {
                     RuleFor(request => request.ChavePix).ChavePixCpf();
                     });
+
                 });
     }
 }

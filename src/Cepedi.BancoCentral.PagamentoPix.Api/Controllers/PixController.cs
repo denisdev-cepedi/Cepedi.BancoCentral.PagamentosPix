@@ -26,9 +26,9 @@ public class PixController : BaseController
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
     public async Task<ActionResult<List<ObterPixsResponse>>> ObterPixsAsync(
-        [FromBody] ObterPixsRequest request) => await SendCommand(request);
+        [FromQuery] ObterPixsRequest request) => await SendCommand(request);
 
-   
+
     [HttpPost]
     [ProducesResponseType(typeof(CriarPixResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
@@ -36,26 +36,26 @@ public class PixController : BaseController
     public async Task<ActionResult<CriarPixResponse>> CriarPixAsync(
         [FromBody] CriarPixRequest request) => await SendCommand(request);
 
-    [HttpGet ("ContaBank")]
+    [HttpGet("ContaBank")]
     [ProducesResponseType(typeof(ObterPixsByContaBankResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
     public async Task<ActionResult<List<ObterPixsByContaBankResponse>>> ObterPixsByContaBankAsync(
-        [FromBody] ObterPixsByContaBankRequest request) => await SendCommand(request);
+    [FromQuery] ObterPixsByContaBankRequest request) => await SendCommand(request);
 
-    
+
     [HttpGet("ChavePix")]
     [ProducesResponseType(typeof(ObterPixByChavePixResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status404NotFound)]
     public async Task<ActionResult<ObterPixByChavePixResponse>> ObterPixsByChavePixAsync(
-        [FromBody] ObterPixByChavePixRequest request) => await SendCommand(request);
+        [FromQuery] ObterPixByChavePixRequest request) => await SendCommand(request);
 
 
-    [HttpDelete("ChavePix")]
+    [HttpPatch("ChavePix")]
     [ProducesResponseType(typeof(DesabilitarChavePixResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status404NotFound)]
     public async Task<ActionResult<DesabilitarChavePixResponse>> DesabilitarChavePixAsync(
-        [FromBody] DesabilitarChavePixRequest request) => await SendCommand(request);
+        [FromQuery] DesabilitarChavePixRequest request) => await SendCommand(request);
 }

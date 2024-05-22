@@ -4,7 +4,7 @@ using OperationResult;
 
 namespace Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
 
-public class DesabilitarChavePixRequest: IRequest<Result<DesabilitarChavePixResponse>>, IValida{
+public class DesabilitarChavePixRequest: IRequest<Result<DesabilitarChavePixResponse>>{
     public required string TipoPix { get; set; }
     public required string ChavePix { get; set; }
 

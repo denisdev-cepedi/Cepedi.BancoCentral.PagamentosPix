@@ -26,16 +26,21 @@ public class PixRepository : IPixRepository {
 
     public async Task<ICollection<PixEntity>> GetAllPixsAsync()
     {
-       return await _context.Pix.ToListAsync();
+        return await _context.Pix.Include(p => p.Conta).ToListAsync();
     }
 
     public async Task<ICollection<PixEntity>> GetAllPixsByBankContaAsync(string codigoInstituicao, string agencia, string conta)
     {
-        return await _context.Pix.Where(pix => pix.Conta.Numero == codigoInstituicao && pix.Conta.Agencia == agencia && pix.Conta.Conta == conta).ToListAsync();
+         return await _context.Pix
+                         .Include(p => p.Conta)
+                         .Where(pix => pix.Conta.Numero == codigoInstituicao && 
+                                       pix.Conta.Agencia == agencia && 
+                                       pix.Conta.Numero == conta)
+                         .ToListAsync();
     }
 
     public async Task<PixEntity> ObterPixByChavePixAsync(string chavePix)
     {
-        return  await _context.Pix.Where(x => x.ChavePix == chavePix).FirstOrDefaultAsync();
+        return await _context.Pix.Include(p => p.Conta).Where(x => x.ChavePix == chavePix).FirstOrDefaultAsync();
     }
 }

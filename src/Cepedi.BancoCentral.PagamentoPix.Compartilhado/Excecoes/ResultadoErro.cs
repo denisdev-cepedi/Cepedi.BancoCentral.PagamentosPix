@@ -9,7 +9,5 @@ public class ResultadoErro
 
     public ETipoErro Tipo { get; set; }
 
-    public class PixInexistente
-    {
-    }
+
 }

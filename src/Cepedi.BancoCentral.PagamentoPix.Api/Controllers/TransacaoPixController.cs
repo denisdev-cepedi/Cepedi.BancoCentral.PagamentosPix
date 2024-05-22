@@ -28,12 +28,19 @@ public class TransacaoPixController : BaseController
         _mediator = mediator;
     }
 
-    [HttpGet("{idTransacaoPix}")]
+    [HttpGet("chavePixOrigem")]
+    [ProducesResponseType(typeof(ObterListTransacoesPixResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
+    public async Task<ActionResult<ObterListTransacoesPixResponse>> ObterTransacaoPixPorChavePixAsync([FromQuery] string chavePix)
+        => await SendCommand(new ObterTransacoesPorChavePixRequest(chavePix));
+
+    [HttpGet("chaveDeSeguranca")]
     [ProducesResponseType(typeof(ObterTransacaoPixResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
-    public async Task<ActionResult<ObterTransacaoPixResponse>> ObterTransacaoPixAsync([FromRoute] int idTransacaoPix)
-        => await SendCommand(new ObterTransacaoPixRequest(idTransacaoPix));
+    public async Task<ActionResult<ObterTransacaoPixResponse>> ObterTransacaoPixPorChaveSegurancaAsync([FromQuery] string chaveSeguranca)
+    => await SendCommand(new ObterTransacoesPorChaveDeSegurancaRequest(chaveSeguranca));
 
     [HttpGet]
     [ProducesResponseType(typeof(ObterListTransacoesPixResponse), StatusCodes.Status200OK)]

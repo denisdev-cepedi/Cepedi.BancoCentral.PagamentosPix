@@ -51,8 +51,7 @@ public class CriarPixRequestHandler : IRequestHandler<CriarPixRequest, Result<Cr
             return Result.Success(new CriarPixResponse(pixEntity.IdPix, pixEntity.IdTipoPix.ToString(), pixEntity.ChavePix, pixEntity.Status ? "Ativado" : "Desativado"));
         }
         
-        // verificar se o pix pertence a essa conta e instituição está desativado
-        if (pix.Conta.Numero == request.CodigoInstituicao && pix.Conta.Agencia == request.Agencia && pix.Conta.Conta == request.Conta && pix.Status == false)
+        if (pixContaDesativado(request, pix))
         {
             pix.Ativar();
             await _pixRepository.AtualizarPixAsync(pix);
@@ -64,4 +63,11 @@ public class CriarPixRequestHandler : IRequestHandler<CriarPixRequest, Result<Cr
         ));
 
     }
+
+    private bool pixContaDesativado(CriarPixRequest request, PixEntity pix)
+    {
+        return pix.Status == false && pix.IdTipoPix == int.Parse(request.TipoPix) && pix.ChavePix == request.ChavePix;
+    }
+
+  
 }

@@ -35,9 +35,16 @@ public class CriarTransacaoPixRequestHandler : IRequestHandler<CriarTransacaoPix
         if (idPixOrigem == 0 || idPixDestino == 0)
         {
             _logger.LogError("Chave Pix incorreta ou inexistente");
-            
+
             return Result.Error<CriarTransacaoPixResponse>(
                     new Compartilhado.Excecoes.PixInexistente());
+        }
+
+        if (request.ChavePixOrigem == request.ChavePixDestino)
+        {
+            _logger.LogError("A chave de origem e a chave de destino são iguais.");
+            return Result.Error<CriarTransacaoPixResponse>(
+                new Compartilhado.Excecoes.ChavesPixIguais());
         }
 
         var transacao = new TransacaoPixEntity()
