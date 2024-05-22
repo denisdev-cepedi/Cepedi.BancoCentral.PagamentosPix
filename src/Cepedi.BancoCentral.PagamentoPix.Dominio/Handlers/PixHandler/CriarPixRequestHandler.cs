@@ -37,6 +37,14 @@ public class CriarPixRequestHandler : IRequestHandler<CriarPixRequest, Result<Cr
                     PagamentosPix.ContaInexistente
                 ));       
             }
+
+            if(request.TipoPix == "1")
+                if(ValidarCpfVinculadoAConta(request, conta.Pessoa.Cpf)==false)
+                    return Result.Error<CriarPixResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
+                    PagamentosPix.CpfNaoVinculado));   
+            
+
+            
             var pixEntity = new PixEntity
             {
                 IdConta = conta.IdConta,
@@ -69,5 +77,11 @@ public class CriarPixRequestHandler : IRequestHandler<CriarPixRequest, Result<Cr
         return pix.Status == false && pix.IdTipoPix == int.Parse(request.TipoPix) && pix.ChavePix == request.ChavePix;
     }
 
-  
+    private bool ValidarCpfVinculadoAConta(CriarPixRequest request, string cpf){
+
+        if(cpf == request.ChavePix){
+            return true;
+        }
+        return false;
+    }
 }

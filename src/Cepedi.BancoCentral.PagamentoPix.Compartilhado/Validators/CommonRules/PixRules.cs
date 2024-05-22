@@ -22,7 +22,7 @@ public static class PixRules
     {
         return ruleBuilder
             .NotEmpty().WithMessage("A agência é obrigatória.")
-            .Length(4, 5).WithMessage("A agência deve ter no mínimo 4 e no máximo 5 dígitos.")
+            .Length(3, 5).WithMessage("A agência deve ter no mínimo 4 e no máximo 5 dígitos.")
             .Matches(@"^\d+$").WithMessage("A agência deve conter apenas números: Art.2 do Inciso IVº ISO 13.616.");
     }
 
