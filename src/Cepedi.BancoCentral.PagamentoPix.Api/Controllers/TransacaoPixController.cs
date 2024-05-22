@@ -32,8 +32,15 @@ public class TransacaoPixController : BaseController
     [ProducesResponseType(typeof(ObterListTransacoesPixResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
-    public async Task<ActionResult<ObterListTransacoesPixResponse>> ObterTransacaoPixAsync([FromQuery] string chavePix)
-        => await SendCommand(new ObterTransacoesPorChavePixRequest (chavePix));
+    public async Task<ActionResult<ObterListTransacoesPixResponse>> ObterTransacaoPixPorChavePixAsync([FromQuery] string chavePix)
+        => await SendCommand(new ObterTransacoesPorChavePixRequest(chavePix));
+
+    [HttpGet("chaveDeSeguranca")]
+    [ProducesResponseType(typeof(ObterTransacaoPixResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
+    public async Task<ActionResult<ObterTransacaoPixResponse>> ObterTransacaoPixPorChaveSegurancaAsync([FromQuery] string chaveSeguranca)
+    => await SendCommand(new ObterTransacoesPorChaveDeSegurancaRequest(chaveSeguranca));
 
     [HttpGet]
     [ProducesResponseType(typeof(ObterListTransacoesPixResponse), StatusCodes.Status200OK)]

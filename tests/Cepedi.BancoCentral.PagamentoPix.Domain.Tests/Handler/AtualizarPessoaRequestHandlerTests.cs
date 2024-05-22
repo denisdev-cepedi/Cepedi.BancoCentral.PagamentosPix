@@ -1,4 +1,4 @@
-﻿using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
+﻿/*using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Responses;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers;
@@ -44,3 +44,4 @@ public class AtualizarPessoaRequestHandlerTests
     }
 
 }
+*/

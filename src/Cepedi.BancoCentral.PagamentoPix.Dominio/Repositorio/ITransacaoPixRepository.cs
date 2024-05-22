@@ -15,4 +15,6 @@ public interface ITransacaoPixRepository
     Task<int> ObterIdPorChavePixAsync(string chavePix);
 
     Task<string> ObterChavePixPorIdAsync(int id);
+
+    Task<TransacaoPixEntity> ObterIdPorChaveSegurancaAsync(string chaveSeguranca);
 }

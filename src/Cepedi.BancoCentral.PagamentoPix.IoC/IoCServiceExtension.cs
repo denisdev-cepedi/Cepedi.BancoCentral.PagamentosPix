@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Cepedi.BancoCentral.PagamentoPix.Cache;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado;
 using Cepedi.BancoCentral.PagamentoPix.Dados.Repositorios;
 using Cepedi.BancoCentral.PagamentoPix.Data;
@@ -10,6 +11,9 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.StackExchangeRedis;
+using Cepedi.BancoCentral.PagamentoPix.Dominio.Servicos;
 
 namespace Cepedi.BancoCentral.PagamentoPix.IoC
 {
@@ -37,6 +41,16 @@ namespace Cepedi.BancoCentral.PagamentoPix.IoC
             // services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddHealthChecks()
                 .AddDbContextCheck<ApplicationDbContext>();
+
+                // Cache Redis
+            services.AddStackExchangeRedisCache(obj =>
+            {
+                obj.Configuration = configuration["Redis::Connection"];
+                obj.InstanceName = configuration["Redis::Instance"];
+            });
+
+            services.AddSingleton<IDistributedCache, RedisCache>();
+            services.AddScoped(typeof(ICache<>), typeof(Cache<>));
         }
 
         private static void ConfigurarFluentValidation(IServiceCollection services)
