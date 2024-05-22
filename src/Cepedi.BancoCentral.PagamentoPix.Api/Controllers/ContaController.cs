@@ -41,7 +41,23 @@ public class ContaController : BaseController
     [ProducesResponseType(typeof(ObterListContaByCpfResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
-    public async Task<ActionResult<ObterListContaByCpfResponse>> ObterContasByCpfAsync([FromQuery] string cpf) => await SendCommand(new ObterListContaByCpfRequest(cpf));
+    public async Task<ActionResult<ObterListContaByCpfResponse>> 
+    ObterContasByCpfAsync([FromQuery] string cpf) 
+    => await SendCommand(new ObterListContaByCpfRequest(cpf));
+
+   [HttpGet("{Bank}")]
+[ProducesResponseType(typeof(ObterContaBankResponse), StatusCodes.Status200OK)]
+[ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+[ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
+public async Task<ActionResult<ObterContaBankResponse>> ObterContaBankAsync(
+    [FromQuery] int Agencia, 
+    [FromQuery] int Conta, 
+    [FromQuery] int Numero) 
+{
+    var request = new ObterContaBankRequest(Agencia, Conta, Numero);
+    return await SendCommand(request);
+} 
+
 
 }
 
