@@ -35,6 +35,7 @@ public class TransacaoPixController : BaseController
     public async Task<ActionResult<ObterListTransacoesPixResponse>> ObterTransacaoPixPorChavePixAsync([FromQuery] string chavePix)
         => await SendCommand(new ObterTransacoesPorChavePixRequest(chavePix));
 
+
     [HttpGet("chaveDeSeguranca")]
     [ProducesResponseType(typeof(ObterTransacaoPixResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
