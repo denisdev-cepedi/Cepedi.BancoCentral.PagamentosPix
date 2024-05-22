@@ -28,7 +28,7 @@ public class TransacaoPixController : BaseController
         _mediator = mediator;
     }
 
-    [HttpGet("chavePix")]
+    [HttpGet("chavePixOrigem")]
     [ProducesResponseType(typeof(ObterListTransacoesPixResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
