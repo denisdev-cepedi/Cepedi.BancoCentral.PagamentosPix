@@ -50,6 +50,12 @@ public class PagamentosPix
         Descricao = "Os dados enviados na requisição são inválidos",
         Tipo = ETipoErro.Erro
     };
+
+     public static ResultadoErro ChavesPixIguais = new(){
+        Titulo = "Chaves pix iguais",
+        Descricao = "A chave de origem e a chave de destino são iguais",
+        Tipo = ETipoErro.Erro
+    };
     public static ResultadoErro PessoaJaCadastrada = new()
     {
         Titulo = "Pessoa ja cadastrada",

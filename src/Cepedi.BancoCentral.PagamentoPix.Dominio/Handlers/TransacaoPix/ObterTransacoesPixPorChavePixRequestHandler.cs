@@ -13,10 +13,10 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
 {
     public class ObterTransacoesPixPorChavePixRequestHandler : IRequestHandler<ObterTransacoesPorChavePixRequest, Result<ObterListTransacoesPixResponse>>
     {
-        private readonly ILogger<ObterTransacoesPixRequestHandler> _logger;
+        private readonly ILogger<ObterTransacoesPixPorChavePixRequestHandler> _logger;
         private readonly ITransacaoPixRepository _transacaoPixRepository;
 
-        public ObterTransacoesPixPorChavePixRequestHandler(ILogger<ObterTransacoesPixRequestHandler> logger, ITransacaoPixRepository transacaoPixRepository)
+        public ObterTransacoesPixPorChavePixRequestHandler(ILogger<ObterTransacoesPixPorChavePixRequestHandler> logger, ITransacaoPixRepository transacaoPixRepository)
         {
             _logger = logger;
             _transacaoPixRepository = transacaoPixRepository;

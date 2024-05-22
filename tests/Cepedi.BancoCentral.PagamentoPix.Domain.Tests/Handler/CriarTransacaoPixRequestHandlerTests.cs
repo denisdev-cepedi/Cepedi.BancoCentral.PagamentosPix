@@ -26,21 +26,24 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Tests
 
 
         [Fact]
-        public async Task CriarTransacaoAsync_QuandoCriar_DeveRetornarSucesso()
+        public async Task CriarTransacaoAsync_DeveRetornarErroQuandoChavePixOrigemInexistente()
         {
             // Arrange
+            _transacaoPixRepository.ObterIdPorChavePixAsync(Arg.Any<string>()).Returns(Task.FromResult(0));
             var request = new CriarTransacaoPixRequest
             {
                 Valor = 100,
                 Data = DateTime.Now,
-                ChavePixOrigem = "00352442590",
+                ChavePixOrigem = "5555555555",
                 ChavePixDestino = "73998626051"
             };
-            _transacaoPixRepository.ObterIdPorChavePixAsync(request.ChavePixOrigem).Returns(Task.FromResult(1));
-            _transacaoPixRepository.ObterIdPorChavePixAsync(request.ChavePixDestino).Returns(Task.FromResult(2));
-            _transacaoPixRepository.CriarTransacaoPixAsync(Arg.Any<TransacaoPixEntity>()).Returns(Task.CompletedTask);
+
             // Act
             var result = await _sut.Handle(request, CancellationToken.None);
+
+            // Assert
+            await _transacaoPixRepository.DidNotReceive().CriarTransacaoPixAsync(Arg.Any<TransacaoPixEntity>());
+            
 
         }
     }

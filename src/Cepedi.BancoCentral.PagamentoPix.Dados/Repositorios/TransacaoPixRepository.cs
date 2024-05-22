@@ -42,6 +42,11 @@ public class TransacaoPixRepository : ITransacaoPixRepository
         return pix?.IdPix ?? 0;
     }
 
+    public async Task<TransacaoPixEntity> ObterIdPorChaveSegurancaAsync(string chaveSeguranca)
+    {
+         return await _context.TransacaoPix.Where(p => p.ChaveDeSeguranca == chaveSeguranca).FirstOrDefaultAsync();
+    }
+
     public async Task<TransacaoPixEntity> ObterTransacaoPixAsync(int IdTransacaoPix)
     {
         return await _context.TransacaoPix.Where(p => p.IdTransacaoPix == IdTransacaoPix).FirstOrDefaultAsync();
