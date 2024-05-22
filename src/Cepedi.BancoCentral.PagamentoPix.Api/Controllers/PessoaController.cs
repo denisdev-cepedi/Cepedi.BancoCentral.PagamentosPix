@@ -7,6 +7,7 @@ using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace Cepedi.BancoCentral.PagamentoPix.Api.Controllers
 {
@@ -47,6 +48,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Api.Controllers
 
     
     [HttpGet]
+    [OutputCache(Duration = 300)]
     [ProducesResponseType(typeof(ObterPessoaResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
