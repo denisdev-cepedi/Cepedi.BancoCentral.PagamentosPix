@@ -16,19 +16,24 @@ public class CriarPixRequestHandler : IRequestHandler<CriarPixRequest, Result<Cr
     private readonly ILogger<CriarPixRequestHandler> _logger;
     private readonly IPixRepository _pixRepository;
     private readonly IContaRepository _contaRepository;
+    private readonly IPixQueryRepository _pixQueryRepository;
 
-    public CriarPixRequestHandler(IPixRepository pixRepository, IContaRepository contaRepository, ILogger<CriarPixRequestHandler> logger)
+    public CriarPixRequestHandler(IPixRepository pixRepository, 
+        IContaRepository contaRepository, 
+        ILogger<CriarPixRequestHandler> logger,
+        IPixQueryRepository pixQueryRepository)
     {
         _pixRepository = pixRepository;
         _contaRepository = contaRepository;
         _logger = logger;
+        _pixQueryRepository = pixQueryRepository;
     }
 
     public async Task<Result<CriarPixResponse>> Handle(CriarPixRequest request, CancellationToken cancellationToken)
     {
         //teorizando que eu pode ter um pix com a mesma chave e difente conta se 
         //estiver desabilitado
-        var pixEntity = await _pixRepository.ObterChavePixAsync(request.ChavePix);
+        var pixEntity = await _pixQueryRepository.ObterChavePixAsync(request.ChavePix);
         if (pixEntity != null && pixEntity.Status == true)
         {
             _logger.LogError("Chave Pix ja existe");

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades;
+using Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio;
 using Dapper;
 using Microsoft.Extensions.Configuration;
 

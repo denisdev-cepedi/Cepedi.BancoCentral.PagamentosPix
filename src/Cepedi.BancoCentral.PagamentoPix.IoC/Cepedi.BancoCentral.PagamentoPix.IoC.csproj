@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Cepedi.BancoCentral.PagamentoPix.Dados\Cepedi.BancoCentral.PagamentoPix.Dados.csproj" />
     <ProjectReference Include="..\Cepedi.BancoCentral.PagamentoPix.Dominio\Cepedi.BancoCentral.PagamentoPix.Dominio.csproj" />
+    <ProjectReference Include="..\Cepedi.BancoCentral.PagamentoPix.Cache\Cepedi.BancoCentral.PagamentoPix.Cache.csproj" />
   </ItemGroup>
 
 </Project>

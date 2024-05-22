@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades;
 
-namespace Cepedi.BancoCentral.PagamentoPix.Dados.Repositorios.Queries
+namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio
 {
     public interface IPixQueryRepository
     {

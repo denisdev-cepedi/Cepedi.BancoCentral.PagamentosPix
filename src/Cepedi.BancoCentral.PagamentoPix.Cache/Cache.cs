@@ -1,4 +1,8 @@
-﻿namespace Cepedi.BancoCentral.PagamentoPix.Cache;
+﻿using System.Text.Json;
+using Cepedi.BancoCentral.PagamentoPix.Dominio.Servicos;
+using Microsoft.Extensions.Caching.Distributed;
+
+namespace Cepedi.BancoCentral.PagamentoPix.Cache;
 public class Cache<T> : ICache<T>
 {
     private readonly IDistributedCache _cache;

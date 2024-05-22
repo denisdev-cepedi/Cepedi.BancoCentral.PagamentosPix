@@ -1,13 +1,18 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Cepedi.BancoCentral.PagamentoPix.Cache;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado;
 using Cepedi.BancoCentral.PagamentoPix.Dados.Repositorios;
+using Cepedi.BancoCentral.PagamentoPix.Dados.Repositorios.Queries;
 using Cepedi.BancoCentral.PagamentoPix.Data;
 using Cepedi.BancoCentral.PagamentoPix.Data.Repositories;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers.Pipelines;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio;
+using Cepedi.BancoCentral.PagamentoPix.Dominio.Servicos;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.StackExchangeRedis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -35,6 +40,19 @@ namespace Cepedi.BancoCentral.PagamentoPix.IoC
             services.AddScoped<ITransacaoPixRepository, TransacaoPixRepository>();
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+
+            services.AddScoped<IPixQueryRepository, PixQueryRepository>();
+             // Cache Redis
+            services.AddStackExchangeRedisCache(obj =>
+            {
+                obj.Configuration = configuration["Redis::Connection"];
+                obj.InstanceName = configuration["Redis::Instance"];
+            });
+
+            services.AddSingleton<IDistributedCache, RedisCache>();
+            services.AddScoped(typeof(ICache<>), typeof(Cache<>));
+            // CacheRedis
+
         
             // services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddHealthChecks()
@@ -69,5 +87,5 @@ namespace Cepedi.BancoCentral.PagamentoPix.IoC
 
             services.AddScoped<ApplicationDbContextInitialiser>();
         }
-    }
+    } 
 }
