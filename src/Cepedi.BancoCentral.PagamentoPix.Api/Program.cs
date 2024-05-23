@@ -2,6 +2,7 @@ using Cepedi.BancoCentral.PagamentoPix.IoC;
 using Serilog;
 using Serilog.Exceptions;
 using Serilog.Sinks.Elasticsearch;
+using Microsoft.IdentityModel.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,8 +36,12 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    IdentityModelEventSource.ShowPII = true;
 }
-
+else
+{
+    app.UseHttpsRedirection();
+}
 static ElasticsearchSinkOptions ConfigureElasticSink(IConfiguration configuration, string environment)
 {
     return new ElasticsearchSinkOptions(new Uri(configuration["ElasticConfiguration:Uri"]))
@@ -49,6 +54,7 @@ static ElasticsearchSinkOptions ConfigureElasticSink(IConfiguration configuratio
 app.UseHealthChecks("/health");
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

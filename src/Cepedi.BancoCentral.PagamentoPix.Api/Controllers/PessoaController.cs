@@ -6,6 +6,7 @@ using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Excecoes;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Responses;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cepedi.BancoCentral.PagamentoPix.Api.Controllers
