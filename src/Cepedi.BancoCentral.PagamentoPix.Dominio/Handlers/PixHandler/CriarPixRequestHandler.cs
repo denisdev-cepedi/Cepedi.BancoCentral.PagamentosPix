@@ -38,7 +38,7 @@ public class CriarPixRequestHandler : IRequestHandler<CriarPixRequest, Result<Cr
                 ));       
             }
 
-            if(request.TipoPix == "1"){
+            if (request.TipoPix == ((int)PixEntity.TipoPix.CPF).ToString()){
 
                 if(request.ChavePix != conta.Pessoa.Cpf){
                     return Result.Error<CriarPixResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
