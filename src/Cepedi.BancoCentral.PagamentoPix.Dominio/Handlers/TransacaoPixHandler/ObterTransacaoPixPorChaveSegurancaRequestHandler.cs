@@ -16,10 +16,12 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
         private readonly ILogger<ObterTransacoesPixPorChavePixRequestHandler> _logger;
         private readonly ITransacaoPixRepository _transacaoPixRepository;
 
-        public ObterTransacaoPixPorChaveSegurancaRequestHandler(ILogger<ObterTransacoesPixPorChavePixRequestHandler> logger, ITransacaoPixRepository transacaoPixRepository)
+        private readonly IPixRepository _pixRepository;
+        public ObterTransacaoPixPorChaveSegurancaRequestHandler(ILogger<ObterTransacoesPixPorChavePixRequestHandler> logger, ITransacaoPixRepository transacaoPixRepository, IPixRepository pixRepository)
         {
             _logger = logger;
             _transacaoPixRepository = transacaoPixRepository;
+            _pixRepository = pixRepository;
         }
 
         public async Task<Result<ObterTransacaoPixResponse>> Handle(ObterTransacoesPorChaveDeSegurancaRequest request, CancellationToken cancellationToken)
@@ -34,8 +36,6 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
                         new Compartilhado.Excecoes.SemResultadosExcecao());
             }
 
-            var chavePixOrigem = await _transacaoPixRepository.ObterChavePixPorIdAsync(transacaoPix.IdPixOrigem);
-            var chavePixDestino = await _transacaoPixRepository.ObterChavePixPorIdAsync(transacaoPix.IdPixDestino);
 
             var response = new ObterTransacaoPixResponse
             (
@@ -43,8 +43,9 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
                 transacaoPix.Valor,
                 transacaoPix.Data,
                 transacaoPix.ChaveDeSeguranca,
-                chavePixOrigem,
-                chavePixDestino
+                transacaoPix.PixOrigem.ChavePix,
+                transacaoPix.PixDestino.ChavePix
+
             );
 
             return Result.Success(response);

@@ -38,12 +38,14 @@ public class CriarPixRequestHandler : IRequestHandler<CriarPixRequest, Result<Cr
                 ));       
             }
 
-            if(request.TipoPix == "1")
-                if(ValidarCpfVinculadoAConta(request, conta.Pessoa.Cpf)==false)
+            if(request.TipoPix == "1"){
+
+                if(ValidarCpfVinculadoAConta(request, conta.Pessoa.Cpf)!){
                     return Result.Error<CriarPixResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
                     PagamentosPix.CpfNaoVinculado));   
-            
-
+                }
+                
+            }
             
             var pixEntity = new PixEntity
             {

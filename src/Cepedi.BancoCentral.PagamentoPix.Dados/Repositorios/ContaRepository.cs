@@ -52,6 +52,9 @@ public class ContaRepository : IContaRepository
 
     public async Task<ContaEntity> ObterContaBankAsync(string CodigoInstituicao, string agencia, string conta)
     {
-        return await _context.Conta.Where(x => x.Numero == CodigoInstituicao && x.Agencia == agencia && x.Conta == conta).FirstOrDefaultAsync();
+         return await _context.Conta
+        .Include(x => x.Pessoa)
+        .Where(x => x.Numero == CodigoInstituicao && x.Agencia == agencia && x.Conta == conta)
+        .FirstOrDefaultAsync();
     }
 }

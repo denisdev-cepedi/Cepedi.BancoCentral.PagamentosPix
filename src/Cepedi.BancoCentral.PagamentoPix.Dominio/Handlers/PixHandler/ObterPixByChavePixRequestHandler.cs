@@ -20,8 +20,7 @@ public class ObterPixByChavePixRequestHandler : IRequestHandler<ObterPixByChaveP
     public async Task<Result<ObterPixByChavePixResponse>> Handle(ObterPixByChavePixRequest request, CancellationToken cancellationToken)
     {
         var pix = await _pixRepository.ObterPixByChavePixAsync(request.ChavePix);
-        var conta = await _contaRepository.ObtemContaPorIdAsync(pix.IdConta);
-        pix.Conta = conta;
+       
         if (pix == null){
             return Result.Error<ObterPixByChavePixResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(PagamentosPix.PixInexistente));
         }

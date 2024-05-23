@@ -24,10 +24,9 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
 
         public async Task<Result<ObterListTransacoesPixResponse>> Handle(ObterTransacoesPorChavePixRequest request, CancellationToken cancellationToken)
         {
-            var idOrigem = await _transacaoPixRepository.ObterIdPorChavePixAsync(request.ChavePix);
-            var transacoesPix = await _transacaoPixRepository.ObterTransacoesPixPorChavePixAsync(idOrigem);
+            var transacoesPix = await _transacaoPixRepository.ObterTransacoesPixPorChavePixAsync(request.ChavePix);
 
-            if (transacoesPix == null || !transacoesPix.Any())
+            if (transacoesPix == null)
             {
                 _logger.LogError("Sem resultados");
                 return Result.Error<ObterListTransacoesPixResponse>(
@@ -41,8 +40,6 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
 
             foreach (var transacao in transacoesPix)
             {
-                var chavePixOrigem = await _transacaoPixRepository.ObterChavePixPorIdAsync(transacao.IdPixOrigem);
-                var chavePixDestino = await _transacaoPixRepository.ObterChavePixPorIdAsync(transacao.IdPixDestino);
 
                 var transacaoResponse = new ObterTransacaoPixResponse
                 (
@@ -50,8 +47,8 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
                     transacao.Valor,
                     transacao.Data,
                     transacao.ChaveDeSeguranca,
-                    chavePixOrigem,
-                    chavePixDestino
+                    transacao.PixOrigem.ChavePix,
+                    transacao.PixDestino.ChavePix
                 );
 
                 response.TransacoesPix.Add(transacaoResponse);

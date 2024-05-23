@@ -26,6 +26,12 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
         {
             var transacoesPix = await _transacaoPixRepository.ObterTransacoesPixAsync();
 
+            if (transacoesPix == null){
+                _logger.LogError("Sem resultados");
+                return Result.Error<ObterListTransacoesPixResponse>(
+                    new Compartilhado.Excecoes.SemResultadosExcecao());
+            }
+            
             var response = new ObterListTransacoesPixResponse()
             {
                 TransacoesPix = new List<ObterTransacaoPixResponse>()
@@ -33,8 +39,6 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
 
             foreach (var transacao in transacoesPix)
             {
-                var chavePixOrigem = await _transacaoPixRepository.ObterChavePixPorIdAsync(transacao.IdPixOrigem);
-                var chavePixDestino = await _transacaoPixRepository.ObterChavePixPorIdAsync(transacao.IdPixDestino);
 
                 var transacaoResponse = new ObterTransacaoPixResponse
                 (
@@ -42,14 +46,14 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
                     transacao.Valor,
                     transacao.Data,
                     transacao.ChaveDeSeguranca,
-                    chavePixOrigem,
-                    chavePixDestino
+                    transacao.PixOrigem.ChavePix,
+                    transacao.PixDestino.ChavePix
                 );
-
+                
                 response.TransacoesPix.Add(transacaoResponse);
             }
 
-            return Result.Success(response).Value;
+            return Result.Success(response);
         }
     }
 }
