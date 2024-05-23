@@ -58,14 +58,14 @@ public class CriarPixRequestHandler : IRequestHandler<CriarPixRequest, Result<Cr
             };
 
             await _pixRepository.CriarPixAsync(pixEntity);
-            return Result.Success(new CriarPixResponse(pixEntity.IdPix, pixEntity.IdTipoPix.ToString(), pixEntity.ChavePix, pixEntity.Status ? "Ativado" : "Desativado"));
+            return Result.Success(new CriarPixResponse(pixEntity.IdPix, ((PixEntity.TipoPix)pix.IdTipoPix).ToString(), pixEntity.ChavePix, pixEntity.Status ? "Ativado" : "Desativado"));
         }
         
         if (pixContaDesativado(request, pix))
         {
             pix.Ativar();
             await _pixRepository.AtualizarPixAsync(pix);
-            return Result.Success(new CriarPixResponse(pix.IdPix, pix.IdTipoPix.ToString(), pix.ChavePix, pix.Status == true ? "Ativado" : "Desativado"));
+            return Result.Success(new CriarPixResponse(pix.IdPix, ((PixEntity.TipoPix)pix.IdTipoPix).ToString(), pix.ChavePix, pix.Status == true ? "Ativado" : "Desativado"));
         }
 
         return Result.Error<CriarPixResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
