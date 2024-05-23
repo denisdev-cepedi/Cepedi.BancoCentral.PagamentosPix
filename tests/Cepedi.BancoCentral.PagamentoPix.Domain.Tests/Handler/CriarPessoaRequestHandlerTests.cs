@@ -1,5 +1,6 @@
 ﻿using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Responses;
+using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Validators;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio;
@@ -20,16 +21,19 @@ public class CriarPessoaRequestHandlerTests
     private readonly ILogger<CriarPessoaRequestHandler> _logger = Substitute.For<ILogger<CriarPessoaRequestHandler>>();
     private readonly CriarPessoaRequestHandler _sut;
 
+    private readonly CriarPessoaRequestValidator _validator;
+    
     public CriarPessoaRequestHandlerTests() 
     {
         _sut = new CriarPessoaRequestHandler(_pessoaRepository, _logger);
+         _validator = new CriarPessoaRequestValidator();
     }
 
     [Fact]
     public async Task CriarPessoaAsync_QuandoCriar_DeveRetornarSucesso()
     {
         //Arrange 
-        var pessoa = new CriarPessoaRequest { Nome= "PessoaX", Cpf = "11111111111"};
+        var pessoa = new CriarPessoaRequest { Nome= "PessoaX", Cpf = "99486401012"};
         
         _pessoaRepository.CriarPessoaAsync(It.IsAny<PessoaEntity>())
             .ReturnsForAnyArgs(new PessoaEntity
@@ -53,7 +57,7 @@ public class CriarPessoaRequestHandlerTests
     public async Task CriarPessoaAsync_QuandoCriarNomeMenorQueCincoCaracteres_DeveRetornarErro()
     {
         //Arrange 
-        var pessoa = new CriarPessoaRequest { Nome= "X", Cpf = "11111111111"};
+        var pessoa = new CriarPessoaRequest { Nome= "X", Cpf = "99486401012"};
 
         _pessoaRepository.CriarPessoaAsync(It.IsAny<PessoaEntity>())
             .ReturnsForAnyArgs(new PessoaEntity
@@ -63,13 +67,11 @@ public class CriarPessoaRequestHandlerTests
                 Cpf = pessoa.Cpf
             });
 
-        //Act
-        var result = await _sut.Handle(pessoa, CancellationToken.None);
-
+        var validationResult = await _validator.ValidateAsync(pessoa);
+    
         //Assert 
-        result.IsSuccess.Should().BeFalse();
-        result.Should().NotBeNull();
-        //result.Should().Contain("Nome deve ter pelo menos 5 caracteres"); 
+        validationResult.IsValid.Should().BeFalse();
+        validationResult.Errors.Should().ContainSingle(e => e.PropertyName == "Nome" && e.ErrorMessage == "Pessoa deve ter pelo menos 5 caracteres");
 
     }
 
