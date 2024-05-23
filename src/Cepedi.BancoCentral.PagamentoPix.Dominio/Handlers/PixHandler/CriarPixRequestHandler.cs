@@ -40,7 +40,7 @@ public class CriarPixRequestHandler : IRequestHandler<CriarPixRequest, Result<Cr
 
             if(request.TipoPix == "1"){
 
-                if(ValidarCpfVinculadoAConta(request, conta.Pessoa.Cpf)!){
+                if(request.ChavePix != conta.Pessoa.Cpf){
                     return Result.Error<CriarPixResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
                     PagamentosPix.CpfNaoVinculado));   
                 }
@@ -81,7 +81,7 @@ public class CriarPixRequestHandler : IRequestHandler<CriarPixRequest, Result<Cr
 
     private bool ValidarCpfVinculadoAConta(CriarPixRequest request, string cpf){
 
-        if(cpf == request.ChavePix){
+        if(cpf != request.ChavePix){
             return true;
         }
         return false;
