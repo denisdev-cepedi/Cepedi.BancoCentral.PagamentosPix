@@ -1,24 +1,11 @@
-
-using System.Data;
-using System.Security.Principal;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
 using FluentValidation;
-using FluentValidation.Validators;
-using static Cepedi.BancoCentral.PagamentoPix.Compartilhado.Utils.Utils;
 
 namespace Cepedi.BancoCentral.PagamentoPix.Compartilhado.Validators;
 
-public class CriarPixRequestValidator : AbstractValidator<CriarPixRequest>
-{
-    public CriarPixRequestValidator()
-    {
-       
-        RuleFor(pix => pix.CodigoInstituicao).CodigoInstituicaoRules();
-    
-        RuleFor(pix => pix.Agencia).AgenciaRules();
+public class DesabilitarChavePixRequestValidator : AbstractValidator<DesabilitarChavePixRequest>{
 
-        RuleFor(pix => pix.Conta).ContaRules();
-        //calidação do campo do tipo pix
+    public DesabilitarChavePixRequestValidator(){
         RuleFor(request => request.TipoPix).TipoPixRules();
         //Validação do chave pix
         RuleFor(request => request.ChavePix)
@@ -48,6 +35,5 @@ public class CriarPixRequestValidator : AbstractValidator<CriarPixRequest>
                     });
 
                 });
-    }  
+    }
 }
-

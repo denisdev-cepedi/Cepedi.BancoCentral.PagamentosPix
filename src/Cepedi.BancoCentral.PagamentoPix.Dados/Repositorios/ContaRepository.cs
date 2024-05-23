@@ -31,10 +31,19 @@ public class ContaRepository : IContaRepository
         return conta;
 
     }
+    public async Task<ContaEntity> ObterContasByCpf(string Cpf)
+    {
+
+        return await _context.Conta
+        .Include(c => c.Pessoa) // Include the related Pessoa entity
+        .Where(p => p.Pessoa.Cpf == Cpf)
+        .FirstOrDefaultAsync();
+
+    }
 
     public async Task<List<ContaEntity>> ObtemContasAsync(int IdPessoa)
     {
-        return await _context.Conta.Where(p => p.IdPessoa == IdPessoa).ToListAsync();
+        return await _context.Conta.Include(x => x.Pessoa).Where(p => p.IdPessoa == IdPessoa).ToListAsync();
     }
 
     public async Task<ContaEntity> ObtemContaPorIdAsync(int IdConta)
@@ -43,7 +52,19 @@ public class ContaRepository : IContaRepository
     }
     public async Task<ContaEntity> ObterContaAsync(int IdConta)
     {
-        return await _context.Conta.Where(p => p.IdConta == IdConta).FirstOrDefaultAsync();
+        return await _context.Conta.Include(x => x.Pessoa).Where(p => p.IdConta == IdConta).FirstOrDefaultAsync();
     }
 
+    public async Task<ContaEntity> ObterContaBankAsync(string CodigoInstituicao, string agencia, string conta)
+    {
+        return await _context.Conta
+       .Include(x => x.Pessoa)
+       .Where(x => x.Numero == CodigoInstituicao && x.Agencia == agencia && x.Conta == conta)
+       .FirstOrDefaultAsync();
+    }
+
+    public async Task<List<ContaEntity>> ObterContasByCpfAsync(string Cpf)
+    {
+         return await _context.Conta.Include(x => x.Pessoa).Where(x => x.Pessoa.Cpf == Cpf).ToListAsync();
+    }
 }

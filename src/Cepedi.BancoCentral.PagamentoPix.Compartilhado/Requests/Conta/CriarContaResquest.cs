@@ -11,5 +11,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests
         public required string Agencia { get; set; }
         public required string Conta { get; set; } = default!;
 
+        public required string Cpf { get; set; } = default!;
+
     }
 }

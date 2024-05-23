@@ -21,23 +21,26 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
             ILogger<ObterListContaByPessoaIdRequestHandler> logger,
             IContaRepository contaRepositorio)
             {
-                _logger = logger;
                 _contaRepositorio = contaRepositorio;
+                _logger = logger;
             }
 
         public async Task<Result<ObterListContaByPessoaIdResponse>> Handle(ObterListContaByPessoaIdRequest request, CancellationToken cancellationToken)
         {
             var contas = await _contaRepositorio.ObtemContasAsync(request.IdPessoa);
-
+            
             var response = new ObterListContaByPessoaIdResponse()
             {
                 Contas = contas.Select(c => new ObterContaResponse()
                 {
                     IdConta = c.IdConta,
-                    IdPessoa = c.IdPessoa,
                     Numero = c.Numero,
                     Conta = c.Conta,
-                    Agencia = c.Agencia
+                    Agencia = c.Agencia,
+                    IdPessoa = c.IdPessoa,
+                    Nome = c.Pessoa.Nome,
+                    Cpf = c.Pessoa.Cpf
+
                 }).ToList()
             };
             return Result.Success(response);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Enums;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Responses;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio;
@@ -27,14 +28,17 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
                 if (contaEntity == null)
                 {
                     return Result.Error<AtualizarContaResponse>(
-                        new Compartilhado.Excecoes.SemResultadosExcecao());
+                        new Compartilhado.Excecoes.ExcecaoAplicacao(
+                            PagamentosPix.ContaInexistente
+                        ));
                 }
 
-                contaEntity.Atualizar(request.Conta, request.Agencia);
+                
+                contaEntity.Atualizar(request.Agencia, request.Conta);
 
                 await _contaRepository.AtualizarContaAsync(contaEntity);
 
-                return Result.Success(new AtualizarContaResponse(contaEntity.Conta, contaEntity.Agencia));
+                return Result.Success(new AtualizarContaResponse(contaEntity.Agencia, contaEntity.Conta));
                 
            
         }

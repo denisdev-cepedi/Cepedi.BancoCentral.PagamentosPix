@@ -17,7 +17,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
         private readonly ILogger<ObterPessoasRequestHandler> _logger;
         private readonly IPessoaRepository _pessoaRepositorio;
 
-        public ObterPessoasRequestHandler(ILogger<ObterPessoasRequestHandler> logger, IPessoaRepository pessoaRepositorio) 
+        public ObterPessoasRequestHandler(ILogger<ObterPessoasRequestHandler> logger, IPessoaRepository pessoaRepositorio)
         {
             _logger = logger;
             _pessoaRepositorio = pessoaRepositorio;
