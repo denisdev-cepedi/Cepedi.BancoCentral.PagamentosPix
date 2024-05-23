@@ -34,10 +34,13 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
                 Contas = contas.Select(c => new ObterContaResponse()
                 {
                     IdConta = c.IdConta,
-                    IdPessoa = c.IdPessoa,
                     Numero = c.Numero,
                     Conta = c.Conta,
-                    Agencia = c.Agencia
+                    Agencia = c.Agencia,
+                    IdPessoa = c.IdPessoa,
+                    Nome = c.Pessoa.Nome,
+                    Cpf = c.Pessoa.Cpf
+
                 }).ToList()
             };
             return Result.Success(response);

@@ -1,4 +1,5 @@
 ﻿using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Excecoes;
+using OperationResult;
 
 namespace Cepedi.BancoCentral.PagamentoPix.Compartilhado.Enums;
 public class PagamentosPix
@@ -8,6 +9,13 @@ public class PagamentosPix
         Titulo = "Ops ocorreu um erro no nosso sistema",
         Descricao = "No momento, nosso sistema está indisponível. Por Favor tente novamente",
         Tipo = ETipoErro.Erro
+    };
+
+    public static readonly ResultadoErro ContaJaExistente= new(){
+
+        Titulo = "Conta ja existente no sistema",
+        Descricao = "Esta conta ja existe. Por favor, escolha outro",
+        Tipo = ETipoErro.Alerta
     };
 
     public static readonly ResultadoErro SemResultados = new()
