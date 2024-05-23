@@ -20,12 +20,12 @@ namespace Cepedi.BancoCentral.PagamentoPix.Api.Tests
             _sut = new PessoaController(_logger, _mediator);
         }
 
-        [Fact]
+        [Fact (DisplayName = "Criar pessoa deve enviar request para mediator")]
         public async Task CriarPessoa_DeveEnviarRequest_Para_Mediator()
         {
             // Arrange 
             var request = new CriarPessoaRequest { Nome = "Lorena", Cpf = "11111111111" };
-            _mediator.Send(request).ReturnsForAnyArgs(Result.Success(new CriarPessoaResponse(1, "")));
+            _mediator.Send(request).ReturnsForAnyArgs(Result.Success(new CriarPessoaResponse(1, "Lorena")));
 
             // Act
             await _sut.CriarPessoaAsync(request);
@@ -33,7 +33,6 @@ namespace Cepedi.BancoCentral.PagamentoPix.Api.Tests
             // Assert
             await _mediator.ReceivedWithAnyArgs().Send(request);
         }
-
 
     }
 }

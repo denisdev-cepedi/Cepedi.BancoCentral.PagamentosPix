@@ -1,0 +1,710 @@
+{
+	"info": {
+		"_postman_id": "05d29e97-0750-4fc5-b443-d0c1ff583467",
+		"name": "BancoCentral.PagamentoPix",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31813365"
+	},
+	"item": [
+		{
+			"name": "Pessoa",
+			"item": [
+				{
+					"name": "http://localhost:5078/Pessoa",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Daniel Oliveira da Silva\",\r\n  \"cpf\": \"086.044.845-10\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5078/Pessoa",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5078",
+							"path": [
+								"Pessoa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:5078/Pessoa",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5078/Pessoa/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5078",
+							"path": [
+								"Pessoa",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pix",
+			"item": [
+				{
+					"name": "CreatPix",
+					"item": [
+						{
+							"name": "Sucess",
+							"item": [
+								{
+									"name": "NuBankCell",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"codigoInstituicao\" :\"260\", \r\n    \"agencia\": \"0001\",\r\n    \"conta\":\"485425350\",\r\n    \"tipoPix\":\"3\",//telefonica\r\n    \"chavePix\": \"+557398626051\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5078/Pix/v1/Pixs",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5078",
+											"path": [
+												"Pix",
+												"v1",
+												"Pixs"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "NuBankChaAleatoria",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"codigoInstituicao\" :\"260\", \r\n    \"agencia\": \"0001\",\r\n    \"conta\":\"485425350\",\r\n    \"tipoPix\":\"4\",//chave aleatoria \r\n    \"chavePix\": \"3b8a4e7c2f6d9a5b1c4e7f2d8b3a9e6\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5078/Pix/v1/Pixs",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5078",
+											"path": [
+												"Pix",
+												"v1",
+												"Pixs"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PicPayEmail",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": " {\r\n    \"codigoInstituicao\" :\"380\", \r\n    \"agencia\": \"0001\",\r\n    \"conta\":\"16482042\",\r\n    \"tipoPix\":\"2\", //email\r\n    \"chavePix\": \"danieloliveira.s558@gmail.com\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5078/Pix/v1/Pixs",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5078",
+											"path": [
+												"Pix",
+												"v1",
+												"Pixs"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PicPayChAleatoria",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": " {\r\n    \"codigoInstituicao\" :\"380\", \r\n    \"agencia\": \"0001\",\r\n    \"conta\":\"16482042\",\r\n    \"tipoPix\":\"4\",//chave aleatoria\r\n    \"chavePix\": \"e5d4a6f3b2c1a7e8d9b0e5d4a6f3b2c1\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5078/Pix/v1/Pixs",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5078",
+											"path": [
+												"Pix",
+												"v1",
+												"Pixs"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "BBBCell",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"codigoInstituicao\" :\"358\", \r\n    \"agencia\": \"10191\",\r\n    \"conta\":\"1099579\",\r\n    \"tipoPix\":\"3\",\r\n    \"chavePix\": \"+557398626051\"\r\n}\r\n\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5078/Pix/v1/Pixs",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5078",
+											"path": [
+												"Pix",
+												"v1",
+												"Pixs"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "BBBChAleatoria",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"codigoInstituicao\" :\"358\", \r\n    \"agencia\": \"10191\",\r\n    \"conta\":\"1099579\",\r\n    \"tipoPix\":\"4\",//chave aleatoria\r\n    \"chavePix\": \"7f9c2ab10f5063a7ea60317b3ccf2455\"\r\n}\r\n\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5078/Pix/v1/Pixs",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5078",
+											"path": [
+												"Pix",
+												"v1",
+												"Pixs"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "ErrorValidator",
+							"item": [
+								{
+									"name": "Rules",
+									"item": [
+										{
+											"name": "CodigoInstituição",
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"codigoInstituicao\" :\"\", \r\n    \"agencia\": \"10191\",\r\n    \"conta\":\"1099579\",\r\n    \"tipoPix\":\"3\",\r\n    \"chavePix\": \"+557398626051\"\r\n}\r\n//O Código da instituição é obrigatório.\r\n//O Código da instituição deve ter no minimo 1 e no maximo 3 digitos.\r\n//O Código da instituição deve conter apenas números.",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:5078/BancoCentralPagamentoPix/v1/Pixs",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "5078",
+													"path": [
+														"BancoCentralPagamentoPix",
+														"v1",
+														"Pixs"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "ChavePix",
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"codigoInstituicao\" :\"\", \r\n    \"agencia\": \"10191\",\r\n    \"conta\":\"1099579\",\r\n    \"tipoPix\":\"3\",\r\n    \"chavePix\": \"\"\r\n}\r\n//Chave Pix é obrigatória.\r\n//Chave Pix aleatória deve ter 32.\r\n//Chave Pix do tipo email deve ser um email válido.\r\n//Chave Pix do tipo CPF deve ser um CPF válido.",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:5078/BancoCentralPagamentoPix/v1/Pixs",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "5078",
+													"path": [
+														"BancoCentralPagamentoPix",
+														"v1",
+														"Pixs"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "TipoPix",
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"codigoInstituicao\" :\"358\", \r\n    \"agencia\": \"10191\",\r\n    \"conta\":\"1099579\",\r\n    \"tipoPix\":\"\",\r\n    \"chavePix\": \"+557398626051\"\r\n}\r\n",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:5078/BancoCentralPagamentoPix/v1/Pixs",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "5078",
+													"path": [
+														"BancoCentralPagamentoPix",
+														"v1",
+														"Pixs"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Conta",
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"codigoInstituicao\" :\"358\", \r\n    \"agencia\": \"10191\",\r\n    \"conta\":\"\",\r\n    \"tipoPix\":\"3\",\r\n    \"chavePix\": \"+557398626051\"\r\n}\r\n",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:5078/BancoCentralPagamentoPix/v1/Pixs",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "5078",
+													"path": [
+														"BancoCentralPagamentoPix",
+														"v1",
+														"Pixs"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Agencia",
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"codigoInstituicao\" :\"358\", \r\n    \"agencia\": \"\",\r\n    \"conta\":\"1099579\",\r\n    \"tipoPix\":\"3\",\r\n    \"chavePix\": \"+557398626051\"\r\n}\r\n\r\n",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:5078/BancoCentralPagamentoPix/v1/Pixs",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "5078",
+													"path": [
+														"BancoCentralPagamentoPix",
+														"v1",
+														"Pixs"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						}
+					],
+					"description": "Criação de Entidades do pagamento pix via post"
+				},
+				{
+					"name": "Delete",
+					"item": [
+						{
+							"name": "cellNuBanck",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"TipoPix\": \"1\",\r\n    \"ChavePix\":\"73998626051\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "emailPicPay",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"TipoPix\":\"1\",\r\n    \"ChavePix\": \"7398626051\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ChAleatoriaBBB",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"TipoPix\":\"3\",\r\n    \"ChavePix\": \"+557398626051\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5078/Pix/v1/Pixs/ChavePix",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5078",
+									"path": [
+										"Pix",
+										"v1",
+										"Pixs",
+										"ChavePix"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GetPix",
+					"item": [
+						{
+							"name": "AllPixsByBankConta",
+							"item": [
+								{
+									"name": "BBB",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"CodigoInstituicao\" :\"358\", \r\n    \"Agencia\": \"10191\",\r\n    \"Conta\":\"1099579\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5078/Pix/v1/Pixs/ContaBank",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5078",
+											"path": [
+												"Pix",
+												"v1",
+												"Pixs",
+												"ContaBank"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PicPay",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"CodigoInstituição\" :\"260\", \r\n    \"Agencia\": \"0001\",\r\n    \"Conta\":\"485425350\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5078/Pix/v1/Pixs/ContaBank",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5078",
+											"path": [
+												"Pix",
+												"v1",
+												"Pixs",
+												"ContaBank"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Nubank",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"CodigoInstituicao\" :\"260\", \r\n    \"Agencia\": \"0001\",\r\n    \"Conta\":\"485425350\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5078/Pix/v1/Pixs/ContaBank",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5078",
+											"path": [
+												"Pix",
+												"v1",
+												"Pixs",
+												"ContaBank"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "OnlyPixChavePix",
+							"item": [
+								{
+									"name": "Aleatoria",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipoPix\":\"4\",//chave aleatoria \r\n    \"chavePix\": \"3b8a4e7c2f6d9a5b1c4e7f2d8b3a9623\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5078/Pix/v1/Pixs/ChavePix",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5078",
+											"path": [
+												"Pix",
+												"v1",
+												"Pixs",
+												"ChavePix"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Celular",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipoPix\":\"3\",//celular\r\n    \"chavePix\": \"+5573998626051\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5078/Pix/v1/Pixs/ChavePix",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5078",
+											"path": [
+												"Pix",
+												"v1",
+												"Pixs",
+												"ChavePix"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "GetAllPixs",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5078/Pix/v1/Pixs",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5078",
+									"path": [
+										"Pix",
+										"v1",
+										"Pixs"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
+
+
+

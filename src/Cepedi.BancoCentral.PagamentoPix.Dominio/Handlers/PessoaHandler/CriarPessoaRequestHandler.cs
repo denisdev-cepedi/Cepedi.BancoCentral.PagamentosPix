@@ -39,7 +39,6 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
                 };
                 await _pessoaRepository.CriarPessoaAsync(pessoa);
                 return Result.Success(new CriarPessoaResponse(pessoa.IdPessoa, pessoa.Nome));
-          
         }
     }
 }

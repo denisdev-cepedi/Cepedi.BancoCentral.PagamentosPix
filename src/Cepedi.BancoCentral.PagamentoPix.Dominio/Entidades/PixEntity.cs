@@ -1,11 +1,15 @@
 ﻿namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades;
+
+/// <summary>
+/// IdPix, IdConta, ChavePix, IdTipoPix, DataCriacao, Status
+/// </summary>
 public class PixEntity
 {
     public int IdPix { get; set; }
 
     public int IdConta { get; set; }
 
-    public ContaEntity Conta { get; set; }
+    public required ContaEntity Conta { get; set; }
 
     public string ChavePix { get; set; } = default!;
 
@@ -25,16 +29,21 @@ public class PixEntity
     }
     
     public enum TipoPix{
-        Cpf = 1,
-        email = 2,
-        telefone = 3,
-        chaveAleatoria = 4 
+        CPF = 1,
+        Email = 2,
+        Telefone = 3,
+        ChaveAleatoria = 4 
     }
 
     internal void Desabilitar()
     {
         Status = false;
     }
+    internal void Ativar()
+    {
+        Status = true;
+    }
+
 }
 
 

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Responses;
@@ -12,35 +11,35 @@ using OperationResult;
 
 namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
 {
-    public class ObterTransacaoPixRequestFilterHandler : IRequestHandler<ObterTransacaoPixRequestFilter, Result<ObterListTransacoesPixResponse>>
+    public class ObterTransacoesPixPorChavePixRequestHandler : IRequestHandler<ObterTransacoesPorChavePixRequest, Result<ObterListTransacoesPixResponse>>
     {
-        private readonly ILogger<ObterTransacaoPixRequestFilterHandler> _logger;
+        private readonly ILogger<ObterTransacoesPixPorChavePixRequestHandler> _logger;
         private readonly ITransacaoPixRepository _transacaoPixRepository;
 
-        public ObterTransacaoPixRequestFilterHandler(ILogger<ObterTransacaoPixRequestFilterHandler> logger, ITransacaoPixRepository transacaoPixRepository)
+        public ObterTransacoesPixPorChavePixRequestHandler(ILogger<ObterTransacoesPixPorChavePixRequestHandler> logger, ITransacaoPixRepository transacaoPixRepository)
         {
             _logger = logger;
             _transacaoPixRepository = transacaoPixRepository;
         }
 
-        public async Task<Result<ObterListTransacoesPixResponse>> Handle(ObterTransacaoPixRequestFilter request, CancellationToken cancellationToken)
+        public async Task<Result<ObterListTransacoesPixResponse>> Handle(ObterTransacoesPorChavePixRequest request, CancellationToken cancellationToken)
         {
-            var transacoesPix = await _transacaoPixRepository.ObterTransacoesPixFilterAsync(request);
+            var transacoesPix = await _transacaoPixRepository.ObterTransacoesPixPorChavePixAsync(request.ChavePix);
 
-            if (transacoesPix == null || !transacoesPix.Any())
+            if (transacoesPix == null)
             {
-                return Result.Error<ObterListTransacoesPixResponse>(new Compartilhado.Excecoes.SemResultadosExcecao());
+                _logger.LogError("Sem resultados");
+                return Result.Error<ObterListTransacoesPixResponse>(
+                    new Compartilhado.Excecoes.SemResultadosExcecao());
             }
 
-            var response = new ObterListTransacoesPixResponse
+            var response = new ObterListTransacoesPixResponse()
             {
                 TransacoesPix = new List<ObterTransacaoPixResponse>()
             };
 
             foreach (var transacao in transacoesPix)
             {
-                var chavePixOrigem = await _transacaoPixRepository.ObterChavePixPorIdAsync(transacao.IdPixOrigem);
-                var chavePixDestino = await _transacaoPixRepository.ObterChavePixPorIdAsync(transacao.IdPixDestino);
 
                 var transacaoResponse = new ObterTransacaoPixResponse
                 (
@@ -48,8 +47,8 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
                     transacao.Valor,
                     transacao.Data,
                     transacao.ChaveDeSeguranca,
-                    chavePixOrigem,
-                    chavePixDestino
+                    transacao.PixOrigem.ChavePix,
+                    transacao.PixDestino.ChavePix
                 );
 
                 response.TransacoesPix.Add(transacaoResponse);
@@ -57,5 +56,6 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
 
             return Result.Success(response);
         }
+
     }
 }

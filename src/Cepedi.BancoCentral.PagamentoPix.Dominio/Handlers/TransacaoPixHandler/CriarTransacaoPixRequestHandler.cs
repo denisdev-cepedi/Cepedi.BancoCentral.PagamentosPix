@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Enums;
+using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Excecoes;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Responses;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades;
@@ -19,28 +20,30 @@ public class CriarTransacaoPixRequestHandler : IRequestHandler<CriarTransacaoPix
 
     private readonly ILogger<CriarTransacaoPixRequestHandler> _logger;
     private readonly ITransacaoPixRepository _transacaoPixRepository;
+    private readonly IPixRepository _pixRepository;
 
-    public CriarTransacaoPixRequestHandler(ITransacaoPixRepository transacaoPixRepository, ILogger<CriarTransacaoPixRequestHandler> logger)
+    public CriarTransacaoPixRequestHandler(ITransacaoPixRepository transacaoPixRepository, ILogger<CriarTransacaoPixRequestHandler> logger, IPixRepository pixRepository)
     {
         _transacaoPixRepository = transacaoPixRepository;
         _logger = logger;
+        _pixRepository = pixRepository;
+
     }
     public async Task<Result<CriarTransacaoPixResponse>> Handle(CriarTransacaoPixRequest request, CancellationToken cancellationToken)
     {
 
-        var idPixOrigem = await _transacaoPixRepository.ObterIdPorChavePixAsync(request.ChavePixOrigem);
-        var idPixDestino = await _transacaoPixRepository.ObterIdPorChavePixAsync(request.ChavePixDestino);
-        var chaveDeSeguranca = GerarChaveDeSeguranca();
-
-        if (idPixOrigem == 0 || idPixDestino == 0)
+        var PixOrigem = await _pixRepository.ObterPixByChavePixAsync(request.ChavePixOrigem);
+        var PixDestino = await _pixRepository.ObterPixByChavePixAsync(request.ChavePixDestino);
+      
+        if (PixDestino == null || PixOrigem == null)
         {
-            _logger.LogError("Chave Pix incorreta ou inexistente");
+            _logger.LogError("Chave Pix incorreta ou inexistente ");
 
             return Result.Error<CriarTransacaoPixResponse>(
                     new Compartilhado.Excecoes.PixInexistente());
         }
 
-        if (request.ChavePixOrigem == request.ChavePixDestino)
+        if (ChavesPixIguais(PixOrigem.ChavePix, PixDestino.ChavePix))
         {
             _logger.LogError("A chave de origem e a chave de destino são iguais.");
             return Result.Error<CriarTransacaoPixResponse>(
@@ -51,9 +54,11 @@ public class CriarTransacaoPixRequestHandler : IRequestHandler<CriarTransacaoPix
         {
             Valor = request.Valor,
             Data = request.Data,
-            ChaveDeSeguranca = chaveDeSeguranca,
-            IdPixOrigem = idPixOrigem,
-            IdPixDestino = idPixDestino
+            ChaveDeSeguranca = GerarChaveDeSeguranca(),
+            IdPixOrigem = PixOrigem.IdPix,
+            IdPixDestino = PixDestino.IdPix,
+            PixOrigem = PixOrigem,
+            PixDestino = PixDestino,
         };
 
         await _transacaoPixRepository.CriarTransacaoPixAsync(transacao);
@@ -79,5 +84,10 @@ public class CriarTransacaoPixRequestHandler : IRequestHandler<CriarTransacaoPix
             sb.Append(b.ToString("X2"));
         }
         return sb.ToString();
+    }
+
+    private static bool ChavesPixIguais(string chavePixOrigem, string chavePixDestino)
+    {
+        return chavePixOrigem == chavePixDestino;
     }
 }

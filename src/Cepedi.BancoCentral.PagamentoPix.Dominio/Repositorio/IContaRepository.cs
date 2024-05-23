@@ -12,8 +12,10 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio
       {
         Task<ContaEntity> ObtemContaPorIdAsync(int IdConta);
         Task<List<ContaEntity>> ObtemContasAsync(int IdPessoa);
+        Task<List<ContaEntity>> ObterContasByCpfAsync(string Cpf);
         Task<ContaEntity> CriarContaAsync(ContaEntity conta);
         Task<ContaEntity> AtualizarContaAsync(ContaEntity conta);
+        Task<ContaEntity> ObterContaBankAsync(string CodigoInstituicao, string agencia, string conta);
     }
 
 }
