@@ -16,10 +16,14 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
             IRequestHandler<AtualizarPessoaCpfRequest, Result<AtualizarPessoaResponse>>
     {
         private readonly IPessoaRepository _pessoaRepository;
+        private readonly IPixRepository _pixRepository;
         private readonly ILogger<AtualizarPessoaCpfRequestHandler> _logger;
-        public AtualizarPessoaCpfRequestHandler(IPessoaRepository pessoaRepository, ILogger<AtualizarPessoaCpfRequestHandler> logger){
+        public AtualizarPessoaCpfRequestHandler(IPessoaRepository pessoaRepository, 
+            ILogger<AtualizarPessoaCpfRequestHandler> logger,
+            IPixRepository pixRepository){
             _pessoaRepository = pessoaRepository;
             _logger = logger;
+            _pixRepository = pixRepository;
         }
         public async Task<Result<AtualizarPessoaResponse>> Handle(AtualizarPessoaCpfRequest request, CancellationToken cancellationToken)
         {
@@ -41,6 +45,14 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
                     {
                         return Result.Error<AtualizarPessoaResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
                             (PagamentosPix.PessoaJaCadastrada)
+                        ));
+                    }
+                    var PixEntity = await _pixRepository.ObterChavePixAsync(request.Cpf);
+
+                    if(PixEntity != null)
+                    {
+                        return Result.Error<AtualizarPessoaResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
+                            (PagamentosPix.CpfComPixJaCadastrado)
                         ));
                     }
                 }

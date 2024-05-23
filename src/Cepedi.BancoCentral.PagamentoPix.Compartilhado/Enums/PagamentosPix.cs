@@ -68,4 +68,9 @@ public class PagamentosPix
         Descricao = "Não foi encontrada a pessoa",
         Tipo = ETipoErro.Alerta
     };
+    public static ResultadoErro CpfComPixJaCadastrado = new(){
+        Titulo = "Cpf atual tem um PIX cadastrado. Não é possivel atualizar o Cpf",
+        Descricao = "O Cpf informado está em uso",
+        Tipo = ETipoErro.Alerta
+    };
 }
