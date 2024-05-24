@@ -47,7 +47,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers
                             (PagamentosPix.PessoaJaCadastrada)
                         ));
                     }
-                    var PixEntity = await _pixRepository.ObterChavePixAsync(request.Cpf);
+                    var PixEntity = await _pixRepository.ObterPixByChavePixAsync(request.Cpf);
 
                     if(PixEntity != null)
                     {

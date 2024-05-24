@@ -36,7 +36,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.IoC
             services.AddScoped<IPixRepository, PixRepository>();
             services.AddScoped<ITransacaoPixRepository, TransacaoPixRepository>();
         
-            ConfigurarSso(services, configuration);
+            //ConfigurarSso(services, configuration);
             // services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddHealthChecks()
                 .AddDbContextCheck<ApplicationDbContext>();
