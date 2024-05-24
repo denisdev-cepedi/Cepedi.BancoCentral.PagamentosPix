@@ -7,8 +7,9 @@ namespace Cepedi.BancoCentral.PagamentoPix.Data.EntityTypeConfiguration;
 
 public class PessoaEntityTypeConfiguration : IEntityTypeConfiguration<PessoaEntity>
 {
-    public void Configure(EntityTypeBuilder<PessoaEntity> builder)
+    public void Configure(EntityTypeBuilder<PessoaEntity> builder )
     {
+        builder.HasQueryFilter(pessoa => pessoa.Nome != null);
         builder.ToTable("Pessoa");
         builder.HasKey(pessoa => pessoa.IdPessoa); // Define a chave primária
         builder.Property(pessoa => pessoa.Nome).HasMaxLength(150);

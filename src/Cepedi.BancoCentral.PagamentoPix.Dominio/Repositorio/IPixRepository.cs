@@ -4,10 +4,10 @@ namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio;
 
 public interface IPixRepository
 {
-    ICollection<PixEntity> ListarPixs();
+    Task<ICollection<PixEntity>> GetAllPixsAsync();
+    Task<ICollection<PixEntity>> GetAllPixsByBankContaAsync(string codigoInstituicao, string agencia, string conta);
     Task<PixEntity> CriarPixAsync(PixEntity pix);
-    Task<PixEntity> ObterPixByIdAsync(int id);
     Task<PixEntity> AtualizarPixAsync(PixEntity pix);
-    Task<PixEntity> ObterChavePixAsync(string chavePix);
-
+    Task<PixEntity> ObterPixByChavePixAsync(string chavePix);
+   
 }

@@ -8,9 +8,13 @@ namespace Cepedi.BancoCentral.PagamentoPix.Compartilhado.Responses
     public class ObterContaResponse
     {
         public int IdConta { get; set; } 
-        public int IdPessoa { get; set; }
+       
         public string Numero { get; set; } = default!; 
         public required string Agencia { get; set; }
         public required string Conta { get; set; } = default!;
+        public int IdPessoa { get; set; }
+        public string Nome { get; set; } = default!;
+
+        public string Cpf { get; set; } = default!; 
     }
 }

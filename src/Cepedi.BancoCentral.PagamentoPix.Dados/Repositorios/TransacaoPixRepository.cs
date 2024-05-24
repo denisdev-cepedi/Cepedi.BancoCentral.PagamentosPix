@@ -15,10 +15,8 @@ public class TransacaoPixRepository : ITransacaoPixRepository
     {
         _context = context;
     }
-    public Task<TransacaoPixEntity> AtualizarTransacaoPixAsync(TransacaoPixEntity transacao)
-    {
-        throw new NotImplementedException();
-    }
+
+
 
     public async Task<TransacaoPixEntity> CriarTransacaoPixAsync(TransacaoPixEntity transacao)
     {
@@ -44,30 +42,49 @@ public class TransacaoPixRepository : ITransacaoPixRepository
 
     public async Task<TransacaoPixEntity> ObterIdPorChaveSegurancaAsync(string chaveSeguranca)
     {
-         return await _context.TransacaoPix.Where(p => p.ChaveDeSeguranca == chaveSeguranca).FirstOrDefaultAsync();
+        return await _context.TransacaoPix
+                        .Include(p => p.PixOrigem)
+                        .Include(p => p.PixDestino)
+                        .Where(p => p.ChaveDeSeguranca == chaveSeguranca)
+                        .FirstOrDefaultAsync();
     }
 
     public async Task<TransacaoPixEntity> ObterTransacaoPixAsync(int IdTransacaoPix)
     {
-        return await _context.TransacaoPix.Where(p => p.IdTransacaoPix == IdTransacaoPix).FirstOrDefaultAsync();
+        return await _context.TransacaoPix
+     .Include(p => p.PixOrigem)
+     .Include(p => p.PixDestino)
+     .Where(p => p.IdTransacaoPix == IdTransacaoPix)
+     .FirstOrDefaultAsync();
+
     }
 
     public async Task<List<TransacaoPixEntity>> ObterTransacoesPixAsync()
     {
-        return await _context.TransacaoPix.ToListAsync();
+        return await _context.TransacaoPix
+        .Include(p => p.PixOrigem)  // Inclui a entidade de origem relacionada
+        .Include(p => p.PixDestino) // Inclui a entidade de destino relacionada
+        .ToListAsync();    
     }
 
     public async Task<List<TransacaoPixEntity>> ObterTransacoesPixFilterAsync(ObterTransacaoPixRequestFilter filter)
     {
-         Expression <Func<TransacaoPixEntity, bool>> dataFilter = p =>p.Data >= filter.DataInicial && p.Data <= filter.DataFinal;
-        _context.TransacaoPix.Where(dataFilter);
-        return await _context.TransacaoPix.ToListAsync();
+        Expression<Func<TransacaoPixEntity, bool>> dataFilter = p => p.Data >= filter.DataInicial && p.Data <= filter.DataFinal;
+
+        var transacoes = await _context.TransacaoPix
+            .Include(p => p.PixOrigem)  // Inclui a entidade Origem relacionada
+            .Include(p => p.PixDestino) // Inclui a entidade Destino relacionada
+            .Where(dataFilter)       // Aplica o filtro de data
+            .ToListAsync();          // Executa a consulta e obtém os resultados
+
+        return transacoes;
+
     }
 
-    public async  Task<List<TransacaoPixEntity>> ObterTransacoesPixPorChavePixAsync(int idPixOrigem)
+    public async Task<List<TransacaoPixEntity>> ObterTransacoesPixPorChavePixAsync(string chavePix)
     {
-        return await _context.TransacaoPix
-            .Where(t => t.IdPixOrigem == idPixOrigem)
+        return await _context.TransacaoPix.Include(t => t.PixOrigem).Include(t => t.PixDestino)
+            .Where(t => t.PixOrigem.ChavePix == chavePix)
             .ToListAsync();
     }
 }
