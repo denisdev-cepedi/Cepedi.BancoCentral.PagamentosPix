@@ -1,0 +1,884 @@
+{
+	"info": {
+		"_postman_id": "2972545a-7d75-484a-904d-c3168c4912df",
+		"name": "Collections",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3589066"
+	},
+	"item": [
+		{
+			"name": "Pessoa",
+			"item": [
+				{
+					"name": "GetAll",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/Pessoa/v1/Pessoas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"Pessoa",
+								"v1",
+								"Pessoas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetByCPF",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/Pessoa/v1/Pessoas/Cpf?Cpf=98558796009",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"Pessoa",
+								"v1",
+								"Pessoas",
+								"Cpf"
+							],
+							"query": [
+								{
+									"key": "Cpf",
+									"value": "98558796009"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Emanuelly Peixoto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Demmi Damaceno\",\r\n  \"cpf\": \"94916531051\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/Pessoa/v1/Pessoas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"Pessoa",
+								"v1",
+								"Pessoas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Yago Gustavo Mota",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Diego Andrade\",\r\n  \"cpf\": \"90927507005\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/Pessoa/v1/Pessoas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"Pessoa",
+								"v1",
+								"Pessoas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AlteraNome",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Lorena Dev\",\n  \"cpf\": \"00408909021\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/Pessoa/v1/Pessoas/Nome",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"Pessoa",
+								"v1",
+								"Pessoas",
+								"Nome"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AlteraCpf",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cpf\": \"98558796009\",\r\n  \"novoCpf\": \"00408909021\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/Pessoa/v1/Pessoas/Cpf",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"Pessoa",
+								"v1",
+								"Pessoas",
+								"Cpf"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Conta",
+			"item": [
+				{
+					"name": "http://localhost:5078/BancoCentralPagamentoPix/v1/Contas",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idPessoa\": 1,\r\n  \"numero\": \"123\",\r\n  \"agencia\": \"12345\",\r\n  \"conta\": \"12396\",\r\n  \"cpf\": \"98558796009\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/Conta/v1/Contas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"Conta",
+								"v1",
+								"Contas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:5000/Conta/v1/Contas",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idConta\": 1,\r\n  \"idPessoa\": 1,\r\n  \"numero\": \"123\",\r\n  \"agencia\": \"12345\",\r\n  \"conta\": \"98765\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/Conta/v1/Contas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"Conta",
+								"v1",
+								"Contas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:5000/Conta/v1/Contas/1",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/Conta/v1/Contas/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"Conta",
+								"v1",
+								"Contas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pix",
+			"item": [
+				{
+					"name": "GetAll",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/Pix/v1/Pixs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"Pix",
+								"v1",
+								"Pixs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:5000/Pix/v1/Pixs/ChavePix?TipoPix=4&ChavePix=7f9c2ab10f5063a7ea60317b3ccf2455",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/Pix/v1/Pixs/ChavePix?TipoPix=4&ChavePix=7f9c2ab10f5063a7ea60317b3ccf2455",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"Pix",
+								"v1",
+								"Pixs",
+								"ChavePix"
+							],
+							"query": [
+								{
+									"key": "TipoPix",
+									"value": "4"
+								},
+								{
+									"key": "ChavePix",
+									"value": "7f9c2ab10f5063a7ea60317b3ccf2455"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:5000/Pix/v1/Pixs/ContaBank?CodigoInstituicao=358&Agencia=10191&Conta=1099579",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/Pix/v1/Pixs/ContaBank?CodigoInstituicao=358&Agencia=10191&Conta=1099579",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"Pix",
+								"v1",
+								"Pixs",
+								"ContaBank"
+							],
+							"query": [
+								{
+									"key": "CodigoInstituicao",
+									"value": "358"
+								},
+								{
+									"key": "Agencia",
+									"value": "10191"
+								},
+								{
+									"key": "Conta",
+									"value": "1099579"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:5000/Pix/v1/Pixs/ChavePix?TipoPix=4&ChavePix=7f9c2ab10f5063a7ea60317b3ccf2455",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/Pix/v1/Pixs/ChavePix?TipoPix=4&ChavePix=7f9c2ab10f5063a7ea60317b3ccf2455",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"Pix",
+								"v1",
+								"Pixs",
+								"ChavePix"
+							],
+							"query": [
+								{
+									"key": "TipoPix",
+									"value": "4"
+								},
+								{
+									"key": "ChavePix",
+									"value": "7f9c2ab10f5063a7ea60317b3ccf2455"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:5000/Pix/v1/Pixs",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codigoInstituicao\": \"123\",\r\n      \"agencia\": \"12345\",\r\n      \"conta\": \"12344\",\r\n  \"tipoPix\": \"2\",\r\n  \"chavePix\": \"demmi@demmi.com.br\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/Pix/v1/Pixs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"Pix",
+								"v1",
+								"Pixs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NuBankCell",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codigoInstituicao\" :\"260\", \r\n    \"agencia\": \"0001\",\r\n    \"conta\":\"485425350\",\r\n    \"tipoPix\":\"3\",//telefonica\r\n    \"chavePix\": \"+557398626051\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5078/Pix/v1/Pixs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5078",
+							"path": [
+								"Pix",
+								"v1",
+								"Pixs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NuBankChaAleatoria",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codigoInstituicao\" :\"260\", \r\n    \"agencia\": \"0001\",\r\n    \"conta\":\"485425350\",\r\n    \"tipoPix\":\"4\",//chave aleatoria \r\n    \"chavePix\": \"3b8a4e7c2f6d9a5b1c4e7f2d8b3a9e6\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5078/Pix/v1/Pixs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5078",
+							"path": [
+								"Pix",
+								"v1",
+								"Pixs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PicPayEmail",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"codigoInstituicao\" :\"380\", \r\n    \"agencia\": \"0001\",\r\n    \"conta\":\"16482042\",\r\n    \"tipoPix\":\"2\", //email\r\n    \"chavePix\": \"danieloliveira.s558@gmail.com\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5078/Pix/v1/Pixs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5078",
+							"path": [
+								"Pix",
+								"v1",
+								"Pixs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PicPayChAleatoria",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"codigoInstituicao\" :\"380\", \r\n    \"agencia\": \"0001\",\r\n    \"conta\":\"16482042\",\r\n    \"tipoPix\":\"4\",//chave aleatoria\r\n    \"chavePix\": \"e5d4a6f3b2c1a7e8d9b0e5d4a6f3b2c1\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5078/Pix/v1/Pixs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5078",
+							"path": [
+								"Pix",
+								"v1",
+								"Pixs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BBBCell",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codigoInstituicao\" :\"358\", \r\n    \"agencia\": \"10191\",\r\n    \"conta\":\"1099579\",\r\n    \"tipoPix\":\"3\",\r\n    \"chavePix\": \"+557398626051\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5078/Pix/v1/Pixs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5078",
+							"path": [
+								"Pix",
+								"v1",
+								"Pixs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BBBChAleatoria",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codigoInstituicao\" :\"358\", \r\n    \"agencia\": \"10191\",\r\n    \"conta\":\"1099579\",\r\n    \"tipoPix\":\"4\",//chave aleatoria\r\n    \"chavePix\": \"7f9c2ab10f5063a7ea60317b3ccf2455\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5078/Pix/v1/Pixs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5078",
+							"path": [
+								"Pix",
+								"v1",
+								"Pixs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:5000/Pix/v1/Pixs/ChavePix?TipoPix=2&ChavePix=xxxxxxxxxxxxxxx@demmi.com",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/Pix/v1/Pixs/ChavePix?TipoPix=2&ChavePix=demmi@demi.com.br",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"Pix",
+								"v1",
+								"Pixs",
+								"ChavePix"
+							],
+							"query": [
+								{
+									"key": "TipoPix",
+									"value": "2"
+								},
+								{
+									"key": "ChavePix",
+									"value": "demmi@demi.com.br"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TransacoesPix",
+			"item": [
+				{
+					"name": "GetAll",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/TransacaoPix/v1/TransacoesPix",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"TransacaoPix",
+								"v1",
+								"TransacoesPix"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:5000/TransacaoPix/v1/TransacoesPix/chaveDeSeguranca?chaveSeguranca=C40785C16DB8F4E095876FE24A4191CC",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/TransacaoPix/v1/TransacoesPix/chaveDeSeguranca?chaveSeguranca=C40785C16DB8F4E095876FE24A4191CC",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"TransacaoPix",
+								"v1",
+								"TransacoesPix",
+								"chaveDeSeguranca"
+							],
+							"query": [
+								{
+									"key": "chaveSeguranca",
+									"value": "C40785C16DB8F4E095876FE24A4191CC"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:5000/TransacaoPix/v1/TransacoesPix",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"valor\": 120.89,\r\n  \"data\": \"2024-05-24T01:53:11.097Z\",\r\n  \"chavePixOrigem\": \"+557398626051\",\r\n  \"chavePixDestino\": \"91450456073\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/TransacaoPix/v1/TransacoesPix",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"TransacaoPix",
+								"v1",
+								"TransacoesPix"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:5000/TransacaoPix/v1/TransacoesPix/filter?DataInicial=05-22-2024&DataFinal=10-01-2024",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/TransacaoPix/v1/TransacoesPix/filter?DataInicial=05-22-2024&DataFinal=10-01-2024",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"TransacaoPix",
+								"v1",
+								"TransacoesPix",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "DataInicial",
+									"value": "05-22-2024"
+								},
+								{
+									"key": "DataFinal",
+									"value": "10-01-2024"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -69,16 +69,9 @@ public class TransacaoPixRepository : ITransacaoPixRepository
 
     public async Task<List<TransacaoPixEntity>> ObterTransacoesPixFilterAsync(ObterTransacaoPixRequestFilter filter)
     {
-        Expression<Func<TransacaoPixEntity, bool>> dataFilter = p => p.Data >= filter.DataInicial && p.Data <= filter.DataFinal;
-
-        var transacoes = await _context.TransacaoPix
-            .Include(p => p.PixOrigem)  // Inclui a entidade Origem relacionada
-            .Include(p => p.PixDestino) // Inclui a entidade Destino relacionada
-            .Where(dataFilter)       // Aplica o filtro de data
-            .ToListAsync();          // Executa a consulta e obtém os resultados
-
-        return transacoes;
-
+        Expression <Func<TransacaoPixEntity, bool>> dataFilter = p =>p.Data >= filter.DataInicial && p.Data <= filter.DataFinal;
+        _context.TransacaoPix.Where(dataFilter);
+        return await _context.TransacaoPix.ToListAsync();        // Executa a consulta e obtém os resultados
     }
 
     public async Task<List<TransacaoPixEntity>> ObterTransacoesPixPorChavePixAsync(string chavePix)
