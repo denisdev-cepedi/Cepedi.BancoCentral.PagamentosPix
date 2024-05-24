@@ -58,7 +58,11 @@ public class CriarPixRequestHandler : IRequestHandler<CriarPixRequest, Result<Cr
             };
 
             await _pixRepository.CriarPixAsync(pixEntity);
-            return Result.Success(new CriarPixResponse(pixEntity.IdPix, ((PixEntity.TipoPix)pix.IdTipoPix).ToString(), pixEntity.ChavePix, pixEntity.Status ? "Ativado" : "Desativado"));
+            // Conversão do tipo de chave
+            string tipoDeChave = ((PixEntity.TipoPix)pixEntity.IdTipoPix).ToString();
+            // Conversão do status
+            string status = pixEntity.Status ? "Ativado" : "Desativado";
+            return new CriarPixResponse(pixEntity.IdPix, tipoDeChave, pixEntity.ChavePix, status);
         }
         
         if (pixContaDesativado(request, pix))

@@ -6,6 +6,7 @@ using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Excecoes;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Responses;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cepedi.BancoCentral.PagamentoPix.Api.Controllers
@@ -59,7 +60,7 @@ namespace Cepedi.BancoCentral.PagamentoPix.Api.Controllers
     [ProducesResponseType(typeof(ObterPessoaResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
-    public async Task<ActionResult<ObterPessoaResponse>> ObterPessoaAsync([FromBody] ObterPessoaRequest request) 
+    public async Task<ActionResult<ObterPessoaResponse>> ObterPessoaAsync([FromQuery] ObterPessoaRequest request) 
         => await SendCommand(request);
 }
 }
