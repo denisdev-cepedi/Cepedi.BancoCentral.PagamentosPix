@@ -1,0 +1,144 @@
+{
+	"info": {
+		"_postman_id": "e5b628f4-0d7f-4b23-a658-a4086d5360c5",
+		"name": "PagamentosPix",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16426791"
+	},
+	"item": [
+		{
+			"name": "TransacaoPix",
+			"item": [
+				{
+					"name": "GetAllTransacoesPix",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5078/TransacaoPix/v1/TransacoesPix",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5078",
+							"path": [
+								"TransacaoPix",
+								"v1",
+								"TransacoesPix"
+							]
+						},
+						"description": "Obtém todas as transações pix"
+					},
+					"response": []
+				},
+				{
+					"name": "GetTransacaoPixByChaveSeguranca",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5078/TransacaoPix/v1/TransacoesPix/chaveDeSeguranca?chaveSeguranca=162D3214A5F36CAD375395EAA9D3D628",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5078",
+							"path": [
+								"TransacaoPix",
+								"v1",
+								"TransacoesPix",
+								"chaveDeSeguranca"
+							],
+							"query": [
+								{
+									"key": "chaveSeguranca",
+									"value": "162D3214A5F36CAD375395EAA9D3D628"
+								}
+							]
+						},
+						"description": "Obtém um registro de uma transação pix atráves da chave de segurança"
+					},
+					"response": []
+				},
+				{
+					"name": "GetTransacoesPixByChavePixOrigem",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain073"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5078/TransacaoPix/v1/TransacoesPix/chavePixOrigem?chavePix=7f9c2ab10f5063a7ea60317b3ccf2455",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5078",
+							"path": [
+								"TransacaoPix",
+								"v1",
+								"TransacoesPix",
+								"chavePixOrigem"
+							],
+							"query": [
+								{
+									"key": "chavePix",
+									"value": "7f9c2ab10f5063a7ea60317b3ccf2455"
+								}
+							]
+						},
+						"description": "Obtém transações feitas atráves de um pix de origem (emitente)"
+					},
+					"response": []
+				},
+				{
+					"name": "CreateNovaTransacaoPix",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"valor\": 700,\r\n  \"data\": \"2024-05-24T04:36:06.875Z\",\r\n  \"chavePixOrigem\": \"7f9c2ab10f5063a7ea60317b3ccf2455\",\r\n  \"chavePixDestino\": \"91450456073\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5078/TransacaoPix/v1/TransacoesPix",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5078",
+							"path": [
+								"TransacaoPix",
+								"v1",
+								"TransacoesPix"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
