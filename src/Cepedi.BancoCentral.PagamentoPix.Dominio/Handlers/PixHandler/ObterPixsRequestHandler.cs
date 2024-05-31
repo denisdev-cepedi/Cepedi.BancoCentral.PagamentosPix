@@ -32,9 +32,11 @@ public class ObterPixsRequestHandler : IRequestHandler<ObterPixsRequest, Result<
             return Result.Success(cachePixs);
         }
         var pixs = await _pixRepository.GetAllPixsAsync();
+        
         if (pixs == null){
             return Result.Error<List<ObterPixsResponse>>(new Compartilhado.Excecoes.SemResultadosExcecao());
         }
+
         var responses = pixs.Select(x => new ObterPixsResponse(x.IdPix, x.Conta.Numero.ToString(), x.ChavePix, ((PixEntity.TipoPix)x.IdTipoPix).ToString(), x.Status ? "Ativado" : "Desativado")).ToList();
         await _cache.SalvarAsync("pixs", responses );
         return Result.Success(responses);
