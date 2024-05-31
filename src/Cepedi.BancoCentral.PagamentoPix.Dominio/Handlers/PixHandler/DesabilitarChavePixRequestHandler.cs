@@ -23,7 +23,7 @@ public class DesabilitarChavePixRequestHandler : IRequestHandler<DesabilitarChav
             return Result.Error<DesabilitarChavePixResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(PagamentosPix.PixInexistente));
         pix.Desabilitar();
         await _pixRepository.AtualizarPixAsync(pix);
-
-        return Result.Success(new DesabilitarChavePixResponse(pix.Status ? "Ativado" : "Desativado"));
+        var response = new DesabilitarChavePixResponse(pix.Status ? "Ativado" : "Desativado");
+        return Result.Success(response);
     }
 }

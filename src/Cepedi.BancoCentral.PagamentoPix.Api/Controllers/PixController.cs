@@ -1,9 +1,14 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Excecoes;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Responses;
 using Cepedi.BancoCentral.PagamentoPix.Dados.Repositorios;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace Cepedi.BancoCentral.PagamentoPix.Api.Controllers;
 [ApiController]
@@ -25,8 +30,7 @@ public class PixController : BaseController
     [ProducesResponseType(typeof(ObterPixsResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status204NoContent)]
-    public async Task<ActionResult<List<ObterPixsResponse>>> ObterPixsAsync(
-        [FromBody] ObterPixsRequest request) => await SendCommand(request);
+    public async Task<ActionResult<List<ObterPixsResponse>>> ObterPixsAsync() => await SendCommand(new ObterPixsRequest());
 
    
     [HttpPost]
@@ -49,7 +53,7 @@ public class PixController : BaseController
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status404NotFound)]
     public async Task<ActionResult<ObterPixByChavePixResponse>> ObterPixsByChavePixAsync(
-        [FromBody] ObterPixByChavePixRequest request) => await SendCommand(request);
+        [FromQuery] ObterPixByChavePixRequest request) => await SendCommand(request);
 
 
     [HttpDelete("ChavePix")]

@@ -5,9 +5,13 @@ using Cepedi.BancoCentral.PagamentoPix.Data;
 using Cepedi.BancoCentral.PagamentoPix.Data.Repositories;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Handlers.Pipelines;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio;
+using Cepedi.BancoCentral.PagamentoPix.Dominio.Servicos;
+using Cepedi.BancoCentral.PagamentosPix.Cache;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.StackExchangeRedis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,9 +24,9 @@ namespace Cepedi.BancoCentral.PagamentoPix.IoC
         {
             ConfigurarDbContext(services, configuration);
 
-            services.AddMediatR(cfg => 
+            services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
-            
+
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ExcecaoPipeline<,>));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidacaoComportamento<,>));
 
@@ -33,7 +37,19 @@ namespace Cepedi.BancoCentral.PagamentoPix.IoC
             services.AddScoped<IContaRepository, ContaRepository>();
             services.AddScoped<IPixRepository, PixRepository>();
             services.AddScoped<ITransacaoPixRepository, TransacaoPixRepository>();
-        
+            // Adicione o serviço PixQueryRepository aqui
+            services.AddScoped<PixQueryRepository>();
+
+             services.AddStackExchangeRedisCache(obj =>
+            {
+                obj.Configuration = configuration["Redis::Connection"];
+                obj.InstanceName = configuration["Redis::Instance"];
+            });
+
+            services.AddSingleton<IDistributedCache, RedisCache>();
+            services.AddScoped(typeof(ICache<>), typeof(Cache<>));
+            // CacheRedis
+
             // services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddHealthChecks()
                 .AddDbContextCheck<ApplicationDbContext>();

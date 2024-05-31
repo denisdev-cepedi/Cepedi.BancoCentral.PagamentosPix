@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Excecoes;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Requests;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Responses;
-using Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades;
+
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,7 +1,6 @@
 using Serilog;
-using Cepedi.BancoCentral.PagamentoPix.IoC;
-using Cepedi.BancoCentral.PagamentoPix.Api;
 
+using Cepedi.BancoCentral.PagamentoPix.IoC;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

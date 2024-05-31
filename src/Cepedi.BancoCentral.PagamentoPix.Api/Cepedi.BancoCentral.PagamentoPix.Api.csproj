@@ -6,7 +6,6 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>$namespace$.Api</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,5 +22,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Cepedi.BancoCentral.PagamentoPix.IoC\Cepedi.BancoCentral.PagamentoPix.IoC.csproj" />
   </ItemGroup>
+  
 
 </Project>

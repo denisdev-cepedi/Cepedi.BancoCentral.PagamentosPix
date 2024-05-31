@@ -1,13 +1,20 @@
+using Cepedi.BancoCentral.PagamentoPix.Dados.Repositorios;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio;
 using Microsoft.EntityFrameworkCore;
 
 namespace Cepedi.BancoCentral.PagamentoPix.Data.Repositories;
 
-public class PixRepository : IPixRepository {
+public class PixRepository : IPixRepository
+{
 
+    private readonly PixQueryRepository _pixQueryRepository;
     private readonly ApplicationDbContext _context;
-    public PixRepository(ApplicationDbContext context) => _context = context;
+    public PixRepository(ApplicationDbContext context, PixQueryRepository pixQueryRepository)
+    {
+        _context = context;
+        _pixQueryRepository = pixQueryRepository;
+    }
 
     public async Task<PixEntity> CriarPixAsync(PixEntity pix)
     {
@@ -17,7 +24,8 @@ public class PixRepository : IPixRepository {
         return pix;
     }
 
-    public async Task<PixEntity> AtualizarPixAsync(PixEntity pix){
+    public async Task<PixEntity> AtualizarPixAsync(PixEntity pix)
+    {
         _context.Pix.Update(pix);
         await _context.SaveChangesAsync();
         return pix;
@@ -26,7 +34,7 @@ public class PixRepository : IPixRepository {
 
     public async Task<ICollection<PixEntity>> GetAllPixsAsync()
     {
-       return await _context.Pix.ToListAsync();
+        return await _context.Pix.ToListAsync();
     }
 
     public async Task<ICollection<PixEntity>> GetAllPixsByBankContaAsync(string codigoInstituicao, string agencia, string conta)
@@ -36,6 +44,7 @@ public class PixRepository : IPixRepository {
 
     public async Task<PixEntity> ObterPixByChavePixAsync(string chavePix)
     {
-        return  await _context.Pix.Where(x => x.ChavePix == chavePix).FirstOrDefaultAsync();
+
+        return await _pixQueryRepository.ObterPixByChavePixAsyncQuery(chavePix);
     }
 }

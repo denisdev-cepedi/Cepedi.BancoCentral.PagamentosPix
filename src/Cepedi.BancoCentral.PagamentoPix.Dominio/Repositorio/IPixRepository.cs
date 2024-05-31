@@ -1,3 +1,4 @@
+using Cepedi.BancoCentral.PagamentoPix.Dados.Repositorios;
 using Cepedi.BancoCentral.PagamentoPix.Dominio.Entidades;
 
 namespace Cepedi.BancoCentral.PagamentoPix.Dominio.Repositorio;

@@ -1,4 +1,4 @@
-﻿using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Enums;
+﻿﻿using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Enums;
 using Cepedi.BancoCentral.PagamentoPix.Compartilhado.Excecoes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +28,7 @@ public class BaseController : ControllerBase
             var (_, res, error) => HandleError(error!)
         };
 
+   
     protected ActionResult HandleError(Exception error) => error switch
     {
         SemResultadosExcecao e => NoContent(),
